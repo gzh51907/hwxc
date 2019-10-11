@@ -75,7 +75,7 @@ export default {
 .wrap {
   height: 3000px;
   flex: 1;
-  padding-top: 13.467vw;
+  padding-top: 13.333vw;
   // padding-left: 4vw;
   // padding-right: 4vw;
 }

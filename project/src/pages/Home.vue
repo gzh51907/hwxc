@@ -3,7 +3,7 @@
     <div class="Home_top">
       <header>
         <div class="picture">
-          <img :src="imglist" alt />
+          <img :src="logo" alt />
         </div>
         <div class="search_frame"></div>
         <div class="search_icon">
@@ -14,7 +14,15 @@
         </div>
       </header>
     </div>
-    <div>首页</div>
+    <div class="layout">
+      <section class="banner">
+        <el-carousel height="37.333vw">
+          <el-carousel-item v-for="(item,index) in imglist" :key="index" type="card">
+            <img :src="item" style="width:100%;height:100%" />
+          </el-carousel-item>
+        </el-carousel>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -22,8 +30,34 @@
 export default {
   data() {
     return {
-      imglist: "https://xm.star365.com/images/logo.png.webp"
+      logo: "https://xm.star365.com/images/logo.png.webp",
+      imglist: [
+        "https://xm.star365.com/imgfile/807c7c11f9f644219a364020078e4732_20191011145537.png",
+
+        "https://xm.star365.com/imgfile/b79696d8d85e41a2ad9cae3b3977de9e_20190913113438.png",
+
+        "https://xm.star365.com/imgfile/807c7c11f9f644219a364020078e4732_20191011145537.png",
+
+        "https://xm.star365.com/imgfile/2459d304780f4753b9b856ceace8736d_20190725143044.png",
+
+        "https://xm.star365.com/imgfile/c023ae86701c4a71a0b0a8bb7e14cb8a_20191011111107.png"
+      ]
     };
+  },
+  async created() {
+    let { data } = await this.$axios.get(
+      "https://xm.star365.com/api/product-api/category/getDetailByBarcode",
+      {
+        params: {
+          barcode: 8068246,
+          cityId: 903,
+          state: 1,
+          latitude: 22.534576,
+          longitude: 113.973016
+        }
+      }
+    );
+    console.log(data);
   }
 };
 </script>
@@ -35,7 +69,7 @@ export default {
   position: fixed;
   z-index: 999;
   top: 0;
-  border-bottom: 1px solid #ccc;
+  // border-bottom: 1px solid #ccc;
   header {
     height: 13.333vw;
     display: flex;
@@ -43,11 +77,6 @@ export default {
     z-index: 20;
     padding-left: 4vw;
     padding-right: 4vw;
-    .el-input {
-      .el-input__inner {
-        height: 0.6rem !important;
-      }
-    }
     .picture {
       width: 22.267vw;
       height: 6.933vw;
@@ -72,6 +101,18 @@ export default {
       color: rgb(0, 158, 159);
       margin-left: 4.667vw;
     }
+  }
+}
+.layout {
+  padding-left: 4vw;
+  padding-right: 4vw;
+  .banner {
+    width: 100%;
+    height: 37.333vw;
+    border-radius: 1.6vw;
+    overflow: hidden;
+    display: block;
+    touch-action: pan-y;
   }
 }
 </style>
