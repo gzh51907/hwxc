@@ -1,20 +1,23 @@
 <template>
-  <div>
-    <div class="main">
-      <router-view />
+  <div id="app">
+    <!-- <div class="wrap"> -->
+      
+      <div class="wrap">
+        <router-view />
+      </div>
+      <footer class="footer">
+        <ul>
+          <li :index="item.path" v-for="item in menus" :key="item.name">
+            <router-link :to="item.path">
+              <i :class="item.icon"></i>
+              <el-badge class="item" v-if="item.name==='cart'">{{item.text}}</el-badge>
+              <template v-else>{{item.text}}</template>
+            </router-link>
+          </li>
+        </ul>
+      </footer>
     </div>
-    <div class="footer">
-      <ul>
-        <li :index="item.path" v-for="item in menus" :key="item.name" >    
-          <router-link :to="item.path">
-          <i :class="item.icon" ></i>
-            <el-badge class="item" v-if="item.name==='cart'">{{item.text}}</el-badge>
-            <template v-else>{{item.text}}</template>
-          </router-link>
-        </li>
-      </ul>
-    </div>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -23,6 +26,8 @@ export default {
   data() {
     return {
       activeIndex: "/home",
+      input2: "",
+     
       menus: [
         {
           name: "home",
@@ -57,14 +62,23 @@ export default {
 
 <style lang="scss" scoped>
 #app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  // font-family: "Avenir", Helvetica, Arial, sans-serif;
+  // -webkit-font-smoothing: antialiased;
+  // -moz-osx-font-smoothing: grayscale;
+  // text-align: center;
+  // color: #2c3e50;
+  // margin-top: 60px;
+  height: 100%;
+  min-height: 100%;
 }
 
+.wrap {
+  height: 3000px;
+  flex: 1;
+  padding-top: 13.467vw;
+  // padding-left: 4vw;
+  // padding-right: 4vw;
+}
 .footer {
   width: 100%;
   height: 13.333vw;
@@ -86,7 +100,7 @@ export default {
       width: 25%;
       display: flex;
       flex-direction: column;
-      justify-content: center;  
+      justify-content: center;
       align-items: center;
       font-size: 3.467vw;
       i {
