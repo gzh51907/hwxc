@@ -27,7 +27,7 @@ export default {
     return {
       activeIndex: "/home",
       input2: "",
-     
+
       menus: [
         {
           name: "home",

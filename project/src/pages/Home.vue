@@ -3,7 +3,7 @@
     <div class="Home_top">
       <header>
         <div class="picture">
-          <img :src="logo" alt />
+          <img src="../images/logo.png" alt />
         </div>
         <div class="search_frame"></div>
         <div class="search_icon">
@@ -36,33 +36,21 @@
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
+import Footer from './Footer.vue';
 export default {
   data() {
     return {
       Noticelist: "",
-      logo: "https://xm.star365.com/images/logo.png.webp",
-
-      imglist: [
-        "https://xm.star365.com/imgfile/807c7c11f9f644219a364020078e4732_20191011145537.png",
-
-        "https://xm.star365.com/imgfile/b79696d8d85e41a2ad9cae3b3977de9e_20190913113438.png",
-
-        "https://xm.star365.com/imgfile/807c7c11f9f644219a364020078e4732_20191011145537.png",
-
-        "https://xm.star365.com/imgfile/2459d304780f4753b9b856ceace8736d_20190725143044.png",
-
-        "https://xm.star365.com/imgfile/c023ae86701c4a71a0b0a8bb7e14cb8a_20191011111107.png"
-      ]
+      imglist: "",
     };
   },
   async created() {
     let {
-      data: {
-        data: { notice }
-      }
+      data: { data }
     } = await this.$axios.get(
       "https://xm.star365.com/api/user-api/index/getIndexData",
       {
@@ -71,8 +59,17 @@ export default {
         }
       }
     );
-    this.Noticelist = notice;
-    console.log(notice);
+    let img = data.carousel.map(item => {
+      return item.carouselPicurl;
+    });
+    console.log(img);
+    let imgitem = img.map(item => {
+      return `https://xm.star365.com/imgfile/${item}`;
+    });
+    this.imglist = imgitem;
+    this.Noticelist = data.notice;
+    console.log(this.Noticelist);
+    console.log(this.imglist);
   }
 };
 </script>
