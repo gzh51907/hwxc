@@ -15,13 +15,25 @@
       </header>
     </div>
     <div class="layout">
-      <section class="banner">
-        <el-carousel height="37.333vw">
-          <el-carousel-item v-for="(item,index) in imglist" :key="index" type="card">
+      <div class="banner">
+        <el-carousel height="37.333vw" indicator-position="none">
+          <el-carousel-item v-for="(item,index) in imglist" :key="index">
             <img :src="item" style="width:100%;height:100%" />
           </el-carousel-item>
         </el-carousel>
-      </section>
+      </div>
+      <div class="notice">
+        <span class="notice_span">公告</span>
+        <el-carousel indicator-position="none" direction="vertical">
+          <el-carousel-item v-for="item in Noticelist" :key="item.id">
+            <h3 class="medium">{{ item.noticeTitle }}</h3>
+          </el-carousel-item>
+        </el-carousel>
+        <a href="#">
+          <img src="../images/img1.png" alt />
+          <span class="name">御景花园</span>
+        </a>
+      </div>
     </div>
   </div>
 </template>
@@ -30,7 +42,9 @@
 export default {
   data() {
     return {
+      Noticelist: "",
       logo: "https://xm.star365.com/images/logo.png.webp",
+
       imglist: [
         "https://xm.star365.com/imgfile/807c7c11f9f644219a364020078e4732_20191011145537.png",
 
@@ -45,19 +59,20 @@ export default {
     };
   },
   async created() {
-    let { data } = await this.$axios.get(
-      "https://xm.star365.com/api/product-api/category/getDetailByBarcode",
+    let {
+      data: {
+        data: { notice }
+      }
+    } = await this.$axios.get(
+      "https://xm.star365.com/api/user-api/index/getIndexData",
       {
         params: {
-          barcode: 8068246,
-          cityId: 903,
-          state: 1,
-          latitude: 22.534576,
-          longitude: 113.973016
+          cityId: 903
         }
       }
     );
-    console.log(data);
+    this.Noticelist = notice;
+    console.log(notice);
   }
 };
 </script>
@@ -69,7 +84,6 @@ export default {
   position: fixed;
   z-index: 999;
   top: 0;
-  // border-bottom: 1px solid #ccc;
   header {
     height: 13.333vw;
     display: flex;
@@ -113,6 +127,65 @@ export default {
     overflow: hidden;
     display: block;
     touch-action: pan-y;
+  }
+  .notice {
+    height: 13.6vw;
+    display: flex;
+    align-items: center;
+    .notice_span {
+      width: 7.867vw;
+      height: 3.733vw;
+      background: #ffb349;
+      color: #fff;
+      font-size: 2.667vw;
+      line-height: 3.733vw;
+      display: inline-block;
+      text-align: center;
+      border-radius: 1.333vw;
+      border-bottom-left-radius: 0;
+      margin-right: 1.6vw;
+    }
+    .el-carousel {
+      width: 48vw;
+      font-size: 11px;
+      height: 15.2px;
+      line-height: 15.2px;
+      .el-carousel__item {
+        h3 {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          color: #555;
+        }
+      }
+    }
+    a {
+      width: 30vw;
+      height: 7.733vw;
+      background: #f5fcf6;
+      border-radius: 3.867vw;
+      display: flex;
+      line-height: 7.733vw;
+      align-items: center;
+      color: #5fbfa4;
+      padding-left: 2vw;
+      position: relative;
+      img {
+        width: 4.8vw;
+        height: 4.8vw;
+        margin-right: 1.333vw;
+      }
+      .name {
+        width: 24vw;
+        display: inline-block;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        position: relative;
+        font-weight: 700;
+        font-size: 11px;
+      }
+    }
   }
 }
 </style>
