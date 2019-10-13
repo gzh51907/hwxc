@@ -50,9 +50,7 @@ export default {
     };
   },
   async created() {
-    let {
-      data: { data }
-    } = await this.$axios.get(
+    let {data: { data }} = await this.$axios.get(
       "https://xm.star365.com/api/user-api/index/getIndexData",
       {
         params: {
