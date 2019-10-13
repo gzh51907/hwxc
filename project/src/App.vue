@@ -1,23 +1,20 @@
 <template>
   <div id="app">
-    <!-- <div class="wrap"> -->
-      
-      <div class="wrap">
-        <router-view />
-      </div>
-      <footer class="footer">
-        <ul>
-          <li :index="item.path" v-for="item in menus" :key="item.name">
-            <router-link :to="item.path">
-              <i :class="item.icon"></i>
-              <el-badge class="item" v-if="item.name==='cart'">{{item.text}}</el-badge>
-              <template v-else>{{item.text}}</template>
-            </router-link>
-          </li>
-        </ul>
-      </footer>
+    <div class="wrap">
+      <router-view />
     </div>
-  <!-- </div> -->
+    <footer class="footer">
+      <ul>
+        <li :index="item.path" v-for="item in menus" :key="item.name">
+          <router-link :to="item.path">
+            <i :class="item.icon"></i>
+            <el-badge class="item" v-if="item.name==='cart'">{{item.text}}</el-badge>
+            <template v-else>{{item.text}}</template>
+          </router-link>
+        </li>
+      </ul>
+    </footer>
+  </div>
 </template>
 
 <script>
@@ -27,7 +24,10 @@ export default {
     return {
       activeIndex: "/home",
       input2: "",
+<<<<<<< HEAD
 
+=======
+>>>>>>> d2b313828f0883f033c8d570337d74be8a03b453
       menus: [
         {
           name: "home",
