@@ -35,13 +35,13 @@
         </a>
       </div>
     </div>
-  <Footer></Footer>
-  <div></div>
+       <Footer></Footer>
   </div>
 </template>
 
 <script>
 import Footer from './Footer.vue';
+
 export default {
   data() {
     return {
@@ -71,6 +71,9 @@ export default {
     this.Noticelist = data.notice;
     console.log(this.Noticelist);
     console.log(this.imglist);
+  },
+  components:{
+    Footer
   }
 };
 </script>

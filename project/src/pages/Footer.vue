@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer">
+  <div class="footer">
     <ul>
       <li :index="item.path" v-for="item in menus" :key="item.name">
         <router-link :to="item.path">
@@ -9,13 +9,45 @@
         </router-link>
       </li>
     </ul>
-  </footer>
+  </div>
 </template>
 
 <script>
 export default {
-
-    
+  name: "app",
+  data() {
+    return {
+      activeIndex: "/home",
+      input2: "",
+      menus: [
+        {
+          name: "home",
+          path: "/home",
+          text: "首页",
+          icon: "el-icon-s-home"
+        },
+        {
+          name: "sort",
+          path: "/sort",
+          text: "分类",
+          icon: "el-icon-menu"
+        },
+        {
+          name: "cart",
+          path: "/cart",
+          text: "购物车",
+          icon: "el-icon-shopping-cart-full"
+        },
+        {
+          name: "mine",
+          path: "/mine",
+          text: "我的",
+          icon: "el-icon-s-custom"
+        }
+      ]
+    };
+  },
+  components: {}
 };
 </script>
 
@@ -27,8 +59,9 @@ export default {
   border-top: 1px solid #ccc;
   position: fixed;
   z-index: 100;
+  left: 0;
   bottom: 0;
-  background: #fff;
+
   ul {
     width: 100%;
     height: 100%;
