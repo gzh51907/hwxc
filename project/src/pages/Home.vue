@@ -48,14 +48,14 @@ export default {
     let img = data.carousel.map(item => {
       return item.carouselPicurl;
     });
-    console.log(img);
+    // console.log(img);
     let imgitem = img.map(item => {
       return `https://xm.star365.com/imgfile/${item}`;
     });
     this.imglist = imgitem;
     this.Noticelist = data.notice;
-    console.log(this.Noticelist);
-    console.log(this.imglist);
+    // console.log(this.Noticelist);
+    // console.log(this.imglist);
   },
   components:{
     Footer,

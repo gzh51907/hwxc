@@ -61,6 +61,7 @@ export default {
   z-index: 100;
   left: 0;
   bottom: 0;
+  background-color: #fff;
 
   ul {
     width: 100%;
