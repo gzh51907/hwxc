@@ -36,12 +36,12 @@
       </div>
     </div>
   <Footer></Footer>
-  <div></div>
   </div>
 </template>
 
 <script>
 import Footer from './Footer.vue';
+
 export default {
   data() {
     return {
