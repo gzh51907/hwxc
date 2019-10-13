@@ -2,7 +2,7 @@
   <footer class="footer">
     <ul>
       <li :index="item.path" v-for="item in menus" :key="item.name">
-        <router-link :to="item.path">
+        <router-link :to="item.path" >
           <i :class="item.icon"></i>
           <el-badge class="item" v-if="item.name==='cart'">{{item.text}}</el-badge>
           <template v-else>{{item.text}}</template>
@@ -14,8 +14,40 @@
 
 <script>
 export default {
-
-    
+  name: "app",
+  data() {
+    return {
+      activeIndex: "/home",
+      input2: "",
+      menus: [
+        {
+          name: "home",
+          path: "/home",
+          text: "首页",
+          icon: "el-icon-s-home"
+        },
+        {
+          name: "sort",
+          path: "/sort",
+          text: "分类",
+          icon: "el-icon-menu"
+        },
+        {
+          name: "cart",
+          path: "/cart",
+          text: "购物车",
+          icon: "el-icon-shopping-cart-full"
+        },
+        {
+          name: "mine",
+          path: "/mine",
+          text: "我的",
+          icon: "el-icon-s-custom"
+        }
+      ]
+    };
+  },
+  components: {}
 };
 </script>
 

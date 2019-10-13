@@ -1,13 +1,24 @@
 <template>
-  <div>我的</div>
+  <div>我的
+
+    <Footer></Footer>
+  </div>
 </template>
 
 <script>
+import Footer from "./Footer.vue";
+
 export default {
-    
+  data(){
+    return {
+
+    }
+  },
+  components:{
+    Footer
+  }   
 }
 </script>
-
 <style lang="scss">
 
 </style>
