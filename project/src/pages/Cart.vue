@@ -1,5 +1,8 @@
 <template>
-  <div>购物车
+  <div>
+    <div class="box">
+      购物车
+    </div>
     <Footer></Footer>
   </div>
 </template>

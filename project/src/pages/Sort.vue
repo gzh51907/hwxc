@@ -1,6 +1,9 @@
 <template>
-    <div>分类
+    <div>
         <Header></Header>
+        <div class="box">
+          分类
+        </div>
         <Footer></Footer>
     </div>
 
@@ -21,4 +24,5 @@ export default {
 };
 </script>
 <style lang="scss">
+
 </style>
