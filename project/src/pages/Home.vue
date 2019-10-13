@@ -71,6 +71,9 @@ export default {
     this.Noticelist = data.notice;
     console.log(this.Noticelist);
     console.log(this.imglist);
+  },
+  components:{
+    Footer
   }
 };
 </script>
