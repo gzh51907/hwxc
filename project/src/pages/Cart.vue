@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="box">
+    <div>
       购物车
     </div>
     <Footer></Footer>
