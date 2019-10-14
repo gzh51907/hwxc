@@ -42,13 +42,13 @@ let router = new VueRouter({
                 requiresAuth:true
             }
         },
+        
+        // 动态路由
         {
             name: 'sort',
-            path: '/sort',
+            path: '/sort/:id',
             component: Sort
         },
-
-        // 动态路由
         {
             name: 'goods',
             path: '/goods/:id',

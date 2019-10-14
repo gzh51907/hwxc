@@ -2,27 +2,27 @@
     <div>
         <Header></Header>
         <div class="middle" id="middle">
-            <el-tabs :tab-position="tabPosition" style="height: auto;">
-                <el-tab-pane :label="item.categoryName"  v-for="item in sortlList" :key="item.id">
-                    <div class="right_goods">
-                        <img :src="item.categoryPicurl" class="bigpic" style="width: 100%;height: 90px;">
-                        <ul>
-                            <li  v-for="item in goodsList" :key="item.id">
-                                <img :src="item.picUrl" >
+            <ul class="tabbox">
+              <li class="tab" v-for="(item,index) in sortList" :key="item.id" @click="goto(item.id,index)"
+              :class="{tab_active:index===current}">{{item.categoryName}}</li>
+            </ul>
+             <div class="right_goods" >              
+                <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto" v-if="hideItem">
+                  <li v-for="item in goodsList.list" :key="item.id" class="infinite-list-item" v-loading="loading" @click="gotoGoods(item.barcode)">
+                    <img :src="item.picUrl" >
                                 <div style="float:right;" class="title_div">
                                     <h2>{{item.productName}}</h2>
                                     <h3>{{item.efficacy}}</h3>
                                     <p class="shandian">闪电送</p>
                                     <p>
                                         <span class="price">￥{{item.guidePrice.toFixed(2)}}</span>
-                                        <i style="float:right;" class="car el-icon-shopping-cart-2"></i>
+                                        <i style="float:right;" class="car el-icon-shopping-cart-2" @click="gotoCar(item.id)"></i>
                                     </p>
-                                </div>   
-                            </li>
-                        </ul>
-                    </div>
-                </el-tab-pane>
-            </el-tabs>
+                                </div> 
+                  </li>
+                </ul>
+                <img class="hide_img" src="../images/no-goods.png" v-else/>
+              </div>          
         </div>
         <Footer></Footer>
     </div>
@@ -37,8 +37,12 @@ export default {
   data() {
     return {
       tabPosition: "left",
-      sortlList: [],
-      goodsList: ""
+      sortList: [],
+      goodsList: {},
+      current: 0,
+      pageNum: 1,
+      id: 5591,
+      loading: ""
     };
   },
   async created() {
@@ -46,26 +50,91 @@ export default {
     let { data: { data } } = await this.$axios.get(
       "https://xm.star365.com/api/product-api/category/getSecondCategoryList"
     );
-    this.sortlList = data;
-    this.sortlList.forEach(item => {
+    this.sortList = data;
+    this.sortList.forEach(item => {
       item.categoryPicurl =
         "https://xm.star365.com/imgfile/" + item.categoryPicurl;
     });
 
-    // 请求拿到第一选项卡的内容
-    let { data: { data: { list } } } = await this.$axios.get(
-      "https://xm.star365.com/api/product-api/category/getProductBy2typeId",
-      {
-        params: {
-          id: "5591",
-          cityId: "903",
-          pageNum: "1",
-          pageSize: "5"
-        }
+    let { id } = this.$route.params;
+    this.tabId(id, 1);
+  },
+  // 路由守卫监听id变化
+  beforeRouteUpdate(to, from, next) {
+    if (to.params.id != from.params.id) {
+      this.id = to.params.id;
+      this.pageNum = 1;
+      this.tabId(to.params.id, this.pageNum);
+    }
+    next();
+  },
+
+  methods: {
+    goto(id, index) {
+      this.$router.push("/sort/" + id);
+      this.current = index;
+      if (this.current != index) {
+        this.pageNum = 1;
+        this.id = id;
       }
-    );
-    console.log("list", list);
-    this.goodsList = list;
+    },
+    load() {
+      // 懒加载
+      if (this.pageNum < this.goodsList.totalPage) {
+        this.loading = true;
+        this.pageNum++;
+        // console.log('还没到临界值哦');
+        console.log("懒加载的页数", this.pageNum);
+        setTimeout(() => {
+          this.loading = false;
+          this.tabId(this.id, this.pageNum);
+        }, 1000);
+      } else if (this.pageNum >= this.goodsList.totalPage) {
+        // console.log('到达临界值');
+        this.pageNum == this.goodsList.totalPage;
+      } else if (this.pageNum <= 1) {
+        this.pageNum = 1;
+      }
+    },
+
+    async tabId(id, pageNum) {
+      console.log("id,pageNum", id, pageNum);
+      // 请求拿到第一选项卡的内容
+      let { data: { data: res } } = await this.$axios.get(
+        "https://xm.star365.com/api/product-api/category/getProductBy2typeId",
+        {
+          params: {
+            id: id,
+            cityId: "903",
+            pageNum: pageNum,
+            pageSize: pageNum * 5
+          }
+        }
+      );
+      // 拿到数据和总页数
+      this.goodsList = {
+        list: res.list,
+        totalPage: res.totalPage
+      };
+      console.log("goods", this.goodsList);
+    },
+
+    // 跳转购物车
+    gotoCar(id){
+      this.$router.push("/cart");
+    },
+    gotoGoods(barcode){
+       this.$router.push({name:"goods",params:{barcode}});
+    }
+  },
+  computed: {
+    hideItem() {
+      if (this.goodsList.totalPage != 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
   },
   components: {
     Footer,
@@ -75,28 +144,71 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#middle {
-  height: 100%;
+.middle {
+  width: 100%;
+  height: calc(100% - 13.333vw);
   border-top: 1px solid #f6f6f8;
-  padding-right: 10px;
+  padding-top: 13.333vw;
+  padding-bottom: 13.333vw;
+  position: fixed;
+
+  .tabbox {
+    height: calc(100% - 13.333vw);
+    width: 25%;
+    background-color: #f6f6f8;
+    float: left;
+    overflow-y: auto;
+    padding-bottom: 13.333vw;
+
+    .tab {
+      width: 100%;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      border-bottom: 1px solid #f1f1f1;
+      font-size: 3.733vw;
+      color: #333;
+    }
+
+    .tab_active {
+      border-left: 2px solid #009e9f;
+      background-color: #fff;
+      color: #009e9f;
+      font-weight: bold;
+      font-size: 4vw;
+    }
+  }
 
   .right_goods {
+    float: right;
+    width: 75%;
+    height: calc(100% - 13.333vw);
+    overflow: auto;
+    padding-bottom: 13.333vw;
+
     ul {
+      height: 100%;
       li {
         border-bottom: 1px solid #f6f6f8;
         height: 27vw;
-        padding: 3.333vw 0;
+        padding: 3.333vw 10px;
 
         img {
           width: 20vw;
           height: 24vw;
         }
         .title_div {
-          width: 37vw;
+          width: 45vw;
 
           h2 {
+            width: 100%;
             font-size: 3.733vw;
             color: #333;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            text-overflow: ellipsis;
+            -webkit-box-orient: vertical;
           }
           h3 {
             font-size: 3.5vw;
@@ -129,6 +241,9 @@ export default {
           }
         }
       }
+    }
+    .hide_img {
+      margin-top: 3.5625rem;
     }
   }
 }

@@ -1,43 +1,47 @@
 <template>
   <div>
     <Header></Header>
-    <div class="layout">
-      <div class="banner">
-        <el-carousel height="37.333vw" indicator-position="none">
-          <el-carousel-item v-for="(item,index) in imglist" :key="index">
-            <img :src="item" style="width:100%;height:100%" />
-          </el-carousel-item>
-        </el-carousel>
-      </div>
-      <div class="notice">
-        <span class="notice_span">公告</span>
-        <el-carousel indicator-position="none" direction="vertical">
-          <el-carousel-item v-for="item in Noticelist" :key="item.id">
-            <h3 class="medium">{{ item.noticeTitle }}</h3>
-          </el-carousel-item>
-        </el-carousel>
-        <a href="#">
-          <img src="../images/img1.png" alt />
-          <span class="name">御景花园</span>
-        </a>
+    <div class="box">
+      <div class="layout">
+        <div class="banner">
+          <el-carousel height="37.333vw" indicator-position="none">
+            <el-carousel-item v-for="(item,index) in imglist" :key="index">
+              <img :src="item" style="width:100%;height:100%" />
+            </el-carousel-item>
+          </el-carousel>
+        </div>
+        <div class="notice">
+          <span class="notice_span">公告</span>
+          <el-carousel indicator-position="none" direction="vertical">
+            <el-carousel-item v-for="item in Noticelist" :key="item.id">
+              <h3 class="medium">{{ item.noticeTitle }}</h3>
+            </el-carousel-item>
+          </el-carousel>
+          <a href="#">
+            <img src="../images/img1.png" alt />
+            <span class="name">御景花园</span>
+          </a>
+        </div>
       </div>
     </div>
+    <Footer></Footer>
   </div>
-
 </template>
 
 <script>
-import Footer from './Footer.vue';
-import Header from './Header.vue';
+import Footer from "./Footer.vue";
+import Header from "./Header.vue";
 export default {
   data() {
     return {
       Noticelist: "",
-      imglist: "",
+      imglist: ""
     };
   },
   async created() {
-    let {data: { data }} = await this.$axios.get(
+    let {
+      data: { data }
+    } = await this.$axios.get(
       "https://xm.star365.com/api/user-api/index/getIndexData",
       {
         params: {
@@ -46,36 +50,28 @@ export default {
       }
     );
     let img = data.carousel.map(item => {
-      return item.carouselPicurl;
-    });
-    // console.log(img);
-    let imgitem = img.map(item => {
-    //   return `https://xm.star365.com/imgfile/${item}`;
-    // });
-    this.imglist = imgitem;
-    this.Noticelist = data.notice;
-    console.log(this.Noticelist);
-    console.log(this.imglist);
-
-    console.log(this.Noticelist);
-    console.log(this.imglist);
-
       return `https://xm.star365.com/imgfile/${item.carouselPicurl}`;
     });
-    console.log(img);
+    // console.log(img);
+
     this.imglist = img;
     this.Noticelist = data.notice;
-    console.log(this.Noticelist);
-    console.log(this.imglist);
+    // console.log(this.Noticelist);
+    // console.log(this.imglist);
   },
-  components:{
+  components: {
     Footer,
     Header
   }
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
+.box {
+  height: 3000px;
+  flex: 1;
+  padding-top: 13.333vw;
+}
 .layout {
   padding-left: 4vw;
   padding-right: 4vw;
