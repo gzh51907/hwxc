@@ -8,7 +8,7 @@
             </ul>
              <div class="right_goods" >              
                 <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto" v-if="hideItem">
-                  <li v-for="item in goodsList.list" :key="item.id" class="infinite-list-item" v-loading="loading">
+                  <li v-for="item in goodsList.list" :key="item.id" class="infinite-list-item" v-loading="loading" @click="gotoGoods(item.barcode)">
                     <img :src="item.picUrl" >
                                 <div style="float:right;" class="title_div">
                                     <h2>{{item.productName}}</h2>
@@ -122,6 +122,9 @@ export default {
     // 跳转购物车
     gotoCar(id){
       this.$router.push("/cart");
+    },
+    gotoGoods(barcode){
+       this.$router.push({name:"goods",params:{barcode}});
     }
   },
   computed: {
