@@ -144,7 +144,6 @@ export default {
       pageNum: 1
     };
   },
-
   methods: {
     gotoTab(id, index) {
       //切换tab颜色
@@ -160,7 +159,7 @@ export default {
     },
     async tabId(id, pageNum) {
       console.log("id,pageNum", id, pageNum);
-      // 请求拿到第一选项卡的内容
+      // 请求拿到第一选项卡的内容123
       let {
         data: {
           data: { list }
@@ -180,7 +179,6 @@ export default {
       // console.log("goodsList", this.goodsList);
     }
   },
-
   mounted() {
     document.querySelector(".scroll_Top").style.bottom = this.toBottom;
   },
@@ -199,12 +197,10 @@ export default {
       return `https://xm.star365.com/imgfile/${item.carouselPicurl}`;
     });
     // console.log(img);
-
     this.imglist = img;
     this.Noticelist = data.notice;
     // console.log(this.Noticelist);
     // console.log(this.imglist);
-
     let {
       data: { data: dataimg }
     } = await this.$axios.get(
@@ -215,21 +211,18 @@ export default {
       return `https://xm.star365.com/imgfile/${item.topicPicurl}`;
     });
     this.imgItem = img_item;
-
     let {
       data: { data: res }
     } = await this.$axios.get(
       "https://xm.star365.com/api/user-api/brand/getBrandList"
     );
     // console.log(res);
-
     res.map(item => {
       let brandimg = `https://xm.star365.com/imgfile/${item.brandPicUrl}`;
       item.brandPicUrl = brandimg;
     });
     // console.log(res);
     this.brand = res;
-
     let {
       data: { data: item }
     } = await this.$axios.get(
@@ -239,7 +232,6 @@ export default {
     this.Product = item;
     this.tabId(item[0].id, this.pageNum);
   },
-
   components: {
     Footer,
     Header
@@ -254,7 +246,6 @@ export default {
   margin-top: 13.333vw;
   margin-bottom: 13.333vw;
 }
-
 .layout {
   padding-left: 4vw;
   padding-right: 4vw;
@@ -436,7 +427,6 @@ export default {
   position: relative;
   z-index: 20;
   height: 11.733vw;
-
   .Home__product_ul {
     width: 100%;
     height: 100%;
@@ -470,7 +460,6 @@ export default {
   display: flex;
   flex-wrap: wrap;
   margin-top: 5.333vw;
-
   .layout_itemlist_li {
     width: 20.667vw;
     height: 27.333vw;
