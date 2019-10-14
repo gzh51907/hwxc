@@ -28,7 +28,7 @@ export default {
         },
         {
           name: "sort",
-          path: "/sort",
+          path: "/sort/5591",
           text: "分类",
           icon: "el-icon-menu"
         },
