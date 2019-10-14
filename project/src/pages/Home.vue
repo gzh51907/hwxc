@@ -22,8 +22,8 @@
         </a>
       </div>
     </div>
-  <Footer></Footer>
   </div>
+
 </template>
 
 <script>
@@ -50,12 +50,23 @@ export default {
     });
     // console.log(img);
     let imgitem = img.map(item => {
-      return `https://xm.star365.com/imgfile/${item}`;
-    });
+    //   return `https://xm.star365.com/imgfile/${item}`;
+    // });
     this.imglist = imgitem;
     this.Noticelist = data.notice;
-    // console.log(this.Noticelist);
-    // console.log(this.imglist);
+    console.log(this.Noticelist);
+    console.log(this.imglist);
+
+    console.log(this.Noticelist);
+    console.log(this.imglist);
+
+      return `https://xm.star365.com/imgfile/${item.carouselPicurl}`;
+    });
+    console.log(img);
+    this.imglist = img;
+    this.Noticelist = data.notice;
+    console.log(this.Noticelist);
+    console.log(this.imglist);
   },
   components:{
     Footer,
