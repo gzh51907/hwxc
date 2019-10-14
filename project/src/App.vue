@@ -24,10 +24,6 @@ export default {
     return {
       activeIndex: "/home",
       input2: "",
-<<<<<<< HEAD
-
-=======
->>>>>>> d2b313828f0883f033c8d570337d74be8a03b453
       menus: [
         {
           name: "home",
