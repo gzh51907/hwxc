@@ -13,7 +13,7 @@ import Footer from "./Footer.vue";
 export default {
   data(){
     return {
-
+      
     }
   },
   components:{

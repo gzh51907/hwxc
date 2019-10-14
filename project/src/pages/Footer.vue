@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer">
+  <div class="footer">
     <ul>
       <li :index="item.path" v-for="item in menus" :key="item.name">
         <router-link :to="item.path" >
@@ -9,7 +9,7 @@
         </router-link>
       </li>
     </ul>
-  </footer>
+  </div>
 </template>
 
 <script>
@@ -59,8 +59,10 @@ export default {
   border-top: 1px solid #ccc;
   position: fixed;
   z-index: 100;
+  left: 0;
   bottom: 0;
-  background: #fff;
+  background-color: #fff;
+
   ul {
     width: 100%;
     height: 100%;
