@@ -2,7 +2,7 @@
   <div class="footer">
     <ul>
       <li :index="item.path" v-for="item in menus" :key="item.name">
-        <router-link :to="item.path" >
+        <router-link :to="item.path">
           <i :class="item.icon"></i>
           <el-badge class="item" v-if="item.name==='cart'">{{item.text}}</el-badge>
           <template v-else>{{item.text}}</template>
@@ -56,7 +56,7 @@ export default {
   width: 100%;
   height: 13.333vw;
   padding-top: 1.333vw;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid #f6f6f8;
   position: fixed;
   z-index: 100;
   left: 0;

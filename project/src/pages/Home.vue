@@ -67,26 +67,33 @@
           <li class="layout_itemlist_li" v-for="item in brand" :key="item.id">
             <div>
               <img :src="item.brandPicUrl" alt />
+
               <p>{{item.brandName}}</p>
             </div>
           </li>
         </ul>
       </section>
       <section class="Home__product">
-        <ul class="Home__product_ul">
-          <li class="Home__product_li" 
-          v-for="item in Product" 
-          :key="item.id"
-          @click="gotoTab()">
-          {{item.categoryName}}
-          </li>
-        </ul>
+        <div class="Tabtop">
+          <ul class="Home__product_ul">
+            <li
+              class="Home__product_li"
+              v-for="(item,index) in Product"
+              :key="item.id"
+              @click="gotoTab(item.id,index)"
+              :class="{active:active === index}"
+            >{{item.categoryName}}</li>
+          </ul>
+        </div>
       </section>
       <section class="layout layout_list">
+        <!-- <keep-alive> -->
         <ul class="layout_list_ul">
-          <li class="layout_list_li" 
-          v-for="item in ProItem" :key="item.id"
-          @click="goto(item.barcode)"
+          <li
+            class="layout_list_li"
+            v-for="item in goodsList"
+            :key="item.id"
+            @click="goto(item.barcode)"
           >
             <a href="###">
               <div class="ProItem__pro-imgs">
@@ -110,6 +117,7 @@
             </a>
           </li>
         </ul>
+        <!-- </keep-alive> -->
       </section>
     </div>
     <div class="scroll_Top" @click="toTop">
@@ -130,23 +138,52 @@ export default {
       imglist: "",
       imgItem: "",
       brand: "",
-      ProItem: "",
-      Product: ""
+      Product: "",
+      active: 0,
+      goodsList: [],
+      pageNum: 1
     };
   },
+
   methods: {
+    gotoTab(id, index) {
+      //切换tab颜色
+      this.active = index;
+      // console.log(index);
+      this.tabId(id, this.pageNum);
+    },
     toTop() {
       document.documentElement.scrollTop = document.body.scrollTop = 0;
     },
-    goto(barcode){
-      this.$router.push({name:"goods",params:{barcode}});
+    goto(barcode) {
+      this.$router.push({ name: "goods", params: { barcode } });
+    },
+    async tabId(id, pageNum) {
+      console.log("id,pageNum", id, pageNum);
+      // 请求拿到第一选项卡的内容
+      let {
+        data: {
+          data: { list }
+        }
+      } = await this.$axios.get(
+        "https://xm.star365.com/api/product-api/category/getProductBy2typeId",
+        {
+          params: {
+            id: id,
+            cityId: 903,
+            pageNum: pageNum,
+            pageSize: 10
+          }
+        }
+      );
+      this.goodsList = list;
+      // console.log("goodsList", this.goodsList);
     }
   },
 
   mounted() {
     document.querySelector(".scroll_Top").style.bottom = this.toBottom;
   },
-
   async created() {
     let {
       data: { data }
@@ -184,7 +221,7 @@ export default {
     } = await this.$axios.get(
       "https://xm.star365.com/api/user-api/brand/getBrandList"
     );
-    console.log(res);
+    // console.log(res);
 
     res.map(item => {
       let brandimg = `https://xm.star365.com/imgfile/${item.brandPicUrl}`;
@@ -194,30 +231,13 @@ export default {
     this.brand = res;
 
     let {
-      data: {
-        data: { list }
-      }
-    } = await this.$axios.get(
-      "https://xm.star365.com/api/product-api/category/getProductBy2typeId",
-      {
-        params: {
-          id: 5591,
-          cityId: 903,
-          pageNum: 1,
-          pageSize: 10
-        }
-      }
-    );
-    this.ProItem = list;
-    console.log(list);
-
-    let {
       data: { data: item }
     } = await this.$axios.get(
       "https://xm.star365.com/api/product-api/category/getSecondCategoryList"
     );
     console.log(item);
     this.Product = item;
+    this.tabId(item[0].id, this.pageNum);
   },
 
   components: {
@@ -234,6 +254,7 @@ export default {
   margin-top: 13.333vw;
   margin-bottom: 13.333vw;
 }
+
 .layout {
   padding-left: 4vw;
   padding-right: 4vw;
@@ -395,10 +416,27 @@ export default {
     z-index: -1;
   }
 }
+.Home__product .active {
+  color: #ffee2f !important;
+  font-size: 4vw !important;
+  line-height: 8vw !important;
+}
+.Home__product .active::after {
+  width: 5.6vw;
+  height: 1.867vw;
+  content: " ";
+  position: absolute;
+  background: url(../images/active.png) no-repeat;
+  background-size: cover;
+  left: 50%;
+  bottom: 2vw;
+  transform: translateX(-50%);
+}
 .Home__product {
   position: relative;
   z-index: 20;
   height: 11.733vw;
+
   .Home__product_ul {
     width: 100%;
     height: 100%;
@@ -410,8 +448,7 @@ export default {
     display: flex;
     z-index: 5;
     .Home__product_li {
-      color: #ffee2f;
-      font-size: 3.733vw;
+      font-size: 3.333vw;
       font-weight: 700;
       line-height: 9.333vw;
       height: 11.733vw;
@@ -433,6 +470,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   margin-top: 5.333vw;
+
   .layout_itemlist_li {
     width: 20.667vw;
     height: 27.333vw;
@@ -532,8 +570,6 @@ export default {
   width: 16vw;
   height: 16vw;
   background: rgba(0, 0, 0, 0.43922);
-  display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -547,5 +583,10 @@ export default {
     width: 5.333vw;
     margin-bottom: 1.333vw;
   }
+}
+.toptab {
+  position: fixed;
+  left: 0px;
+  width: 100%;
 }
 </style>
