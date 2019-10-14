@@ -56,8 +56,8 @@ export default {
 
     this.imglist = img;
     this.Noticelist = data.notice;
-    console.log(this.Noticelist);
-    console.log(this.imglist);
+    // console.log(this.Noticelist);
+    // console.log(this.imglist);
   },
   components: {
     Footer,
