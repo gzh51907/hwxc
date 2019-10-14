@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="box">
-      购物车
+      购物车115454545
     </div>
     <Footer></Footer>
   </div>
