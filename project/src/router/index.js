@@ -51,7 +51,7 @@ let router = new VueRouter({
         // 动态路由
         {
             name: 'goods',
-            path: '/goods/:id',
+            path: '/goods/:barcode',
             component: Goods
         },
         {

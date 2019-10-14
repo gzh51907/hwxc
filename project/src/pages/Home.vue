@@ -74,13 +74,21 @@
       </section>
       <section class="Home__product">
         <ul class="Home__product_ul">
-          <li class="Home__product_li" v-for="item in Product" :key="item.id">{{item.categoryName}}</li>
+          <li class="Home__product_li" 
+          v-for="item in Product" 
+          :key="item.id"
+          @click="gotoTab()">
+          {{item.categoryName}}
+          </li>
         </ul>
       </section>
       <section class="layout layout_list">
         <ul class="layout_list_ul">
-          <li class="layout_list_li" v-for="item in ProItem" :key="item.id">
-            <a href="#">
+          <li class="layout_list_li" 
+          v-for="item in ProItem" :key="item.id"
+          @click="goto(item.barcode)"
+          >
+            <a href="###">
               <div class="ProItem__pro-imgs">
                 <img :src="item.picUrl" alt />
                 <img src alt />
@@ -104,9 +112,11 @@
         </ul>
       </section>
     </div>
-    <el-backtop target=".page-component__scroll .el-scrollbar__wrap"></el-backtop>
+    <div class="scroll_Top" @click="toTop">
+      <img src="../images/jiantou.png" alt />
+      回顶部
+    </div>
     <Footer></Footer>
-    
   </div>
 </template>
 
@@ -124,6 +134,19 @@ export default {
       Product: ""
     };
   },
+  methods: {
+    toTop() {
+      document.documentElement.scrollTop = document.body.scrollTop = 0;
+    },
+    goto(barcode){
+      this.$router.push({name:"goods",params:{barcode}});
+    }
+  },
+
+  mounted() {
+    document.querySelector(".scroll_Top").style.bottom = this.toBottom;
+  },
+
   async created() {
     let {
       data: { data }
@@ -181,7 +204,7 @@ export default {
           id: 5591,
           cityId: 903,
           pageNum: 1,
-          pageSize: 18
+          pageSize: 10
         }
       }
     );
@@ -298,6 +321,10 @@ export default {
         align-items: center;
         margin: 0 auto 4.933vw;
       }
+      span {
+        color: #333;
+        font-size: 3.733vw;
+      }
     }
   }
 }
@@ -384,7 +411,7 @@ export default {
     z-index: 5;
     .Home__product_li {
       color: #ffee2f;
-      font-size: 4.267vw;
+      font-size: 3.733vw;
       font-weight: 700;
       line-height: 9.333vw;
       height: 11.733vw;
@@ -496,6 +523,29 @@ export default {
         }
       }
     }
+  }
+}
+.scroll_Top {
+  position: fixed;
+  bottom: 18.667vw;
+  right: 1.333vw;
+  width: 16vw;
+  height: 16vw;
+  background: rgba(0, 0, 0, 0.43922);
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  font-size: 3.2vw;
+  color: #fff;
+  transform: scale(0.8);
+  z-index: 99;
+  img {
+    width: 5.333vw;
+    margin-bottom: 1.333vw;
   }
 }
 </style>
