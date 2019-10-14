@@ -82,7 +82,7 @@
         </div>
         <div class="footer-box">
           <i class="el-icon-star-off"></i>
-          <span>收藏22222</span>
+          <span>收藏222</span>
         </div>
         <div class="footer-box">
           <i class="el-icon-shopping-cart-2"></i>
