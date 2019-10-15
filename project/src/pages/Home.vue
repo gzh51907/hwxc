@@ -142,7 +142,7 @@ export default {
   },
   methods: {
     gotoTab(id, index) {
-      //切换tab颜色
+      //切换tab颜色`
       this.active = index;
       // console.log(index);
       this.tabId(id, this.pageNum);
