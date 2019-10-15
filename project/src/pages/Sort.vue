@@ -46,7 +46,7 @@ export default {
     };
   },
   async created() {
-    //   请求拿到选项卡和图片
+    //   请求拿到选项卡和图片1111
     let { data: { data } } = await this.$axios.get(
       "https://xm.star365.com/api/product-api/category/getSecondCategoryList"
     );
@@ -119,7 +119,7 @@ export default {
       console.log("goods", this.goodsList);
     },
 
-    // 跳转购物车11111
+    // 跳转购物车
     gotoCar(barcode){
       // 添加前，判断该商品是否已经存在,存在+1
       let currentgoods = this.$store.state.cart.cartlist.filter(item=>item.id == barcode)[0];
