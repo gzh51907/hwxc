@@ -139,7 +139,7 @@ export default {
 
     // 跳转购物车
     gotoCar(list) {
-      console.log("点了加入购物车");
+      
       // 添加前，判断该商品是否已经存在,存在
       let currentgoods = this.$store.state.cart.cartlist.filter(
         item => item.id == list.barcode
@@ -151,6 +151,7 @@ export default {
         let goods = {
           id: list.barcode,
           title: list.productName,
+          efficacy: list.efficacy,
           pic: list.picUrl,
           price: list.guidePrice,
           num: 1

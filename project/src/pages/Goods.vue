@@ -90,12 +90,13 @@
           <i class="el-icon-star-off"></i>
           <span>收藏</span>
         </div>
-        <div class="footer-box">
+        <div class="footer-box" @click="GotoCar">
           <i class="el-icon-shopping-cart-2"></i>
           <span>加入清单</span>
         </div>
       </div>
       <button class="footer-r" @click="gotoCar">加入购物车</button>
+      
     </div>
   </div>
 </template>
@@ -162,7 +163,11 @@ export default {
     gotoCar(){
       this.add2cart();
       this.$router.push("/cart");
+      
     },
+    GotoCar(){
+       this.$router.push("/cart");
+    }
   }
 };
 </script>

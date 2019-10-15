@@ -1,13 +1,14 @@
 <template>
   <div>
-    <div class="Cart">
-      <div class="CartHeader">
+    <div class="CartHeader">
         <div class="logo">
           <img src="../images/logo.png" alt />
         </div>
         <div class="qingdan">清单</div>
         <div class="bianji">编辑</div>
       </div>
+    <div class="Cart">
+      
       <div class="no-box" style=" display: none;">
         <div class="no-box-img">
           <img src="https://xm.star365.com/images/no.png" alt />
@@ -18,8 +19,6 @@
         <div class="GoodsCart-header">
           <div class="GoodsCart-header-l">
             <el-checkbox class="checkbox-name">闪电送药</el-checkbox>
-            <!-- <input type="checkbox" class="checkboxall">
-            闪电送药122-->
           </div>
           <div class="GoodsCart-header-r">免配送费, 最快25分钟送达</div>
         </div>
@@ -29,12 +28,12 @@
               <div class="checkbox">
                 <el-checkbox class="checkbox-name"></el-checkbox>
               </div>
-              <div class="goodsimg">
+              <div class="goodsimg" @click="gotoGoods(item.id)">
                 <img :src="item.pic" alt />
               </div>
               <div class="goodsname">
-                <p class="goods-p">{{item.title}}</p>
-                <p class="goods-p goods-p2">{{item.efficacy}}</p>
+                <p class="goods-p" @click="gotoGoods(item.id)">{{item.title}}</p>
+                <p class="goods-p goods-p2" @click="gotoGoods(item.id)">{{item.efficacy}}</p>
                 <p class="goodsprice">
                   <span class="goodsprice-span">￥{{item.price}}</span>
                   <el-input-number
@@ -56,7 +55,7 @@
             总计：
             <span>
               <i>￥</i>
-              {{totalPrice}}
+              {{totalPrice.toFixed(2)}}
             </span>
           </div>
         </div>
@@ -77,11 +76,16 @@ export default {
   },
   computed: {
     cartlist() {
-      console.log('cartlist',this.$store.state.cart.cartlist);
+      console.log("cartlist", this.$store.state.cart.cartlist);
       return this.$store.state.cart.cartlist;
     },
-    totalPrice(){
+    totalPrice() {
       return this.$store.getters.allprice;
+    }
+  },
+  methods: {
+    gotoGoods(barcode) {
+      this.$router.push({ name: "goods", params: { barcode } });
     }
   },
   components: {
@@ -90,12 +94,8 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.Cart {
-  min-height: 100vh;
-  background: #f7f7f7;
-  padding-bottom: 14vw;
-
-  .CartHeader {
+.CartHeader {
+    width: 100%;
     height: 10.4vw;
     line-height: 10.4vw;
     background: #fff;
@@ -104,8 +104,11 @@ export default {
     color: #333;
     display: flex;
     align-items: center;
-
+    position: fixed;
+    top: 0;
+    z-index: 500;
     .logo {
+      flex: 1;
       img {
         width: 17.333vw;
         height: 5.333vw;
@@ -118,12 +121,19 @@ export default {
       color: #000;
     }
     .bianji {
+      flex: 1;
       width: 11.733vw;
       height: 10.4vw;
       line-height: 10.4vw;
-      text-align: right;
+      text-align: center;
     }
   }
+.Cart {
+  min-height: 100vh;
+  background: #f7f7f7;
+  padding-bottom: 14vw;
+  padding-top: 10.4vw;
+  box-sizing: border-box;
   .no-box {
     margin-top: 26.666vw;
     height: 100%;
@@ -149,12 +159,12 @@ export default {
   .GoodsCart {
     background: #fff;
     margin-top: 1.333vw;
-    padding-left: 4vw;
-    padding-right: 4vw;
+    
+ 
     .GoodsCart-header {
       height: 10.667vw;
       line-height: 10.667vw;
-
+      padding:0 4vw;
       color: #fa2b31;
       .GoodsCart-header-l {
         float: left;
@@ -179,13 +189,14 @@ export default {
     }
     .GoodsCart-content {
       height: 100%;
-
+      padding-bottom: 14vw;
+      background: #f7f7f7;
       ul {
         height: 100%;
         li {
           background: #fff;
           height: 25.867vw;
-          padding: 3vw 0vw;
+          padding: 3vw  4vw;
           .checkbox {
             float: left;
             line-height: 28vw;
