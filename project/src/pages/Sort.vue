@@ -46,7 +46,7 @@ export default {
     };
   },
   async created() {
-    //   请求拿到选项卡和图片
+    //   请求拿到选项卡和图片111
     let { data: { data } } = await this.$axios.get(
       "https://xm.star365.com/api/product-api/category/getSecondCategoryList"
     );
