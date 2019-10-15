@@ -17,108 +17,12 @@
               <h3 class="medium">{{ item.noticeTitle }}</h3>
             </el-carousel-item>
           </el-carousel>
-          <a href="###">
+          <a href="#">
             <img src="../images/img1.png" alt />
             <span class="name">御景花园</span>
           </a>
         </div>
       </div>
-      <ul class="menu_ul">
-        <li class="menu_li">
-          <a href="###">
-            <img src="../images/logo_1.png" alt />
-            <span>城市服务</span>
-          </a>
-        </li>
-        <li class="menu_li">
-          <a href="###">
-            <img src="../images/logo_2.png" alt />
-            <span>慢病专区</span>
-          </a>
-        </li>
-        <li class="menu_li">
-          <a href="###">
-            <img src="../images/logo_3.png" alt />
-            <span>全球优品</span>
-          </a>
-        </li>
-        <li class="menu_li">
-          <a href="###">
-            <img src="../images/logo_4.png" alt />
-            <span>药师服务</span>
-          </a>
-        </li>
-      </ul>
-      <section class="Home_sign">
-        <div class="Home_sign_item">正品保障</div>
-        <div class="Home_sign_item">全国连锁</div>
-        <div class="Home_sign_item">企业资质</div>
-      </section>
-      <section class="layout">
-        <div class="layout_item" v-for="item in imgItem" :key="item">
-          <img :src="item" alt />
-        </div>
-      </section>
-      <section class="layout">
-        <h3 class="layout_h3">
-          <em>品牌馆</em>
-        </h3>
-        <ul class="layout_itemlist_ul">
-          <li class="layout_itemlist_li" v-for="item in brand" :key="item.id">
-            <div>
-              <img :src="item.brandPicUrl" alt />
-
-              <p>{{item.brandName}}</p>
-            </div>
-          </li>
-        </ul>
-      </section>
-      <section class="Home__product">
-        <div class="Tabtop">
-          <ul class="Home__product_ul">
-            <li
-              class="Home__product_li"
-              v-for="(item,index) in Product"
-              :key="item.id"
-              @click="gotoTab(item.id,index)"
-              :class="{active:active === index}"
-            >{{item.categoryName}}</li>
-          </ul>
-        </div>
-      </section>
-      <section class="layout layout_list">
-        <ul class="layout_list_ul">
-          <li
-            class="layout_list_li"
-            v-for="item in goodsList"
-            @click="goto(item.barcode)"
-            :key="item.id"
-          >
-            <div class="ProItem__pro-imgs">
-              <img :src="item.picUrl" alt />
-              <img src="../images/tl.png" alt />
-            </div>
-            <div class="ProItem__pro-box">
-              <p class="ProItem__pro-box_p1">{{item.productName}}</p>
-              <p class="ProItem__pro-box_p2">{{item.efficacy}}</p>
-              <div class="ProItem__pro-tag">
-                <span></span>
-              </div>
-              <div class="ProItem__pro-price">
-                <div class="Price__money">
-                  ￥
-                  <em>{{item.guidePrice.toFixed(2)}}</em>
-                </div>
-              </div>
-              <p class="ProItem__pro-num">销量{{item.sellCount}}笔</p>
-            </div>
-          </li>
-        </ul>
-      </section>
-    </div>
-    <div class="scroll_Top" @click="toTop">
-      <img src="../images/jiantou.png" alt />
-      回顶部
     </div>
     <Footer></Footer>
   </div>
@@ -131,15 +35,10 @@ export default {
   data() {
     return {
       Noticelist: "",
-      imglist: "",
-      imgItem: "",
-      brand: "",
-      Product: "",
-      active: 0,
-      goodsList: [],
-      pageNum: 1,
+      imglist: ""
     };
   },
+<<<<<<< HEAD
   methods: {
     gotoTab(id, index) {
       //切换tab颜色
@@ -180,6 +79,8 @@ export default {
     document.querySelector(".scroll_Top").style.bottom = this.toBottom;
     
   },
+=======
+>>>>>>> huiyun
   async created() {
     let {
       data: { data }
@@ -195,10 +96,12 @@ export default {
       return `https://xm.star365.com/imgfile/${item.carouselPicurl}`;
     });
     // console.log(img);
+
     this.imglist = img;
     this.Noticelist = data.notice;
     // console.log(this.Noticelist);
     // console.log(this.imglist);
+<<<<<<< HEAD
     let {
       data: { data: dataimg }
     } = await this.$axios.get(
@@ -229,6 +132,8 @@ export default {
     // console.log(item);
     this.Product = item;
     this.tabId(item[0].id, this.pageNum);
+=======
+>>>>>>> huiyun
   },
   components: {
     Footer,
@@ -237,12 +142,11 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 .box {
-  height: auto;
+  height: 3000px;
   flex: 1;
-  margin-top: 13.333vw;
-  margin-bottom: 13.333vw;
+  padding-top: 13.333vw;
 }
 .layout {
   padding-left: 4vw;
@@ -315,6 +219,7 @@ export default {
     }
   }
 }
+<<<<<<< HEAD
 .menu_ul {
   display: flex;
   .menu_li {
@@ -586,4 +491,6 @@ export default {
 //   z-index: 4;
 //   width: 100%;
 // }
+=======
+>>>>>>> huiyun
 </style>
