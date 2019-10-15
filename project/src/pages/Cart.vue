@@ -19,7 +19,7 @@
           <div class="GoodsCart-header-l">
             <el-checkbox class="checkbox-name">闪电送药</el-checkbox>
             <!-- <input type="checkbox" class="checkboxall">
-            闪电送药122-->
+            闪电送药-->
           </div>
           <div class="GoodsCart-header-r">免配送费, 最快25分钟送达</div>
         </div>
