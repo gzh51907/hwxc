@@ -59,7 +59,7 @@ export default {
     let { id } = this.$route.params;
     this.tabId(id, 1);
   },
-  // 路由守卫监听id变化
+  // 路由守卫监听id变化11
   beforeRouteUpdate(to, from, next) {
     if (to.params.id != from.params.id) {
       this.id = to.params.id;
