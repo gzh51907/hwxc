@@ -36,7 +36,7 @@
                 <p class="goods-p">{{item.title}}</p>
                 <p class="goods-p goods-p2">{{item.efficacy}}</p>
                 <p class="goodsprice">
-                  <span class="goodsprice-span">￥{{item.price}}</span>
+                  <span class="goodsprice-span">￥{{item.price.toFixed(2)}}</span>
                   <el-input-number
                     v-model="item.num"
                     :min="1"
@@ -56,7 +56,7 @@
             总计：
             <span>
               <i>￥</i>
-              {{totalPrice}}
+              {{totalPrice.toFixed(2)}}
             </span>
           </div>
         </div>

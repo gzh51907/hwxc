@@ -118,10 +118,8 @@ export default {
       };
       console.log("goods", this.goodsList);
     },
-
-    // 跳转购物车
-    gotoCar(list){
-      // 添加前，判断该商品是否已经存在,存在11232
+    add2cart(list){
+ // 添加前，判断该商品是否已经存在,存在11232
       let currentgoods = this.$store.state.cart.cartlist.filter(item=>item.id == barcode)[0];
       if(currentgoods){
         let num = currentgoods.num + 1;
@@ -136,6 +134,10 @@ export default {
         };
         this.$store.commit("add2cart", goods);
       }
+    },
+    // 跳转购物车
+    gotoCar(list){
+      this.add2cart(list);
       this.$router.push("/cart");
     },
     gotoGoods(barcode){;
