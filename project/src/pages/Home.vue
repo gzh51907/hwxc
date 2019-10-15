@@ -332,7 +332,7 @@ export default {
       }
       span {
         color: #333;
-        font-size: 3vw;
+        font-size: 3.633vw;
       }
     }
   }
