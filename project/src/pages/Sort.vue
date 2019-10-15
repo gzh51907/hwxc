@@ -107,7 +107,7 @@ export default {
           }
         }
       );
-      // 拿到数据和总页数
+      // 拿到数据和总页数11
       this.goodsList = {
         list: res.list,
         totalPage: res.totalPage
