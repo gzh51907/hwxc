@@ -18,6 +18,7 @@ import Mine from '../pages/Mine.vue';
 import Goods from '../pages/Goods.vue';
 // import store from '../store';
 
+
 // 3. 实例化router并配置参数
 let router = new VueRouter({
     // mode:'hash',

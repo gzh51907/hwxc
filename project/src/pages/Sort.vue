@@ -99,7 +99,7 @@ export default {
 
     async tabId(id, pageNum) {
       console.log("id,pageNum", id, pageNum);
-      // 请求拿到第一选项卡的内容
+      // 请求拿到第一选项卡的内容122
       let { data: { data: res } } = await this.$axios.get(
         "https://xm.star365.com/api/product-api/category/getProductBy2typeId",
         {
