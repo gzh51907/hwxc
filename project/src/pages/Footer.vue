@@ -1,9 +1,10 @@
 <template>
   <div class="footer">
     <ul>
-      <li :index="item.path" v-for="item in menus" :key="item.name">
-        <router-link :to="item.path">
-          <i :class="item.icon"></i>
+      <li :index="item.path" v-for="item in menus" :key="item.name"  
+     >
+        <router-link :to="item.path" >
+          <i :class="item.icon" ></i>
           <el-badge class="item" v-if="item.name==='cart'">{{item.text}}</el-badge>
           <template v-else>{{item.text}}</template>
         </router-link>
@@ -47,6 +48,15 @@ export default {
       ]
     };
   },
+  methods: {
+    // changePage(index){
+    //   // let nowIdx = 0;
+    //   // console.log(this.$router.history)
+    //   console.log(this.$router.history.current.name);
+    //   console.log('index,now',index,this.nowIdx);
+    //   this.nowIdx = index;
+    // }
+  },
   components: {}
 };
 </script>
@@ -88,6 +98,13 @@ export default {
         align-items: center;
         color: #555;
         text-decoration: none;
+      }
+      .router-link-active {
+        color: green;
+
+        i {
+          color: green;
+        }
       }
     }
   }

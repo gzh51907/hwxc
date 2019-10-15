@@ -116,16 +116,19 @@ export default {
     },
 
     // 跳转购物车
-    gotoCar(list){
+    gotoCar(list) {
       // 添加前，判断该商品是否已经存在,存在+1
-      let currentgoods = this.$store.state.cart.cartlist.filter(item=>item.id == list.barcode)[0];
-      if(currentgoods){
+      let currentgoods = this.$store.state.cart.cartlist.filter(
+        item => item.id == list.barcode
+      )[0];
+      if (currentgoods) {
         let num = currentgoods.num + 1;
-        this.$store.commit('changeNum',{id:list.barcode,num:1});
-      }else{
-          let goods = {
-          id:list.barcode,
+        this.$store.commit("changeNum", { id: list.barcode, num: 1 });
+      } else {
+        let goods = {
+          id: list.barcode,
           title: list.productName,
+          efficacy:list.efficacy,
           pic: list.picUrl,
           price: list.guidePrice,
           num: 1
@@ -134,8 +137,8 @@ export default {
       }
       this.$router.push("/cart");
     },
-    gotoGoods(barcode){;
-      this.$router.push({name:"goods",params:{barcode}});
+    gotoGoods(barcode) {
+      this.$router.push({ name: "goods", params: { barcode } });
     }
   },
   computed: {
@@ -249,7 +252,7 @@ export default {
               border-radius: 50%;
               color: #fff;
             }
-            .el-icon-shopping-cart-2:before{
+            .el-icon-shopping-cart-2:before {
               font-size: 18px;
             }
           }
