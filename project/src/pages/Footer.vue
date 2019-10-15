@@ -48,15 +48,6 @@ export default {
       ]
     };
   },
-  methods: {
-    // changePage(index){
-    //   // let nowIdx = 0;
-    //   // console.log(this.$router.history)
-    //   console.log(this.$router.history.current.name);
-    //   console.log('index,now',index,this.nowIdx);
-    //   this.nowIdx = index;
-    // }
-  },
   components: {}
 };
 </script>
@@ -100,10 +91,10 @@ export default {
         text-decoration: none;
       }
       .router-link-active {
-        color: green;
+        color: #009e9f;
 
         i {
-          color: green;
+          color: #009e9f;
         }
       }
     }
