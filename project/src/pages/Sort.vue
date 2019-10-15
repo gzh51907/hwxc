@@ -117,7 +117,7 @@ export default {
 
     // 跳转购物车
     gotoCar(list) {
-      // 添加前，判断该商品是否已经存在,存在+1
+      // 添加前，判断该商品是否已经存在,存在则+1
       let currentgoods = this.$store.state.cart.cartlist.filter(
         item => item.id == list.barcode
       )[0];
