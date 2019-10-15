@@ -156,7 +156,7 @@ export default {
     },
     async tabId(id, pageNum) {
       console.log("id,pageNum", id, pageNum);
-      // 请求拿到第一选项卡的内容
+      // 请求拿到第一选项卡的内容a
       let {
         data: {
           data: { list }
