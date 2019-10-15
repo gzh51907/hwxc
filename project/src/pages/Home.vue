@@ -73,20 +73,26 @@
           </li>
         </ul>
       </section>
-      <section class="Home__product" >
+      <section class="Home__product">
         <div class="Tabtop">
           <ul class="Home__product_ul">
             <li
               class="Home__product_li"
               v-for="(item,index) in Product"
               :key="item.id"
-              @click="gotoTab(item.id,index)"
+              @click="gotoTab(item.id,index),openFullScreen()"
               :class="{active:active === index}"
             >{{item.categoryName}}</li>
           </ul>
         </div>
       </section>
+
       <section class="layout layout_list">
+        <div class="loading" v-if="show">
+          <img src="../images/loading.png" alt />
+          <img src="../images/loading.png" alt />
+          <img src="../images/loading.png" alt />
+        </div>
         <ul class="layout_list_ul">
           <li
             class="layout_list_li"
@@ -138,25 +144,29 @@ export default {
       active: 0,
       goodsList: [],
       pageNum: 1,
+      show: false,
     };
   },
   methods: {
+    openFullScreen() {
+      this.show = true;
+      setTimeout(() => {
+        this.show = false;
+      }, 2600);
+    },
     gotoTab(id, index) {
       //切换tab颜色`
       this.active = index;
-      // console.log(index);
       this.tabId(id, this.pageNum);
     },
     toTop() {
       document.documentElement.scrollTop = document.body.scrollTop = 0;
     },
     goto(barcode) {
-      console.log(barcode);
       this.$router.push({ name: "goods", params: { barcode } });
     },
     async tabId(id, pageNum) {
-      console.log("id,pageNum", id, pageNum);
-      // 请求拿到第一选项卡的内容a
+      // 请求拿到第一选项卡的内容
       let {
         data: {
           data: { list }
@@ -173,8 +183,7 @@ export default {
         }
       );
       this.goodsList = list;
-      // console.log("goodsList", this.goodsList);
-    },
+    }
   },
   mounted() {
     document.querySelector(".scroll_Top").style.bottom = this.toBottom;
@@ -193,11 +202,9 @@ export default {
     let img = data.carousel.map(item => {
       return `https://xm.star365.com/imgfile/${item.carouselPicurl}`;
     });
-    // console.log(img);
+
     this.imglist = img;
     this.Noticelist = data.notice;
-    // console.log(this.Noticelist);
-    // console.log(this.imglist);
     let {
       data: { data: dataimg }
     } = await this.$axios.get(
@@ -225,7 +232,7 @@ export default {
     } = await this.$axios.get(
       "https://xm.star365.com/api/product-api/category/getSecondCategoryList"
     );
-    console.log(item);
+    // console.log(item);
     this.Product = item;
     this.tabId(item[0].id, this.pageNum);
   },
@@ -332,7 +339,7 @@ export default {
       }
       span {
         color: #333;
-        font-size: 3vw;
+        font-size: 3.633vw;
       }
     }
   }
@@ -479,11 +486,28 @@ export default {
     }
   }
 }
+
+.loading {
+  width: 100%;
+  height: auto;
+  position: absolute;
+  z-index: 2;
+  top: -13vw;
+  left: 0;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
 .layout_list {
   margin-top: 1.333vw;
+  position: relative;
   .layout_list_ul {
     display: flex;
     flex-wrap: wrap;
+    .layout_list_li:nth-child(even) {
+      border-right: none;
+    }
     .layout_list_li {
       width: 45.6vw;
       height: 80.933vw;
