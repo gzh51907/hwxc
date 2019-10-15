@@ -95,7 +95,7 @@
           <span>加入清单</span>
         </div>
       </div>
-      <button class="footer-r" @click="add2cart">加入购物车</button>
+      <button class="footer-r" @click="gotoCar">加入购物车</button>
     </div>
   </div>
 </template>
@@ -133,15 +133,36 @@ export default {
       this.picList = data.picList;
       this.description = data.description;
       // console.log(data.description);
-      // console.log(data);
+      console.log('data',data);
     },
     go() {
       this.$router.go(-1);
     },
     add2cart() {
-      let id = this.GoodsData.barcode;
-      this.$store.commit("add2cart", id);
-    }
+
+      // 添加前，判断该商品是否已经存在,存在
+      let currentgoods = this.$store.state.cart.cartlist.filter(item=>item.id == this.GoodsData.barcode)[0];
+      if(currentgoods){
+        let num = currentgoods.num + 1;
+        this.$store.commit('changeNum',{id: this.GoodsData.barcode,num:1});
+      }else{
+          let goods = {
+          id: this.GoodsData.barcode,
+          title:  this.GoodsData.productName,
+          efficacy: this.GoodsData.efficacy,
+          pic:  this.GoodsData.minPic,
+          price:  this.GoodsData.guidePrice,
+          num: 1,
+          
+          };
+        this.$store.commit("add2cart", goods);
+      }
+    },
+     // 跳转购物车
+    gotoCar(){
+      this.add2cart();
+      this.$router.push("/cart");
+    },
   }
 };
 </script>

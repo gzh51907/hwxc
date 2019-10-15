@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
     <div>
         <Header></Header>
         <div class="middle" id="middle">
@@ -25,8 +26,50 @@
               </div>          
         </div>
         <Footer></Footer>
+=======
+  <div>
+    <Header></Header>
+    <div class="middle" id="middle">
+      <ul class="tabbox">
+        <li
+          class="tab"
+          v-for="(item,index) in sortList"
+          :key="item.id"
+          @click.stop="goto(item.id,index)"
+          :class="{tab_active:index===current}"
+        >{{item.categoryName}}</li>
+      </ul>
+      <div class="right_goods">
+        <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto" v-if="hideItem">
+          <li
+            v-for="item in goodsList.list"
+            :key="item.id"
+            class="infinite-list-item"
+            v-loading="loading"
+            @click.stop="gotoGoods(item.barcode)"
+          >
+            <img :src="item.picUrl" />
+            <div style="float:right;" class="title_div">
+              <h2>{{item.productName}}</h2>
+              <h3>{{item.efficacy}}</h3>
+              <p class="shandian">闪电送</p>
+              <p>
+                <span class="price">￥{{item.guidePrice.toFixed(2)}}</span>
+                <i
+                  style="float:right;"
+                  class="car el-icon-shopping-cart-2"
+                  @click.stop="gotoCar(item)"
+                ></i>
+              </p>
+            </div>
+          </li>
+        </ul>
+        <img class="hide_img" src="../images/no-goods.png" v-else />
+      </div>
+>>>>>>> chendongtao
     </div>
-
+    <Footer></Footer>
+  </div>
 </template>
 
 <script>
@@ -46,8 +89,15 @@ export default {
     };
   },
   async created() {
+<<<<<<< HEAD
     //   请求拿到选项卡和图片
     let { data: { data } } = await this.$axios.get(
+=======
+    //   请求拿到选项卡和图片1
+    let {
+      data: { data }
+    } = await this.$axios.get(
+>>>>>>> chendongtao
       "https://xm.star365.com/api/product-api/category/getSecondCategoryList"
     );
     this.sortList = data;
@@ -95,8 +145,16 @@ export default {
     },
 
     async tabId(id, pageNum) {
+<<<<<<< HEAD
       // 请求拿到第一选项卡的内容
       let { data: { data: res } } = await this.$axios.get(
+=======
+      console.log("id,pageNum", id, pageNum);
+      // 请求拿到第一选项卡的内容12233
+      let {
+        data: { data: res }
+      } = await this.$axios.get(
+>>>>>>> chendongtao
         "https://xm.star365.com/api/product-api/category/getProductBy2typeId",
         {
           params: {
@@ -117,7 +175,12 @@ export default {
 
     // 跳转购物车
     gotoCar(list) {
+<<<<<<< HEAD
       // 添加前，判断该商品是否已经存在,存在+1
+=======
+      console.log("点了加入购物车");
+      // 添加前，判断该商品是否已经存在,存在
+>>>>>>> chendongtao
       let currentgoods = this.$store.state.cart.cartlist.filter(
         item => item.id == list.barcode
       )[0];
@@ -128,7 +191,10 @@ export default {
         let goods = {
           id: list.barcode,
           title: list.productName,
+<<<<<<< HEAD
           efficacy:list.efficacy,
+=======
+>>>>>>> chendongtao
           pic: list.picUrl,
           price: list.guidePrice,
           num: 1
