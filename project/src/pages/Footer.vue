@@ -5,7 +5,7 @@
      >
         <router-link :to="item.path" >
           <i :class="item.icon" ></i>
-          <el-badge class="item" v-if="item.name==='cart'">{{item.text}}</el-badge>
+          <el-badge :value="cartlength" class="item" v-if="item.name==='cart'" style="line-height:30px">{{item.text}}</el-badge>
           <template v-else>{{item.text}}</template>
         </router-link>
       </li>
@@ -48,11 +48,39 @@ export default {
       ]
     };
   },
+  computed: {
+    cartlength() {
+      // return this.$store.state.cartlist.length;
+      return this.$store.getters.cartlength;
+    },
+    currentUser() {
+      return this.$store.state.common.user;
+    }
+  },
+  methods: {
+    handleSelect(index, indexpath) {
+      // console.log(index, indexpath);
+      this.activeIndex = index;
+    },
+    goto(path) {
+      this.$router.push(path);
+    },
+    logout() {
+      this.$store.commit('logout');
+    }
+  },
+  created() {
+    //获取url地址参数
+    // console.log(this.$router);
+    this.activeIndex = this.$route.path;
+    this.$store.dispatch('checkLogin');
+  },
   components: {}
 };
 </script>
 
 <style lang="scss">
+
 .footer {
   width: 100%;
   height: 13.333vw;
