@@ -12,6 +12,17 @@
           <img :src="item" alt />
         </el-carousel-item>
       </el-carousel>
+      <div class="back">
+        <i class="el-icon-arrow-left"></i>
+      </div>
+      <div class="sousuo">
+        <div class="sousuo1">
+          <i class="el-icon-search"></i>
+        </div>
+        <div class="sousuo2">
+          <i class="el-icon-takeaway-box"></i>
+        </div>
+      </div>
     </div>
     <div class="box2">
       <div class="pricelist">
@@ -23,7 +34,7 @@
           <i class="el-icon-location"></i>
           <span class="CityLevel">深圳市</span>
         </div>
-        <div class="Sales">销量636笔</div>
+        <div class="Sales">销量{{GoodsData.sellCount}}笔</div>
       </div>
       <div class="title">
         <div class="title-icon">
@@ -64,12 +75,7 @@
     <div class="box5">
       <template>
         <el-tabs :stretch="true">
-          <el-tab-pane
-            label="商品详情"
-            name="first"
-            v-html="description"
-            class="description"
-          ></el-tab-pane>
+          <el-tab-pane label="商品详情" name="first" v-html="description" class="description"></el-tab-pane>
           <el-tab-pane label="评论(2)" name="second">不知道</el-tab-pane>
         </el-tabs>
       </template>
@@ -110,7 +116,7 @@ export default {
       "https://xm.star365.com/api/product-api/category/getDetailByBarcode",
       {
         params: {
-          barcode: 8073722,
+          barcode: 8030248,
           cityId: 903,
           state: 1,
           latitude: 22.534576,
@@ -122,6 +128,7 @@ export default {
     this.picList = data.picList;
     this.description = data.description;
     console.log(data.description);
+    console.log(data);
   },
   updated() {}
 };
@@ -185,6 +192,69 @@ export default {
     img {
       width: 100%;
       height: 100%;
+    }
+  }
+  .back {
+    width: 9.067vw;
+    height: 9.067vw;
+    padding: 2.133vw;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.5);
+    background-clip: content-box;
+    border-radius: 50%;
+    z-index: 10;
+    top: 2.667vw;
+    left: 1.333vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    i {
+      font-size: 5.333vw;
+      font-weight: 700;
+      color: rgb(255, 255, 255);
+    }
+  }
+  .sousuo {
+    position: fixed;
+    top: 4.8vw;
+    right: 3.467vw;
+    z-index: 999;
+    .sousuo1 {
+      float: left;
+      width: 9.067vw;
+      height: 9.067vw;
+      background: #fcac3b;
+      border-radius: 50%;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      text-align: center;
+      
+    }
+    .sousuo2 {
+      float: left;
+      width: 9.067vw;
+      height: 9.067vw;
+      border-radius: 50%;
+      -webkit-box-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      background: #009e9f;
+      margin-left: 2.667vw;
+      text-align: center;
+    }
+    i {
+      font-size: 5.333vw;
+      font-weight: 700;
+      color: rgb(255, 255, 255);
+      line-height:  9.067vw;
+      
     }
   }
 }
@@ -373,6 +443,9 @@ export default {
   background: #fff;
   width: 100%;
   height: 100%;
-  	.description>>> img{ display:block !important;; width: 400px !important;; }
+  .description >>> img {
+    display: block !important;
+    width: 400px !important;
+  }
 }
 </style>
