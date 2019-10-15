@@ -51,7 +51,7 @@ let router = new VueRouter({
         },
         {
             name: 'goods',
-            path: '/goods/:id',
+            path: '/goods/:barcode',
             component: Goods
         },
         {
