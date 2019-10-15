@@ -17,7 +17,7 @@
               <h3 class="medium">{{ item.noticeTitle }}</h3>
             </el-carousel-item>
           </el-carousel>
-          <a href="#">
+          <a href="###">
             <img src="../images/img1.png" alt />
             <span class="name">御景花园</span>
           </a>
@@ -25,25 +25,25 @@
       </div>
       <ul class="menu_ul">
         <li class="menu_li">
-          <a href="#">
+          <a href="###">
             <img src="../images/logo_1.png" alt />
             <span>城市服务</span>
           </a>
         </li>
         <li class="menu_li">
-          <a href="#">
+          <a href="###">
             <img src="../images/logo_2.png" alt />
             <span>慢病专区</span>
           </a>
         </li>
         <li class="menu_li">
-          <a href="#">
+          <a href="###">
             <img src="../images/logo_3.png" alt />
             <span>全球优品</span>
           </a>
         </li>
         <li class="menu_li">
-          <a href="#">
+          <a href="###">
             <img src="../images/logo_4.png" alt />
             <span>药师服务</span>
           </a>
@@ -87,37 +87,33 @@
         </div>
       </section>
       <section class="layout layout_list">
-        <!-- <keep-alive> -->
         <ul class="layout_list_ul">
           <li
             class="layout_list_li"
             v-for="item in goodsList"
-            :key="item.id"
             @click="goto(item.barcode)"
+            :key="item.id"
           >
-            <a href="###">
-              <div class="ProItem__pro-imgs">
-                <img :src="item.picUrl" alt />
-                <img src alt />
+            <div class="ProItem__pro-imgs">
+              <img :src="item.picUrl" alt />
+              <img src="../images/tl.png" alt />
+            </div>
+            <div class="ProItem__pro-box">
+              <p class="ProItem__pro-box_p1">{{item.productName}}</p>
+              <p class="ProItem__pro-box_p2">{{item.efficacy}}</p>
+              <div class="ProItem__pro-tag">
+                <span></span>
               </div>
-              <div class="ProItem__pro-box">
-                <p class="ProItem__pro-box_p1">{{item.productName}}</p>
-                <p class="ProItem__pro-box_p2">{{item.efficacy}}</p>
-                <div class="ProItem__pro-tag">
-                  <span></span>
+              <div class="ProItem__pro-price">
+                <div class="Price__money">
+                  ￥
+                  <em>{{item.guidePrice.toFixed(2)}}</em>
                 </div>
-                <div class="ProItem__pro-price">
-                  <div class="Price__money">
-                    ￥
-                    <em>{{item.guidePrice.toFixed(2)}}</em>
-                  </div>
-                </div>
-                <p class="ProItem__pro-num">销量{{item.sellCount}}笔</p>
               </div>
-            </a>
+              <p class="ProItem__pro-num">销量{{item.sellCount}}笔</p>
+            </div>
           </li>
         </ul>
-        <!-- </keep-alive> -->
       </section>
     </div>
     <div class="scroll_Top" @click="toTop">
@@ -141,10 +137,9 @@ export default {
       Product: "",
       active: 0,
       goodsList: [],
-      pageNum: 1
+      pageNum: 1,
     };
   },
-
   methods: {
     gotoTab(id, index) {
       //切换tab颜色
@@ -156,11 +151,12 @@ export default {
       document.documentElement.scrollTop = document.body.scrollTop = 0;
     },
     goto(barcode) {
+      console.log(barcode);
       this.$router.push({ name: "goods", params: { barcode } });
     },
     async tabId(id, pageNum) {
       console.log("id,pageNum", id, pageNum);
-      // 请求拿到第一选项卡的内容123
+      // 请求拿到第一选项卡的内容123a
       let {
         data: {
           data: { list }
@@ -172,17 +168,17 @@ export default {
             id: id,
             cityId: 903,
             pageNum: pageNum,
-            pageSize: 10
+            pageSize: 12
           }
         }
       );
       this.goodsList = list;
       // console.log("goodsList", this.goodsList);
-    }
+    },
   },
-
   mounted() {
     document.querySelector(".scroll_Top").style.bottom = this.toBottom;
+    
   },
   async created() {
     let {
@@ -199,12 +195,10 @@ export default {
       return `https://xm.star365.com/imgfile/${item.carouselPicurl}`;
     });
     // console.log(img);
-
     this.imglist = img;
     this.Noticelist = data.notice;
     // console.log(this.Noticelist);
     // console.log(this.imglist);
-
     let {
       data: { data: dataimg }
     } = await this.$axios.get(
@@ -215,21 +209,18 @@ export default {
       return `https://xm.star365.com/imgfile/${item.topicPicurl}`;
     });
     this.imgItem = img_item;
-
     let {
       data: { data: res }
     } = await this.$axios.get(
       "https://xm.star365.com/api/user-api/brand/getBrandList"
     );
     // console.log(res);
-
     res.map(item => {
       let brandimg = `https://xm.star365.com/imgfile/${item.brandPicUrl}`;
       item.brandPicUrl = brandimg;
     });
     // console.log(res);
     this.brand = res;
-
     let {
       data: { data: item }
     } = await this.$axios.get(
@@ -239,7 +230,6 @@ export default {
     this.Product = item;
     this.tabId(item[0].id, this.pageNum);
   },
-
   components: {
     Footer,
     Header
@@ -254,7 +244,6 @@ export default {
   margin-top: 13.333vw;
   margin-bottom: 13.333vw;
 }
-
 .layout {
   padding-left: 4vw;
   padding-right: 4vw;
@@ -344,7 +333,7 @@ export default {
       }
       span {
         color: #333;
-        font-size: 3.733vw;
+        font-size: 3vw;
       }
     }
   }
@@ -436,7 +425,7 @@ export default {
   position: relative;
   z-index: 20;
   height: 11.733vw;
-
+  width: 100%;
   .Home__product_ul {
     width: 100%;
     height: 100%;
@@ -470,7 +459,6 @@ export default {
   display: flex;
   flex-wrap: wrap;
   margin-top: 5.333vw;
-
   .layout_itemlist_li {
     width: 20.667vw;
     height: 27.333vw;
@@ -484,6 +472,7 @@ export default {
       object-fit: cover;
       border-radius: 1.333vw;
     }
+
     p {
       margin-top: 2.667vw;
       color: #666;
@@ -510,6 +499,13 @@ export default {
           width: 100%;
           height: 100%;
           object-fit: contain;
+        }
+        img:nth-child(2) {
+          width: 9.333vw;
+          height: 8.133vw;
+          position: absolute;
+          top: 1.333vw;
+          left: 1.333vw;
         }
       }
       .ProItem__pro-box {
@@ -584,9 +580,10 @@ export default {
     margin-bottom: 1.333vw;
   }
 }
-.toptab {
+.Tabtop{
   position: fixed;
-  left: 0px;
+  top: 0;
+  z-index: 4;
   width: 100%;
 }
 </style>
