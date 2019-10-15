@@ -226,7 +226,7 @@ export default {
     } = await this.$axios.get(
       "https://xm.star365.com/api/product-api/category/getSecondCategoryList"
     );
-    console.log(item);
+    // console.log(item);
     this.Product = item;
     this.tabId(item[0].id, this.pageNum);
   },
@@ -580,10 +580,10 @@ export default {
     margin-bottom: 1.333vw;
   }
 }
-.Tabtop{
-  position: fixed;
-  top: 0;
-  z-index: 4;
-  width: 100%;
-}
+// .Tabtop{
+//   position: fixed;
+//   top: 0;
+//   z-index: 4;
+//   width: 100%;
+// }
 </style>
