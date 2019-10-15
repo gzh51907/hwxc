@@ -5,7 +5,7 @@
         trigger="click"
         class="goodsimg"
         :autoplay="false"
-        arrow="always"
+        arrow="hover"
         indicator-position="none"
       >
         <el-carousel-item v-for="item in picList" :key="item">
@@ -13,7 +13,7 @@
         </el-carousel-item>
       </el-carousel>
       <div class="back">
-        <i class="el-icon-arrow-left"></i>
+        <i class="el-icon-arrow-left" @click="go"></i>
       </div>
       <div class="sousuo">
         <div class="sousuo1">
@@ -95,7 +95,7 @@
           <span>加入清单</span>
         </div>
       </div>
-      <button class="footer-r">加入购物车</button>
+      <button class="footer-r" @click="add2cart">加入购物车</button>
     </div>
   </div>
 </template>
@@ -109,28 +109,40 @@ export default {
       description: ""
     };
   },
-  async created() {
-    let {
-      data: { data }
-    } = await this.$axios.get(
-      "https://xm.star365.com/api/product-api/category/getDetailByBarcode",
-      {
-        params: {
-          barcode: 8030248,
-          cityId: 903,
-          state: 1,
-          latitude: 22.534576,
-          longitude: 113.973016
-        }
-      }
-    );
-    this.GoodsData = data;
-    this.picList = data.picList;
-    this.description = data.description;
-    console.log(data.description);
-    console.log(data);
+  created() {
+    let { barcode } = this.$route.params;
+    this.getData(barcode);
   },
-  updated() {}
+  methods: {
+    async getData(barcode) {
+      let {
+        data: { data }
+      } = await this.$axios.get(
+        "https://xm.star365.com/api/product-api/category/getDetailByBarcode",
+        {
+          params: {
+            barcode: barcode,
+            cityId: 903,
+            state: 1,
+            latitude: 22.534576,
+            longitude: 113.973016
+          }
+        }
+      );
+      this.GoodsData = data;
+      this.picList = data.picList;
+      this.description = data.description;
+      // console.log(data.description);
+      // console.log(data);
+    },
+    go() {
+      this.$router.go(-1);
+    },
+    add2cart() {
+      let id = this.GoodsData.barcode;
+      this.$store.commit("add2cart", id);
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -208,6 +220,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+
     i {
       font-size: 5.333vw;
       font-weight: 700;
@@ -232,7 +245,6 @@ export default {
       -webkit-align-items: center;
       align-items: center;
       text-align: center;
-      
     }
     .sousuo2 {
       float: left;
@@ -253,8 +265,7 @@ export default {
       font-size: 5.333vw;
       font-weight: 700;
       color: rgb(255, 255, 255);
-      line-height:  9.067vw;
-      
+      line-height: 9.067vw;
     }
   }
 }
@@ -323,8 +334,8 @@ export default {
     }
   }
   .explain {
-    height: 4vw;
-    margin-top: 1.333vw;
+    height: 8vw;
+    margin-top: 2vw;
     padding-bottom: 3.333vw;
     .explain-l {
       float: left;
@@ -338,6 +349,7 @@ export default {
     .explain-r {
       float: right;
       // width: 13.333vw;
+      margin-top: 2vw;
       i {
         float: left;
         width: 0.04rem;
