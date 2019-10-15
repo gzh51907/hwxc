@@ -1,32 +1,46 @@
 <template>
-    <div>
-        <Header></Header>
-        <div class="middle" id="middle">
-            <ul class="tabbox">
-              <li class="tab" v-for="(item,index) in sortList" :key="item.id" @click="goto(item.id,index)"
-              :class="{tab_active:index===current}">{{item.categoryName}}</li>
-            </ul>
-             <div class="right_goods" >              
-                <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto" v-if="hideItem">
-                  <li v-for="item in goodsList.list" :key="item.id" class="infinite-list-item" v-loading="loading" @click="gotoGoods(item.barcode)">
-                    <img :src="item.picUrl" >
-                                <div style="float:right;" class="title_div">
-                                    <h2>{{item.productName}}</h2>
-                                    <h3>{{item.efficacy}}</h3>
-                                    <p class="shandian">闪电送</p>
-                                    <p>
-                                        <span class="price">￥{{item.guidePrice.toFixed(2)}}</span>
-                                        <i style="float:right;" class="car el-icon-shopping-cart-2" @click.stop="gotoCar(item.barcode)"></i>
-                                    </p>
-                                </div> 
-                  </li>
-                </ul>
-                <img class="hide_img" src="../images/no-goods.png" v-else/>
-              </div>          
-        </div>
-        <Footer></Footer>
+  <div>
+    <Header></Header>
+    <div class="middle" id="middle">
+      <ul class="tabbox">
+        <li
+          class="tab"
+          v-for="(item,index) in sortList"
+          :key="item.id"
+          @click.stop="goto(item.id,index)"
+          :class="{tab_active:index===current}"
+        >{{item.categoryName}}</li>
+      </ul>
+      <div class="right_goods">
+        <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto" v-if="hideItem">
+          <li
+            v-for="item in goodsList.list"
+            :key="item.id"
+            class="infinite-list-item"
+            v-loading="loading"
+            @click.stop="gotoGoods(item.barcode)"
+          >
+            <img :src="item.picUrl" />
+            <div style="float:right;" class="title_div">
+              <h2>{{item.productName}}</h2>
+              <h3>{{item.efficacy}}</h3>
+              <p class="shandian">闪电送</p>
+              <p>
+                <span class="price">￥{{item.guidePrice.toFixed(2)}}</span>
+                <i
+                  style="float:right;"
+                  class="car el-icon-shopping-cart-2"
+                  @click.stop="gotoCar(item)"
+                ></i>
+              </p>
+            </div>
+          </li>
+        </ul>
+        <img class="hide_img" src="../images/no-goods.png" v-else />
+      </div>
     </div>
-
+    <Footer></Footer>
+  </div>
 </template>
 
 <script>
@@ -47,7 +61,9 @@ export default {
   },
   async created() {
     //   请求拿到选项卡和图片1
-    let { data: { data } } = await this.$axios.get(
+    let {
+      data: { data }
+    } = await this.$axios.get(
       "https://xm.star365.com/api/product-api/category/getSecondCategoryList"
     );
     this.sortList = data;
@@ -100,7 +116,9 @@ export default {
     async tabId(id, pageNum) {
       console.log("id,pageNum", id, pageNum);
       // 请求拿到第一选项卡的内容12233
-      let { data: { data: res } } = await this.$axios.get(
+      let {
+        data: { data: res }
+      } = await this.$axios.get(
         "https://xm.star365.com/api/product-api/category/getProductBy2typeId",
         {
           params: {
@@ -120,26 +138,29 @@ export default {
     },
 
     // 跳转购物车
-    gotoCar(barcode){
+    gotoCar(list) {
+      console.log("点了加入购物车");
       // 添加前，判断该商品是否已经存在,存在
-      let currentgoods = this.$store.state.cart.cartlist.filter(item=>item.id == barcode)[0];
-      if(currentgoods){
+      let currentgoods = this.$store.state.cart.cartlist.filter(
+        item => item.id == list.barcode
+      )[0];
+      if (currentgoods) {
         let num = currentgoods.num + 1;
-        this.$store.commit('changeNum',{id,num:1});
-      }else{
-          let goods = {
-          id,
-          title: this.goodslist.productName,
-          pic: this.goodslist.picUrl,
-          price: this.goodslist.guidePrice,
+        this.$store.commit("changeNum", { id: list.barcode, num: 1 });
+      } else {
+        let goods = {
+          id: list.barcode,
+          title: list.productName,
+          pic: list.picUrl,
+          price: list.guidePrice,
           num: 1
         };
         this.$store.commit("add2cart", goods);
       }
       this.$router.push("/cart");
     },
-    gotoGoods(barcode){;
-      this.$router.push({name:"goods",params:{barcode}});
+    gotoGoods(barcode) {
+      this.$router.push({ name: "goods", params: { barcode } });
     }
   },
   computed: {
@@ -253,7 +274,7 @@ export default {
               border-radius: 50%;
               color: #fff;
             }
-            .el-icon-shopping-cart-2:before{
+            .el-icon-shopping-cart-2:before {
               font-size: 18px;
             }
           }

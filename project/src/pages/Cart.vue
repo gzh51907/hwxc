@@ -6,7 +6,6 @@
           <img src="../images/logo.png" alt />
         </div>
         <div class="qingdan">清单</div>
-
         <div class="bianji">编辑</div>
       </div>
       <div class="no-box" style=" display: none;">
@@ -26,23 +25,20 @@
         </div>
         <div class="GoodsCart-content">
           <ul>
-            <li>
+            <li v-for="item in cartlist" :key="item.id">
               <div class="checkbox">
                 <el-checkbox class="checkbox-name"></el-checkbox>
               </div>
               <div class="goodsimg">
-                <img
-                  src="https://xm.star365.com/imgfile/c58853e00c654b108af8f223897abab4_20190821154651.png"
-                  alt
-                />
+                <img :src="item.pic" alt />
               </div>
               <div class="goodsname">
-                <p class="goods-p">999,复方感冒灵颗粒 14G*15袋</p>
-                <p class="goods-p goods-p2">用于风热感冒所致的发热，微恶风寒，头身痛，口干而渴，鼻塞涕浊，咽喉红肿疼痛，咳嗽，痰黄粘稠。</p>
+                <p class="goods-p">{{item.title}}</p>
+                <p class="goods-p goods-p2">{{item.efficacy}}</p>
                 <p class="goodsprice">
-                  <span class="goodsprice-span">￥36.80</span>
+                  <span class="goodsprice-span">￥{{item.price}}</span>
                   <el-input-number
-                    v-model="num"
+                    v-model="item.num"
                     :min="1"
                     size="mini"
                     style="width:100px;height:20px;"
@@ -54,8 +50,20 @@
           </ul>
         </div>
       </div>
+      <div class="inferior">
+        <div class="aggregate">
+          <div class="aggregate-l">
+            总计：
+            <span>
+              <i>￥</i>
+              {{totalPrice}}
+            </span>
+          </div>
+        </div>
+        <button class="but">提交需求</button>
+        <div class="yunfei">不含邮费</div>
+      </div>
     </div>
-
     <Footer></Footer>
   </div>
 </template>
@@ -65,9 +73,16 @@ import Footer from "./Footer.vue";
 
 export default {
   data() {
-    return {
-      num: 1
-    };
+    return {};
+  },
+  computed: {
+    cartlist() {
+      console.log('cartlist',this.$store.state.cart.cartlist);
+      return this.$store.state.cart.cartlist;
+    },
+    totalPrice(){
+      return this.$store.getters.allprice;
+    }
   },
   components: {
     Footer
@@ -79,6 +94,7 @@ export default {
   min-height: 100vh;
   background: #f7f7f7;
   padding-bottom: 14vw;
+
   .CartHeader {
     height: 10.4vw;
     line-height: 10.4vw;
@@ -87,7 +103,6 @@ export default {
     font-size: 4vw;
     color: #333;
     display: flex;
-
     align-items: center;
 
     .logo {
@@ -164,6 +179,7 @@ export default {
     }
     .GoodsCart-content {
       height: 100%;
+
       ul {
         height: 100%;
         li {
@@ -216,6 +232,47 @@ export default {
           }
         }
       }
+    }
+  }
+  .inferior {
+    width: 100%;
+    height: 13.067vw;
+    background: #fff;
+    // padding-left: 4vw;
+    position: fixed;
+    z-index: 10;
+    bottom: 15vw;
+    .aggregate {
+      line-height: 13.067vw;
+      padding-left: 4vw;
+      font-size: 3.467vw;
+      color: #666;
+      .aggregate-l {
+        float: left;
+        span {
+          color: #e73522;
+          font-size: 5.067vw;
+          font-weight: 700;
+          i {
+            font-size: 3.733vw;
+          }
+        }
+      }
+    }
+    .yunfei {
+      float: right;
+      line-height: 13.067vw;
+      padding-right: 5vw;
+      color: #a0a0a0;
+      font-size: 3.467vw;
+    }
+    .but {
+      float: right;
+      width: 32vw;
+      height: 13.067vw;
+      background: linear-gradient(90deg, #ec632b 0, #e73522) !important;
+      color: #fff;
+      font-size: 4.8vw;
     }
   }
 }
