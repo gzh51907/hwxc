@@ -5,7 +5,7 @@
      >
         <router-link :to="item.path" >
           <i :class="item.icon" ></i>
-          <el-badge :value="cartlength" class="item" v-if="item.name==='cart'" style="line-height:30px">{{item.text}}</el-badge>
+          <el-badge :value="cartlength" class="item" v-if="item.name==='cart'" style=" position: absolute;top:12px"><span>{{item.text}}</span></el-badge>
           <template v-else>{{item.text}}</template>
         </router-link>
       </li>
@@ -52,6 +52,7 @@ export default {
     cartlength() {
       // return this.$store.state.cartlist.length;
       return this.$store.getters.cartlength;
+  
     },
     currentUser() {
       return this.$store.state.common.user;
@@ -91,6 +92,7 @@ export default {
   left: 0;
   bottom: 0;
   background-color: #fff;
+  position: absolute;
 
   ul {
     width: 100%;
@@ -107,10 +109,15 @@ export default {
       justify-content: center;
       align-items: center;
       font-size: 3.467vw;
+      span{
+        display: block;
+        margin-top: 56%;
+      }
       i {
         font-size: 6vw;
         color: #aaa;
       }
+      
       a {
         display: flex;
         flex-direction: column;
@@ -125,6 +132,10 @@ export default {
           color: #009e9f;
         }
       }
+    }
+    li:nth-child(3) i{
+        position: absolute;
+        top: 17%;
     }
   }
 }
