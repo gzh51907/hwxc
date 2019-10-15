@@ -46,7 +46,7 @@ export default {
     };
   },
   async created() {
-    //   请求拿到选项卡和图片
+    //   请求拿到选项卡和图片1
     let { data: { data } } = await this.$axios.get(
       "https://xm.star365.com/api/product-api/category/getSecondCategoryList"
     );
@@ -83,11 +83,14 @@ export default {
       if (this.pageNum < this.goodsList.totalPage) {
         this.loading = true;
         this.pageNum++;
+        // console.log('还没到临界值哦');
+        console.log("懒加载的页数", this.pageNum);
         setTimeout(() => {
           this.loading = false;
           this.tabId(this.id, this.pageNum);
         }, 1000);
       } else if (this.pageNum >= this.goodsList.totalPage) {
+        // console.log('到达临界值');
         this.pageNum == this.goodsList.totalPage;
       } else if (this.pageNum <= 1) {
         this.pageNum = 1;
@@ -95,7 +98,8 @@ export default {
     },
 
     async tabId(id, pageNum) {
-      // 请求拿到第一选项卡的内容
+      console.log("id,pageNum", id, pageNum);
+      // 请求拿到第一选项卡的内容12233
       let { data: { data: res } } = await this.$axios.get(
         "https://xm.star365.com/api/product-api/category/getProductBy2typeId",
         {
@@ -116,19 +120,16 @@ export default {
     },
 
     // 跳转购物车
-    gotoCar(list) {
-      // 添加前，判断该商品是否已经存在,存在则+1
-      let currentgoods = this.$store.state.cart.cartlist.filter(
-        item => item.id == list.barcode
-      )[0];
-      if (currentgoods) {
+    gotoCar(list){
+      // 添加前，判断该商品是否已经存在,存在11232
+      let currentgoods = this.$store.state.cart.cartlist.filter(item=>item.id == barcode)[0];
+      if(currentgoods){
         let num = currentgoods.num + 1;
-        this.$store.commit("changeNum", { id: list.barcode, num: 1 });
-      } else {
-        let goods = {
-          id: list.barcode,
+        this.$store.commit('changeNum',{id,num:1});
+      }else{
+          let goods = {
+          id:list.barcode,
           title: list.productName,
-          efficacy:list.efficacy,
           pic: list.picUrl,
           price: list.guidePrice,
           num: 1
@@ -137,8 +138,8 @@ export default {
       }
       this.$router.push("/cart");
     },
-    gotoGoods(barcode) {
-      this.$router.push({ name: "goods", params: { barcode } });
+    gotoGoods(barcode){;
+      this.$router.push({name:"goods",params:{barcode}});
     }
   },
   computed: {
@@ -252,7 +253,7 @@ export default {
               border-radius: 50%;
               color: #fff;
             }
-            .el-icon-shopping-cart-2:before {
+            .el-icon-shopping-cart-2:before{
               font-size: 18px;
             }
           }

@@ -18,18 +18,20 @@ let cart = {
     },
     mutations:{
         add2cart(state,goods){
+            window.console.log('添加商品');
             state.cartlist.unshift(goods);
         },
         remove(state,id){
             state.cartlist = state.cartlist.filter(item=>item.id != id);
         },
-        clearCart(state,{id,num}){
+        clearCart(state){
             state.cartlist = [];
         },
-        chengeNum(state,{id,num}){
+        changeNum(state,{id,num}){
+            window.console.log('num',num);
             state.cartlist.forEach(item=>{
                 if(item.id === id){
-                    item.num = num;
+                    item.num += num;
                 }
             })
         }
@@ -43,7 +45,7 @@ let cart = {
                 context.commit('changeNum',{id,num})
             }else{
                 Message.error('当前库存不足');
-                context.commit('changeNum',{id,num:kuncun})
+                context.commit('changeNum',{id,num:kucun})
             }
         }
     }
