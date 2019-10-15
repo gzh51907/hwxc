@@ -1,6 +1,5 @@
 <template>
-  <div>我的
-
+  <div>
     <Footer></Footer>
   </div>
 </template>
