@@ -16,7 +16,7 @@
                                     <p class="shandian">闪电送</p>
                                     <p>
                                         <span class="price">￥{{item.guidePrice.toFixed(2)}}</span>
-                                        <i style="float:right;" class="car el-icon-shopping-cart-2" @click="gotoCar(item.id)"></i>
+                                        <i style="float:right;" class="car el-icon-shopping-cart-2" @click.stop="gotoCar(item.barcode)"></i>
                                     </p>
                                 </div> 
                   </li>
@@ -120,11 +120,26 @@ export default {
     },
 
     // 跳转购物车
-    gotoCar(id){
+    gotoCar(barcode){
+      // 添加前，判断该商品是否已经存在,存在+1
+      let currentgoods = this.$store.state.cart.cartlist.filter(item=>item.id == barcode)[0];
+      if(currentgoods){
+        let num = currentgoods.num + 1;
+        this.$store.commit('changeNum',{id,num:1});
+      }else{
+          let goods = {
+          id,
+          title: this.goodslist.productName,
+          pic: this.goodslist.picUrl,
+          price: this.goodslist.guidePrice,
+          num: 1
+        };
+        this.$store.commit("add2cart", goods);
+      }
       this.$router.push("/cart");
     },
-    gotoGoods(barcode){
-       this.$router.push({name:"goods",params:{barcode}});
+    gotoGoods(barcode){;
+      this.$router.push({name:"goods",params:{barcode}});
     }
   },
   computed: {
@@ -237,6 +252,9 @@ export default {
               text-align: center;
               border-radius: 50%;
               color: #fff;
+            }
+            .el-icon-shopping-cart-2:before{
+              font-size: 18px;
             }
           }
         }
