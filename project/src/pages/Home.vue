@@ -166,7 +166,7 @@ export default {
       this.$router.push({ name: "goods", params: { barcode } });
     },
     async tabId(id, pageNum) {
-      // 请求拿到第一选项卡的内容
+      // 请求拿到第一选项卡的内容`````
       let {
         data: {
           data: { list }
