@@ -178,7 +178,7 @@ export default {
             id: id,
             cityId: 903,
             pageNum: pageNum,
-            pageSize: 12
+            pageSize: 18
           }
         }
       );
