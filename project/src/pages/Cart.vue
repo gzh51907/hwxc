@@ -19,11 +19,8 @@
         <div class="GoodsCart-header">
           <div class="GoodsCart-header-l">
             <el-checkbox class="checkbox-name">闪电送药</el-checkbox>
-<<<<<<< HEAD
             <!-- <input type="checkbox" class="checkboxall">
             闪电送药-->
-=======
->>>>>>> chendongtao
           </div>
           <div class="GoodsCart-header-r">免配送费, 最快25分钟送达</div>
         </div>
@@ -86,7 +83,8 @@ export default {
     },
     totalPrice() {
       return this.$store.getters.allprice;
-    }
+    },
+   
   },
   methods: {
     gotoGoods(barcode) {

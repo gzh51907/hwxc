@@ -118,12 +118,6 @@ export default {
       };
       console.log("goods", this.goodsList);
     },
-<<<<<<< HEAD
-    add2cart(list){
- // 添加前，判断该商品是否已经存在,存在11232
-      let currentgoods = this.$store.state.cart.cartlist.filter(item=>item.id == list.barcode)[0];
-      if(currentgoods){
-=======
 
     // 跳转购物车
     gotoCar(list) {
@@ -133,7 +127,6 @@ export default {
         item => item.id == list.barcode
       )[0];
       if (currentgoods) {
->>>>>>> chendongtao
         let num = currentgoods.num + 1;
         this.$store.commit('changeNum',{id,num:1});
       }else{
