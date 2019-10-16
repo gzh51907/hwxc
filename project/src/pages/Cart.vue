@@ -1,14 +1,14 @@
 <template>
   <div>
     <div class="CartHeader">
-        <div class="logo">
-          <img src="../images/logo.png" alt />
-        </div>
-        <div class="qingdan">清单</div>
-        <div class="bianji">编辑</div>
+      <div class="logo">
+        <img src="../images/logo.png" alt />
       </div>
+      <div class="qingdan">清单</div>
+      <!-- <div class="bianji">编辑</div> -->
+      <div class="bianji"></div>
+    </div>
     <div class="Cart">
-      
       <div class="no-box" style=" display: none;">
         <div class="no-box-img">
           <img src="https://xm.star365.com/images/no.png" alt />
@@ -18,7 +18,8 @@
       <div class="GoodsCart">
         <div class="GoodsCart-header">
           <div class="GoodsCart-header-l">
-            <el-checkbox class="checkbox-name">闪电送药</el-checkbox>
+            <span style="font-weight:700;font-size:18px">闪电送药</span>
+            <!-- <el-checkbox class="checkbox-name">闪电送药</el-checkbox> -->
             <!-- <input type="checkbox" class="checkboxall">
             闪电送药-->
           </div>
@@ -27,9 +28,9 @@
         <div class="GoodsCart-content">
           <ul>
             <li v-for="item in cartlist" :key="item.id">
-              <div class="checkbox">
+              <!-- <div class="checkbox">
                 <el-checkbox class="checkbox-name"></el-checkbox>
-              </div>
+              </div>-->
               <div class="goodsimg" @click="gotoGoods(item.id)">
                 <img :src="item.pic" alt />
               </div>
@@ -38,6 +39,8 @@
                 <p class="goods-p goods-p2" @click="gotoGoods(item.id)">{{item.efficacy}}</p>
                 <p class="goodsprice">
                   <span class="goodsprice-span">￥{{item.price.toFixed(2)}}</span>
+                  <!-- <span class="goodsprice-dele" @click="removegoods(item.id)">删除</span> -->
+
                   <el-input-number
                     v-model="item.num"
                     :min="1"
@@ -46,6 +49,16 @@
                     class="goodsprice-input"
                   ></el-input-number>
                 </p>
+              </div>
+              <div>
+                <el-button
+                  type="danger"
+                  icon="el-icon-delete"
+                  circle
+                  class="goodsprice-dele"
+                  size="mini"
+                  @click="removegoods(item.id)"
+                ></el-button>
               </div>
             </li>
           </ul>
@@ -62,7 +75,8 @@
           </div>
         </div>
         <button class="but">提交需求</button>
-        <div class="yunfei">不含邮费</div>
+        <!-- <div class="yunfei">不含邮费</div> -->
+        <div class="yunfei" @click="clearCart">清空</div>
       </div>
     </div>
     <Footer></Footer>
@@ -89,6 +103,12 @@ export default {
   methods: {
     gotoGoods(barcode) {
       this.$router.push({ name: "goods", params: { barcode } });
+    },
+    clearCart() {
+      this.$store.commit("clearCart");
+    },
+    removegoods(id) {
+      this.$store.commit("remove", id);
     }
   },
   components: {
@@ -98,39 +118,39 @@ export default {
 </script>
 <style lang="scss" scoped>
 .CartHeader {
-    width: 100%;
-    height: 10.4vw;
-    line-height: 10.4vw;
-    background: #fff;
-    padding: 0 4vw;
-    font-size: 4vw;
-    color: #333;
-    display: flex;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    z-index: 500;
-    .logo {
-      flex: 1;
-      img {
-        width: 17.333vw;
-        height: 5.333vw;
-      }
-    }
-    .qingdan {
-      flex: 1;
-      text-align: center;
-      font-size: 4.8vw;
-      color: #000;
-    }
-    .bianji {
-      flex: 1;
-      width: 11.733vw;
-      height: 10.4vw;
-      line-height: 10.4vw;
-      text-align: center;
+  width: 100%;
+  height: 10.4vw;
+  line-height: 10.4vw;
+  background: #fff;
+  padding: 0 4vw;
+  font-size: 4vw;
+  color: #333;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  z-index: 500;
+  .logo {
+    flex: 1;
+    img {
+      width: 17.333vw;
+      height: 5.333vw;
     }
   }
+  .qingdan {
+    flex: 1;
+    text-align: center;
+    font-size: 4.8vw;
+    color: #000;
+  }
+  .bianji {
+    flex: 1;
+    width: 11.733vw;
+    height: 10.4vw;
+    line-height: 10.4vw;
+    text-align: center;
+  }
+}
 .Cart {
   min-height: 100vh;
   background: #f7f7f7;
@@ -162,12 +182,10 @@ export default {
   .GoodsCart {
     background: #fff;
     margin-top: 1.333vw;
-    
- 
     .GoodsCart-header {
       height: 10.667vw;
       line-height: 10.667vw;
-      padding:0 4vw;
+      padding: 0 4vw;
       color: #fa2b31;
       .GoodsCart-header-l {
         float: left;
@@ -194,12 +212,13 @@ export default {
       height: 100%;
       padding-bottom: 14vw;
       background: #f7f7f7;
+      position: relative;
       ul {
         height: 100%;
         li {
           background: #fff;
           height: 25.867vw;
-          padding: 3vw  4vw;
+          padding: 3vw 4vw;
           .checkbox {
             float: left;
             line-height: 28vw;
@@ -219,7 +238,7 @@ export default {
           }
           .goodsname {
             float: left;
-            width: 56vw;
+            width: 52vw;
             font-size: 3.733vw;
             color: #333;
             display: block;
@@ -244,7 +263,20 @@ export default {
               }
             }
           }
+          .goodsprice-dele {
+            float: right;
+            color: #fff;
+            font-size: 3vw;
+            // margin-left: 2vw;
+            margin-top: 7vw;
+          }
         }
+      }
+      .shanchu {
+        position: absolute;
+        right: 7px;
+        top: 30px;
+        z-index: 3;
       }
     }
   }
@@ -277,8 +309,11 @@ export default {
       float: right;
       line-height: 13.067vw;
       padding-right: 5vw;
-      color: #a0a0a0;
-      font-size: 3.467vw;
+      // color: #a0a0a0;
+      color: #e73522;
+      font-weight: 700;
+      // font-size: 3.467vw;
+      font-size: 4vw;
     }
     .but {
       float: right;

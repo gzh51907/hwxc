@@ -73,13 +73,52 @@
       <div class="pingzhi-r">企业资质</div>
     </div>
     <div class="box5">
-      <template>
+      <!-- <template>
         <el-tabs :stretch="true">
           <el-tab-pane label="商品详情" name="first" v-html="description" class="description"></el-tab-pane>
-          <el-tab-pane label="评论(2)" name="second">不知道</el-tab-pane>
+          <el-tab-pane label="评论(2)" name="second">评论内容</el-tab-pane>
         </el-tabs>
-      </template>
+      </template>-->
+      <ul class="box5-ul">
+        <li
+          v-for="(item,index) in items"
+          :class="{active:istrue==index}"
+          :key="item.id"
+          @click="istrue=index"
+        >
+          {{ item.name }}
+          <span v-if="index===1">({{userlist.length}})</span>
+        </li>
+        <div class="cards">
+          <div class="tab-card1" style="display: block;" v-show="istrue===0" v-html="description"></div>
+          <div class="tab-card2" v-show="istrue===1">
+            <!-- <ul class="pinglun">
+              <li>11</li>
+              <li>11</li>
+              <li>11</li>
+            </ul>-->
+            <dl class="pinglun" v-for="item in userlist" :key="item.name">
+              <dd>
+                <div class="pinglun-top">
+                  <div>
+                    <div class="userimg">
+                      <el-avatar :src="item.headImg"></el-avatar>
+                    </div>
+                    <div class="username">
+                      <p class="username-t">{{item.name}}</p>
+                      <el-rate v-model="item.score" disabled="true"></el-rate>
+                    </div>
+                  </div>
+                  <span class="shijian">{{item.commentDate}}</span>
+                </div>
+                <div class="pinglun-bootom">{{item.content}}</div>
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </ul>
     </div>
+
     <div class="goods-footer">
       <div class="footer-l">
         <div class="footer-box">
@@ -92,11 +131,11 @@
         </div>
         <div class="footer-box" @click="GotoCar">
           <i class="el-icon-shopping-cart-2"></i>
-          <span>加入清单</span>
+          <el-badge :value="cartlength" style=" position: absolute;top:0px;right:40%; "></el-badge>
+          <span>需求清单</span>
         </div>
       </div>
       <button class="footer-r" @click="gotoCar">加入购物车</button>
-      
     </div>
   </div>
 </template>
@@ -107,12 +146,22 @@ export default {
     return {
       picList: [],
       GoodsData: "",
-      description: ""
+      description: "",
+      istrue: 0,
+      items: [{ name: "商品详情", id: "xq" }, { name: "评论", id: "pl" }],
+      userlist: [],
+      value1: 5
     };
   },
   created() {
     let { barcode } = this.$route.params;
     this.getData(barcode);
+    this.getcomment(barcode);
+  },
+  computed: {
+    cartlength() {
+      return this.$store.getters.cartlength;
+    }
   },
   methods: {
     async getData(barcode) {
@@ -134,43 +183,67 @@ export default {
       this.picList = data.picList;
       this.description = data.description;
       // console.log(data.description);
-      console.log('data',data);
+      // console.log("data", data);
+    },
+    async getcomment(barcode) {
+      let {
+        data: {
+          data: { list }
+        }
+      } = await this.$axios.get(
+        "https://xm.star365.com/api/order-api/comments/getByBarcode",
+        {
+          params: {
+            barcode: barcode,
+            pageSize: 5,
+            pageNum: 1
+          }
+        }
+      );
+      list.map(item => {
+        let img = `https://xm.star365.com/imgfile/${item.headImg}`;
+        item.headImg = img;
+      });
+      this.userlist = list;
+
+      // console.log("用户评论内容", this.userlist);
     },
     go() {
       this.$router.go(-1);
     },
     add2cart() {
-
       // 添加前，判断该商品是否已经存在,存在
-      let currentgoods = this.$store.state.cart.cartlist.filter(item=>item.id == this.GoodsData.barcode)[0];
-      if(currentgoods){
+      let currentgoods = this.$store.state.cart.cartlist.filter(
+        item => item.id == this.GoodsData.barcode
+      )[0];
+      if (currentgoods) {
         let num = currentgoods.num + 1;
-        this.$store.commit('changeNum',{id: this.GoodsData.barcode,num:1});
-      }else{
-          let goods = {
+        this.$store.commit("changeNum", { id: this.GoodsData.barcode, num: 1 });
+      } else {
+        let goods = {
           id: this.GoodsData.barcode,
-          title:  this.GoodsData.productName,
+          title: this.GoodsData.productName,
           efficacy: this.GoodsData.efficacy,
-          pic:  this.GoodsData.minPic,
-          price:  this.GoodsData.guidePrice,
-          num: 1,
-          
-          };
+          pic: this.GoodsData.minPic,
+          price: this.GoodsData.guidePrice,
+          num: 1
+        };
         this.$store.commit("add2cart", goods);
       }
     },
-     // 跳转购物车
-    gotoCar(){
+    // 跳转购物车
+    gotoCar() {
       this.add2cart();
       this.$router.push("/cart");
-      
     },
-    GotoCar(){
-       this.$router.push("/cart");
+    GotoCar() {
+      this.$router.push("/cart");
     }
-  }
+  },
+  
 };
 </script>
+
 <style lang="scss" scoped>
 #goods {
   background: #f7f7f7;
@@ -188,7 +261,7 @@ export default {
   align-items: center;
   bottom: 0;
   left: 0;
-  z-index: 100;
+  z-index: 10000;
   .footer-l {
     float: left;
     display: flex;
@@ -481,9 +554,93 @@ export default {
   background: #fff;
   width: 100%;
   height: 100%;
-  .description >>> img {
-    display: block !important;
-    width: 400px !important;
+
+  .box5-ul {
+    width: 100%;
+    height: 100%;
+    // padding-bottom: 10vw;
+
+    li {
+      float: left;
+      width: 50%;
+      height: 10vw;
+      line-height: 10vw;
+      color: rgb(51, 51, 51);
+      font-size: 3.8vw;
+      font-weight: 700;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+      background: #fff;
+    }
+    .active {
+      color: rgb(0, 158, 159);
+      border-bottom: 1px solid rgb(0, 158, 159);
+    }
+    .cards {
+      width: 100%;
+      height: 100%;
+      // padding-top: 14vw;
+      // .description >>> img {
+      //   display: block !important;
+      //   width: 400px !important;
+      // }
+      .tab-card1 {
+        padding-top: 14vw;
+        padding-left: 4vw;
+        padding-right: 4vw;
+        font-size: 3.467vw;
+        color: #666;
+        >>> dt {
+          >>> img {
+            width: 200px !important;
+            height: 200px !important;
+            max-width: 5px !important;
+            height: auto !important;
+            vertical-align: middle !important;
+          }
+        }
+      }
+      .tab-card2 {
+        padding-left: 4vw;
+        padding-right: 4vw;
+        font-size: 3.467vw;
+        padding-top: 10vw;
+        color: #666;
+        .pinglun {
+          padding-top: 5vw;
+          dd {
+            // padding-top:2vw;
+            .pinglun-top {
+              height: 14vw;
+              .userimg {
+                float: left;
+              }
+              .username {
+                float: left;
+                margin-left: 3vw;
+                .username-t {
+                  margin-bottom: 1.067vw;
+                }
+              }
+              .shijian {
+                float: right;
+                font-size: 2.667vw;
+                color: #999;
+                margin-top: 3vw;
+              }
+            }
+            .pinglun-bootom {
+              line-height: 5.333vw;
+              font-size: 3.467vw;
+              padding: 0 2.667vw 2.667vw;
+              border-bottom: 1px solid #f4f4f4;
+              margin-top: 2.667vw;
+              color: #333;
+            }
+          }
+        }
+      }
+    }
   }
 }
 </style>
