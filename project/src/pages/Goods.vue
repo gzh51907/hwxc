@@ -106,7 +106,7 @@
                     </div>
                     <div class="username">
                       <p class="username-t">{{item.name}}</p>
-                      <el-rate v-model="item.score" disabled="true"></el-rate>
+                      <el-rate v-model="item.score" disabled></el-rate>
                     </div>
                   </div>
                   <span class="shijian">{{item.commentDate}}</span>
