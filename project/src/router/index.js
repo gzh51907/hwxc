@@ -1,3 +1,10 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-10-12 17:00:43
+ * @LastEditTime: 2019-10-16 10:20:43
+ * @LastEditors: Please set LastEditors
+ */
 import Vue from 'vue';
 
 // 使用VueRouter步骤
@@ -28,11 +35,11 @@ let router = new VueRouter({
         // 首页
         {
             name: 'home',
-            path: '/home',  //当浏览器地址为/home时，显示Home组件的内容
+            path: '/home', //当浏览器地址为/home时，显示Home组件的内容
             component: Home
         },
         {
-            path: '/',  //当浏览器地址为/home时，显示Home组件的内容
+            path: '/', //当浏览器地址为/home时，显示Home组件的内容
             redirect: '/home'
         },
         // 购物车
@@ -40,8 +47,8 @@ let router = new VueRouter({
             name: 'cart',
             path: '/cart',
             component: Cart,
-            meta:{
-                requiresAuth:true
+            meta: {
+                requiresAuth: true
             }
         },
         
@@ -60,14 +67,16 @@ let router = new VueRouter({
             name: 'mine',
             path: '/mine',
             component: Mine,
-            meta:{
-                requiresAuth:true
+            meta: {
+                requiresAuth: true
             }
         },
         {
+            name: 'reg',
             path: '/reg',
             component: Reg
         }, {
+            name: 'login',
             path: '/login',
             component: Login
         },

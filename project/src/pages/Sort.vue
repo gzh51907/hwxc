@@ -59,7 +59,7 @@ export default {
     let { id } = this.$route.params;
     this.tabId(id, 1);
   },
-  // 路由守卫监听id变化11
+  // 路由守卫监听id变化
   beforeRouteUpdate(to, from, next) {
     if (to.params.id != from.params.id) {
       this.id = to.params.id;
@@ -118,15 +118,10 @@ export default {
       };
       console.log("goods", this.goodsList);
     },
-
-    // 跳转购物车
-    gotoCar(list) {
-      
-      // 添加前，判断该商品是否已经存在,存在
-      let currentgoods = this.$store.state.cart.cartlist.filter(
-        item => item.id == list.barcode
-      )[0];
-      if (currentgoods) {
+    add2cart(list){
+ // 添加前，判断该商品是否已经存在,存在+1
+      let currentgoods = this.$store.state.cart.cartlist.filter(item=>item.id == list.barcode)[0];
+      if(currentgoods){
         let num = currentgoods.num + 1;
         this.$store.commit('changeNum',{id,num:1});
       }else{
