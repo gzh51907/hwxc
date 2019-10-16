@@ -2,11 +2,12 @@
     <div>
         <Header></Header>
         <div class="middle" id="middle">
+          <el-alert title="成功加入购物车" type="success" show-icon v-show="showAlert"></el-alert>
             <ul class="tabbox">
               <li class="tab" v-for="(item,index) in sortList" :key="item.id" @click="goto(item.id,index)"
               :class="{tab_active:index===current}">{{item.categoryName}}</li>
             </ul>
-             <div class="right_goods" >              
+            <div class="right_goods" >              
                 <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto" v-if="hideItem">
                   <li v-for="item in goodsList.list" :key="item.id" class="infinite-list-item" v-loading="loading" @click="gotoGoods(item.barcode)">
                     <img :src="item.picUrl" >
@@ -16,13 +17,14 @@
                                     <p class="shandian">闪电送</p>
                                     <p>
                                         <span class="price">￥{{item.guidePrice.toFixed(2)}}</span>
-                                        <i style="float:right;" class="car el-icon-shopping-cart-2" @click.stop="gotoCar(item)"></i>
+                                        <i style="float:right;" class="car el-icon-shopping-cart-2" @click.stop="addCar(item)"></i>
                                     </p>
                                 </div> 
                   </li>
                 </ul>
+                 
                 <img class="hide_img" src="../images/no-goods.png" v-else/>
-              </div>          
+            </div>          
         </div>
         <Footer></Footer>
     </div>
@@ -42,19 +44,16 @@ export default {
       current: 0,
       pageNum: 1,
       id: 5591,
-      loading: ""
+      loading: "",
+      showAlert: false
     };
   },
   async created() {
-    //   请求拿到选项卡和图片1
+    //   请求拿到选项卡和图片
     let { data: { data } } = await this.$axios.get(
       "https://xm.star365.com/api/product-api/category/getSecondCategoryList"
     );
     this.sortList = data;
-    this.sortList.forEach(item => {
-      item.categoryPicurl =
-        "https://xm.star365.com/imgfile/" + item.categoryPicurl;
-    });
 
     let { id } = this.$route.params;
     this.tabId(id, 1);
@@ -99,7 +98,7 @@ export default {
 
     async tabId(id, pageNum) {
       console.log("id,pageNum", id, pageNum);
-      // 请求拿到第一选项卡的内容12233
+      // 请求拿到第一选项卡的内容
       let { data: { data: res } } = await this.$axios.get(
         "https://xm.star365.com/api/product-api/category/getProductBy2typeId",
         {
@@ -107,7 +106,8 @@ export default {
             id: id,
             cityId: "903",
             pageNum: pageNum,
-            pageSize: pageNum * 5
+            // pageSize: pageNum * 5
+            pageSize:50
           }
         }
       );
@@ -116,17 +116,23 @@ export default {
         list: res.list,
         totalPage: res.totalPage
       };
+      this.goodsList.list.forEach(item=>{
+        console.log(item.guidePrice);
+      })
+
       console.log("goods", this.goodsList);
     },
-    add2cart(list){
- // 添加前，判断该商品是否已经存在,存在+1
-      let currentgoods = this.$store.state.cart.cartlist.filter(item=>item.id == list.barcode)[0];
-      if(currentgoods){
+    add2cart(list) {
+      // 添加前，判断该商品是否已经存在,存在+1
+      let currentgoods = this.$store.state.cart.cartlist.filter(
+        item => item.id == list.barcode
+      )[0];
+      if (currentgoods) {
         let num = currentgoods.num + 1;
-        this.$store.commit('changeNum',{id,num:1});
-      }else{
-          let goods = {
-          id:list.barcode,
+        this.$store.commit("changeNum", { id, num: 1 });
+      } else {
+        let goods = {
+          id: list.barcode,
           title: list.productName,
           efficacy: list.efficacy,
           pic: list.picUrl,
@@ -136,13 +142,17 @@ export default {
         this.$store.commit("add2cart", goods);
       }
     },
-    // 跳转购物车
-    gotoCar(list){
+    // 添加到购物车
+    addCar(list) {
       this.add2cart(list);
-      this.$router.push("/cart");
+      this.showAlert = true;
+      setTimeout(() => {
+        this.showAlert = false;
+      }, 1000);
+      // this.$router.push("/cart");
     },
-    gotoGoods(barcode){;
-      this.$router.push({name:"goods",params:{barcode}});
+    gotoGoods(barcode) {
+      this.$router.push({ name: "goods", params: { barcode } });
     }
   },
   computed: {
@@ -256,7 +266,7 @@ export default {
               border-radius: 50%;
               color: #fff;
             }
-            .el-icon-shopping-cart-2:before{
+            .el-icon-shopping-cart-2:before {
               font-size: 18px;
             }
           }
