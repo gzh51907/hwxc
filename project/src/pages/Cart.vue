@@ -83,7 +83,8 @@ export default {
     },
     totalPrice() {
       return this.$store.getters.allprice;
-    }
+    },
+   
   },
   methods: {
     gotoGoods(barcode) {
