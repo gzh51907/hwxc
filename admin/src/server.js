@@ -17,7 +17,7 @@ const allRouter = require('./routers');
 app.use(allRouter);
 // 静态资源服务器（缓存7天）
 app.use(express.static('./'))
-// 监听
+// 监听1
 app.listen(PORT, () => {
-    window.console.log("服务器启动成功");
+    console.log("服务器启动成功");
 });
