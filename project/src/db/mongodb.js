@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-12 13:58:12
- * @LastEditTime: 2019-10-16 10:37:36
+ * @LastEditTime: 2019-10-16 14:01:49
  * @LastEditors: Please set LastEditors
  */
 // 引入并解构
@@ -110,7 +110,7 @@ async function update(colName, query, data) {
  * @param {Object} query    查询条件
  */
 async function find(colName, query = {}) {
-    console.log(query)
+
     let {
         db,
         client

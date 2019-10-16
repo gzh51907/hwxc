@@ -6,9 +6,6 @@
  * @LastEditors: Please set LastEditors
  -->
 <template>
-<<<<<<< HEAD
-  <div>登录1</div>
-=======
   <div class="login">
     <div class="loginLogo">
       <div class="loginCenter">
@@ -50,7 +47,6 @@
       </el-form>
     </div>
   </div>
->>>>>>> yunfei
 </template>
 <script>
 export default {
