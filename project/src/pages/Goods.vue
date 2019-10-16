@@ -200,12 +200,12 @@ export default {
           }
         }
       );
-      list.map(item =>{
-        let img = `https://xm.star365.com/imgfile/${item.headImg}`
+      list.map(item => {
+        let img = `https://xm.star365.com/imgfile/${item.headImg}`;
         item.headImg = img;
-      })
+      });
       this.userlist = list;
-      
+
       // console.log("用户评论内容", this.userlist);
     },
     go() {
@@ -239,7 +239,8 @@ export default {
     GotoCar() {
       this.$router.push("/cart");
     }
-  }
+  },
+  
 };
 </script>
 
@@ -579,20 +580,24 @@ export default {
       width: 100%;
       height: 100%;
       // padding-top: 14vw;
-      .description >>> img {
-        display: block !important;
-        width: 400px !important;
-      }
+      // .description >>> img {
+      //   display: block !important;
+      //   width: 400px !important;
+      // }
       .tab-card1 {
         padding-top: 14vw;
         padding-left: 4vw;
         padding-right: 4vw;
         font-size: 3.467vw;
         color: #666;
-        img {
-          max-width: 100%;
-          height: auto;
-          vertical-align: middle;
+        >>> dt {
+          >>> img {
+            width: 200px !important;
+            height: 200px !important;
+            max-width: 5px !important;
+            height: auto !important;
+            vertical-align: middle !important;
+          }
         }
       }
       .tab-card2 {
