@@ -115,6 +115,9 @@
                   ￥
                   <em>{{item.guidePrice.toFixed(2)}}</em>
                 </div>
+              <p class="Price_p">
+                <i class="el-icon-shopping-cart-full" @click.stop="gotoCar(item)"></i>
+              </p>
               </div>
               <p class="ProItem__pro-num">销量{{item.sellCount}}笔</p>
             </div>
@@ -164,6 +167,29 @@ export default {
     },
     goto(barcode) {
       this.$router.push({ name: "goods", params: { barcode } });
+    },
+    add2cart(list){
+ // 添加前，判断该商品是否已经存在,存在+1
+      let currentgoods = this.$store.state.cart.cartlist.filter(item=>item.id == list.barcode)[0];
+      if(currentgoods){
+        let num = currentgoods.num + 1;
+        this.$store.commit('changeNum',{id:list.barcode,num:1});
+      }else{
+          let goods = {
+          id:list.barcode,
+          title: list.productName,
+          efficacy: list.efficacy,
+          pic: list.picUrl,
+          price: list.guidePrice,
+          num: 1
+        };
+        this.$store.commit("add2cart", goods);
+      }
+    },
+    // 跳转购物车
+    gotoCar(list){
+      this.add2cart(list);
+      this.$router.push("/cart");
     },
     async tabId(id, pageNum) {
       // 请求拿到第一选项卡的内容
@@ -564,6 +590,8 @@ export default {
           }
         }
         .ProItem__pro-price {
+          display: flex;
+          justify-content: space-between;
           .Price__money {
             font-size: 3.2vw;
             color: #e73522;
@@ -571,6 +599,22 @@ export default {
             em {
               font-size: 4.267vw;
               font-style: inherit;
+            }
+          }
+          .Price_p {
+            width: 7.6vw;
+            height: 7.6vw;
+            background: #009e9f;
+            border-radius: 50%;
+            display: flex;
+            -webkit-box-pack: center;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            padding-right: 0.533vw;
+            box-sizing: border-box;   
+            i{
+              font-size: 5vw;
             }
           }
         }
