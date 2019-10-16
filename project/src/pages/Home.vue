@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-10-12 17:00:43
+ * @LastEditTime: 2019-10-12 17:00:43
+ * @LastEditors: your name
+ -->
 <template>
   <div>
     <Header></Header>
@@ -144,7 +151,7 @@ export default {
       active: 0,
       goodsList: [],
       pageNum: 1,
-      show: false,
+      show: false
     };
   },
   methods: {

@@ -129,10 +129,10 @@ export default {
       )[0];
       if (currentgoods) {
         let num = currentgoods.num + 1;
-        this.$store.commit("changeNum", { id, num: 1 });
-      } else {
-        let goods = {
-          id: list.barcode,
+        this.$store.commit('changeNum',{id:list.barcode,num:1});
+      }else{
+          let goods = {
+          id:list.barcode,
           title: list.productName,
           efficacy: list.efficacy,
           pic: list.picUrl,
