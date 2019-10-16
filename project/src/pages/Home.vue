@@ -162,7 +162,7 @@ export default {
       }, 2600);
     },
     gotoTab(id, index) {
-      //切换tab颜色```
+      //切换tab颜色
       this.active = index;
       this.tabId(id, this.pageNum);
     },
