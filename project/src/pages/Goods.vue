@@ -589,6 +589,7 @@ export default {
         padding-right: 4vw;
         font-size: 3.467vw;
         color: #666;
+        overflow: hidden;
         >>> dt {
           >>> img {
             width: 200px !important;

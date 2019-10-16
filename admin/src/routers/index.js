@@ -29,12 +29,16 @@ Router.use((req, res, next) => {
 
 //引入路由模块
 const userRouter = require('./user');
+const goodsRouter = require('./goods');
+
 
 Router.use(express.urlencoded({
     extended: true
 }), express.json());
 
 Router.use('/user', userRouter);
+Router.use('/goods', goodsRouter);
+
 Router.get('/verify', (req, res) => {
     let Authorization = req.get('Authorization');
     // 校验token的有效性
