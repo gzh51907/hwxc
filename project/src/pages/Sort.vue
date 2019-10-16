@@ -82,14 +82,11 @@ export default {
       if (this.pageNum < this.goodsList.totalPage) {
         this.loading = true;
         this.pageNum++;
-        // console.log('还没到临界值哦');
-        console.log("懒加载的页数", this.pageNum);
         setTimeout(() => {
           this.loading = false;
           this.tabId(this.id, this.pageNum);
         }, 1000);
       } else if (this.pageNum >= this.goodsList.totalPage) {
-        // console.log('到达临界值');
         this.pageNum == this.goodsList.totalPage;
       } else if (this.pageNum <= 1) {
         this.pageNum = 1;
@@ -97,7 +94,6 @@ export default {
     },
 
     async tabId(id, pageNum) {
-      console.log("id,pageNum", id, pageNum);
       // 请求拿到第一选项卡的内容
       let { data: { data: res } } = await this.$axios.get(
         "https://xm.star365.com/api/product-api/category/getProductBy2typeId",
@@ -106,8 +102,7 @@ export default {
             id: id,
             cityId: "903",
             pageNum: pageNum,
-            // pageSize: pageNum * 5
-            pageSize:50
+            pageSize: pageNum * 5
           }
         }
       );
@@ -116,10 +111,6 @@ export default {
         list: res.list,
         totalPage: res.totalPage
       };
-      this.goodsList.list.forEach(item=>{
-        console.log(item.guidePrice);
-      })
-
       console.log("goods", this.goodsList);
     },
     add2cart(list) {
@@ -149,7 +140,6 @@ export default {
       setTimeout(() => {
         this.showAlert = false;
       }, 1000);
-      // this.$router.push("/cart");
     },
     gotoGoods(barcode) {
       this.$router.push({ name: "goods", params: { barcode } });
