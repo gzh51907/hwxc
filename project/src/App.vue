@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-10-12 17:00:43
+ * @LastEditTime: 2019-10-13 20:25:45
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div id="app">
     <div class="wrap">
@@ -41,9 +48,7 @@ export default {
       ]
     };
   },
-  components: {
-
-  }
+  components: {}
 };
 </script>
 
@@ -52,5 +57,4 @@ export default {
   height: 100%;
   min-height: 100%;
 }
-
 </style>

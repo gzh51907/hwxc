@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-10-12 17:00:43
+ * @LastEditTime: 2019-10-12 17:00:43
+ * @LastEditors: your name
+ -->
 <template>
   <div>
     <Header></Header>
@@ -144,7 +151,7 @@ export default {
       active: 0,
       goodsList: [],
       pageNum: 1,
-      show: false,
+      show: false
     };
   },
   methods: {
@@ -155,7 +162,7 @@ export default {
       }, 2600);
     },
     gotoTab(id, index) {
-      //切换tab颜色`
+      //切换tab颜色```
       this.active = index;
       this.tabId(id, this.pageNum);
     },
@@ -166,7 +173,7 @@ export default {
       this.$router.push({ name: "goods", params: { barcode } });
     },
     async tabId(id, pageNum) {
-      // 请求拿到第一选项卡的内容11
+      // 请求拿到第一选项卡的内容
       let {
         data: {
           data: { list }
@@ -178,7 +185,7 @@ export default {
             id: id,
             cityId: 903,
             pageNum: pageNum,
-            pageSize: 12
+            pageSize: 18
           }
         }
       );
