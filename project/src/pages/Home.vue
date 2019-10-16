@@ -165,11 +165,6 @@ export default {
         this.show = false;
       }, 2600);
     },
-    gotoTab(id, index) {
-      //切换tab颜色
-      this.active = index;
-      this.tabId(id, this.pageNum);
-    },
     toTop() {
       document.documentElement.scrollTop = document.body.scrollTop = 0;
     },
@@ -196,7 +191,11 @@ export default {
         this.$store.commit("add2cart", goods);
       }
     },
-
+     gotoTab(id, index) {
+      //切换tab颜色
+      this.active = index;
+      this.tabId(id, this.pageNum);
+    },
     // 添加到购物车
     addCar(list) {
       this.add2cart(list);
@@ -218,7 +217,7 @@ export default {
             id: id,
             cityId: 903,
             pageNum: pageNum,
-            pageSize: 18
+            pageSize:20
           }
         }
       );

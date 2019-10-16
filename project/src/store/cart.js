@@ -18,7 +18,7 @@ let cart = {
     },
     mutations:{
         add2cart(state,goods){
-            window.console.log('添加商品');
+            // window.console.log('添加商品');
             state.cartlist.unshift(goods);
         },
         remove(state,id){
