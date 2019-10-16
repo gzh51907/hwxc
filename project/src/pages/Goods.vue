@@ -240,8 +240,6 @@ export default {
       this.$router.push("/cart");
     }
   }
-  //评论的接口https://xm.star365.com/api/order-api/comments/getByBarcode?barcode=0043019&pageSize=5&pageNum=1
-  //https://xm.star365.com/imgfile/8b31c4b46f79400fbe3251aa60f86f0b_20191005192335.png
 };
 </script>
 
@@ -601,11 +599,12 @@ export default {
         padding-left: 4vw;
         padding-right: 4vw;
         font-size: 3.467vw;
+        padding-top: 10vw;
         color: #666;
         .pinglun {
-          padding-top: 10vw;
+          padding-top: 5vw;
           dd {
-            padding-top: 5.333vw;
+            // padding-top:2vw;
             .pinglun-top {
               height: 14vw;
               .userimg {
