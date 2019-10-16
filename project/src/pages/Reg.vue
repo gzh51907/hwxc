@@ -65,7 +65,7 @@ export default {
         //
         callback(new Error("两次密码输入不一致"));
       } else {
-        //   校验成功,执行回调
+        //   校验成功,执行回调1
         callback();
       }
     };
