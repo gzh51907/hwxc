@@ -133,7 +133,7 @@ export default {
         this.$store.commit("add2cart", goods);
       }
     },
-    // 添加到购物车
+    // 添加到购物车1
     addCar(list) {
       this.add2cart(list);
       this.showAlert = true;
