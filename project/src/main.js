@@ -25,9 +25,5 @@ Vue.prototype.$axios = axios;
 new Vue({
   router,
   store,
-<<<<<<< HEAD
- 
-=======
->>>>>>> yunfei
   render: h => h(App),
 }).$mount('#app')

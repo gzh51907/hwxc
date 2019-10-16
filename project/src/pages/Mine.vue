@@ -2,14 +2,10 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-12 17:00:43
- * @LastEditTime: 2019-10-16 12:56:06
+ * @LastEditTime: 2019-10-16 15:22:37
  * @LastEditors: Please set LastEditors
  -->
 <template>
-<<<<<<< HEAD
-  <div>
-    <Footer></Footer>
-=======
   <div class="mine">
     <div class="m-header">
       <div class="m-contain">
@@ -96,25 +92,19 @@
         </div>
       </div>
     </div>
->>>>>>> yunfei
+    <Footer></Footer>
   </div>
 </template>
 <script>
 import Footer from "./Footer.vue";
 
 export default {
-<<<<<<< HEAD
-  data(){
-    return {
-
-    }
+  data() {
+    return {};
   },
-  components:{
+  components: {
     Footer
-  }   
-}
-=======
-  computed: {},
+  },
   methods: {
     goto1(path) {
       this.$router.replace({
@@ -128,9 +118,8 @@ export default {
     }
   }
 };
->>>>>>> yunfei
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .mine {
   width: 100vw;
   height: 100vh;

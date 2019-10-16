@@ -1,18 +1,8 @@
-<<<<<<< HEAD
-import axios from 'axios';
-
-let common = {
-    state:{
-        user:null
-    },
-    mutations:{
-        login(state,{username,Authorization}){
-=======
 /*
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-16 11:13:53
- * @LastEditTime: 2019-10-16 11:21:17
+ * @LastEditTime: 2019-10-16 15:12:42
  * @LastEditors: Please set LastEditors
  */
 import axios from 'axios';
@@ -25,39 +15,10 @@ export default {
             username,
             Authorization
         }) {
->>>>>>> yunfei
             state.user = {
                 username,
                 Authorization
             }
-<<<<<<< HEAD
-            localStorage.setItem('user',JSON.stringify({username,Authorization}));  
-        },
-        logout(state){
-            state.user = null;
-            localStorage.removeItem('user');
-        }
-    },
-    actions:{
-        async checkLogin(context,payload){
-            let user = localStorage.getItem('user');
-            if(!user){
-                context.commit('logout');
-            }else{
-                // 有鉴权，校验是否过期
-                user = JSON.parse(user);
-                let {data} = await axios.get('http://localhost:1907/verify',{
-                    headers:{
-                        Authorization:user.Authorization
-                    }
-                })
-                if(data.code === 1){
-                    context.commit('login',user);
-                }else{
-                    context.commit('logout');
-                    return 400
-                }  
-=======
             // 存入本地存储
             localStorage.setItem("user", JSON.stringify({
                 username,
@@ -80,7 +41,7 @@ export default {
                 // 发起ajax请求，校验token是否过期
                 let {
                     data
-                } = await axios.get('http://localhost:1907/verify', {
+                } = await axios.get('http://localhost:20190/verify', {
                     headers: {
                         Authorization: user.Authorization
                     }
@@ -92,15 +53,8 @@ export default {
                     context.commit('logout');
                     return 400
                 }
->>>>>>> yunfei
             }
             return 200;
         }
     }
-<<<<<<< HEAD
 }
-
-export default common
-=======
-}
->>>>>>> yunfei

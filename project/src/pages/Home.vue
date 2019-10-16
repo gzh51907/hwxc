@@ -2,8 +2,8 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-12 17:00:43
- * @LastEditTime: 2019-10-13 20:25:00
- * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2019-10-12 17:00:43
+ * @LastEditors: your name
  -->
 <template>
   <div>
@@ -139,15 +139,11 @@
 
 <script>
 import Footer from "./Footer.vue";
-<<<<<<< HEAD
 import Header from "./Header.vue";
-=======
->>>>>>> yunfei
 export default {
   data() {
     return {
       Noticelist: "",
-<<<<<<< HEAD
       imglist: "",
       imgItem: "",
       brand: "",
@@ -155,10 +151,7 @@ export default {
       active: 0,
       goodsList: [],
       pageNum: 1,
-      show: false,
-=======
-      imglist: ""
->>>>>>> yunfei
+      show: false
     };
   },
   methods: {
@@ -258,60 +251,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-<<<<<<< HEAD
 .box {
   height: auto;
   flex: 1;
   margin-top: 13.333vw;
   margin-bottom: 13.333vw;
-=======
-.Home_top {
-  width: 100%;
-  background: #fff;
-  position: fixed;
-  z-index: 999;
-  top: 0;
-  header {
-    // height: 13.333vw;
-    height: auto;
-    display: flex;
-    align-items: center;
-    z-index: 20;
-    padding-left: 4vw;
-    padding-right: 4vw;
-
-    .picture {
-      width: 22.267vw;
-      height: 6.933vw;
-      margin-right: 1.067vw;
-      img {
-        width: 100%;
-        height: 100%;
-      }
-    }
-    .search_frame {
-      width: 46.667vw;
-      height: 8vw;
-      background: #f7f7f7;
-      border-radius: 3.867vw;
-      display: flex;
-      align-items: center;
-      padding-left: 2vw;
-      color: #666;
-    }
-    .search_icon {
-      font-size: 6vw;
-      color: rgb(0, 158, 159);
-      margin-left: 4.667vw;
-    }
-  }
->>>>>>> yunfei
 }
 .layout {
   padding-left: 4vw;
   padding-right: 4vw;
-  // 汪
-  padding-top: 13.333vw;
   .banner {
     width: 100%;
     height: 37.333vw;

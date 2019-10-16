@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-12 17:00:43
- * @LastEditTime: 2019-10-16 12:01:12
+ * @LastEditTime: 2019-10-16 15:17:10
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -142,7 +142,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .login {
   width: 100%;
   .loginLogo {

@@ -2,14 +2,10 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-13 17:16:47
- * @LastEditTime: 2019-10-16 13:03:22
+ * @LastEditTime: 2019-10-16 15:21:30
  * @LastEditors: Please set LastEditors
  -->
 <template>
-<<<<<<< HEAD
-  <div>
-    注册
-=======
   <div class="reg">
     <div class="regLogo">
       <div class="regCenter">
@@ -57,13 +53,9 @@
         <a href="###">立即登录</a>
       </p>
     </div>
->>>>>>> yunfei
   </div>
 </template>
 <script>
-<<<<<<< HEAD
-</script>
-=======
 export default {
   data() {
     const validatePass = (rule, value, callback) => {
@@ -123,7 +115,6 @@ export default {
       }
     };
   },
->>>>>>> yunfei
 
   methods: {
     submitForm() {
@@ -167,7 +158,7 @@ export default {
   }
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .reg {
   width: 100%;
   .regLogo {
