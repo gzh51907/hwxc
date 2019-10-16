@@ -11,7 +11,7 @@ const app = express();
 const {
     PORT
 } = require('./config.json');
-// 引入所有的路由1
+// 引入所有的路由
 const allRouter = require('./routers');
 // 使用路由
 app.use(allRouter);

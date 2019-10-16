@@ -239,8 +239,7 @@ export default {
     GotoCar() {
       this.$router.push("/cart");
     }
-  },
-  
+  }
 };
 </script>
 
