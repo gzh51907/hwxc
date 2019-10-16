@@ -17,7 +17,7 @@
                                     <p class="shandian">闪电送</p>
                                     <p>
                                         <span class="price">￥{{item.guidePrice.toFixed(2)}}</span>
-                                        <i style="float:right;" class="car el-icon-shopping-cart-2" @click.stop="addCar(item)"></i>
+                                        <i style="float:right;" class="car el-icon-shopping-cart-full" @click.stop="addCar(item)"></i>
                                     </p>
                                 </div> 
                   </li>
@@ -256,7 +256,7 @@ export default {
               border-radius: 50%;
               color: #fff;
             }
-            .el-icon-shopping-cart-2:before {
+            .el-icon-shopping-cart-full:before {
               font-size: 18px;
             }
           }
