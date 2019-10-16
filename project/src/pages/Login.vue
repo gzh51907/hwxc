@@ -1,5 +1,5 @@
 <template>
-  <div>登录</div>
+  <div>登录1</div>
 </template>
 
 <script>
