@@ -50,7 +50,6 @@ export default {
   },
   computed: {
     cartlength() {
-      // return this.$store.state.cartlist.length;
       return this.$store.getters.cartlength;
     },
     currentUser() {
