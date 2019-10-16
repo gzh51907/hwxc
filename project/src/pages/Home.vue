@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-10-12 17:00:43
+ * @LastEditTime: 2019-10-13 20:25:00
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div>
     <div class="Home_top">
@@ -35,17 +42,17 @@
         </a>
       </div>
     </div>
-  <Footer></Footer>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
-import Footer from './Footer.vue';
+import Footer from "./Footer.vue";
 export default {
   data() {
     return {
       Noticelist: "",
-      imglist: "",
+      imglist: ""
     };
   },
   async created() {
@@ -82,12 +89,14 @@ export default {
   z-index: 999;
   top: 0;
   header {
-    height: 13.333vw;
+    // height: 13.333vw;
+    height: auto;
     display: flex;
     align-items: center;
     z-index: 20;
     padding-left: 4vw;
     padding-right: 4vw;
+
     .picture {
       width: 22.267vw;
       height: 6.933vw;
@@ -117,6 +126,8 @@ export default {
 .layout {
   padding-left: 4vw;
   padding-right: 4vw;
+  // 汪
+  padding-top: 13.333vw;
   .banner {
     width: 100%;
     height: 37.333vw;

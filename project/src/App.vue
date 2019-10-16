@@ -1,21 +1,28 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-10-12 17:00:43
+ * @LastEditTime: 2019-10-13 20:25:45
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div id="app">
-    <!-- <div class="wrap"> -->   
-      <div class="wrap">
-        <router-view />
-      </div>
-      <!-- <footer class="footer">
-        <ul>
-          <li :index="item.path" v-for="item in menus" :key="item.name">
-            <router-link :to="item.path">
-              <i :class="item.icon"></i>
-              <el-badge class="item" v-if="item.name==='cart'">{{item.text}}</el-badge>
-              <template v-else>{{item.text}}</template>
-            </router-link>
-          </li>
-        </ul>
-      </footer> -->
+    <!-- <div class="wrap"> -->
+    <div class="wrap">
+      <router-view />
     </div>
+    <footer class="footer">
+      <ul>
+        <li :index="item.path" v-for="item in menus" :key="item.name">
+          <router-link :to="item.path">
+            <i :class="item.icon"></i>
+            <el-badge class="item" v-if="item.name==='cart'">{{item.text}}</el-badge>
+            <template v-else>{{item.text}}</template>
+          </router-link>
+        </li>
+      </ul>
+    </footer>
+  </div>
   <!-- </div> -->
 </template>
 
@@ -71,48 +78,52 @@ export default {
 }
 
 .wrap {
-  height: 3000px;
+  // 汪
+  height: auto;
+  // background: red;
   flex: 1;
-  padding-top: 13.333vw;
+  // 汪
+  // padding-top: 13.333vw;
+
   // padding-left: 4vw;
   // padding-right: 4vw;
 }
-// .footer {
-//   width: 100%;
-//   height: 13.333vw;
-//   padding-top: 1.333vw;
-//   border-top: 1px solid #ccc;
-//   position: fixed;
-//   z-index: 100;
-//   bottom: 0;
-//   background: #fff;
-//   ul {
-//     width: 100%;
-//     height: 100%;
-//     display: flex;
-//     align-items: center;
-//     list-style: none;
-//     justify-content: space-around;
-//     li {
-//       height: 100%;
-//       width: 25%;
-//       display: flex;
-//       flex-direction: column;
-//       justify-content: center;
-//       align-items: center;
-//       font-size: 3.467vw;
-//       i {
-//         font-size: 6vw;
-//         color: #aaa;
-//       }
-//       a {
-//         display: flex;
-//         flex-direction: column;
-//         align-items: center;
-//         color: #555;
-//         text-decoration: none;
-//       }
-//     }
-//   }
-// }
+.footer {
+  width: 100%;
+  height: 13.333vw;
+  padding-top: 1.333vw;
+  border-top: 1px solid #ccc;
+  position: fixed;
+  z-index: 100;
+  bottom: 0;
+  background: #fff;
+  ul {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    list-style: none;
+    justify-content: space-around;
+    li {
+      height: 100%;
+      width: 25%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 3.467vw;
+      i {
+        font-size: 6vw;
+        color: #aaa;
+      }
+      a {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        color: #555;
+        text-decoration: none;
+      }
+    }
+  }
+}
 </style>
