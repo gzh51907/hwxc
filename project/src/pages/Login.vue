@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-12 17:00:43
- * @LastEditTime: 2019-10-16 15:17:10
+ * @LastEditTime: 2019-10-16 15:29:50
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -46,9 +46,11 @@
         </div>
       </el-form>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 <script>
+import Footer from "./Footer";
 export default {
   data() {
     return {
@@ -138,6 +140,9 @@ export default {
         path: "/reg"
       });
     }
+  },
+  components: {
+    Footer
   }
 };
 </script>

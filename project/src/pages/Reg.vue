@@ -2,7 +2,7 @@
  * @Description: In User Settings Edit
  * @Author: your name
  * @Date: 2019-10-13 17:16:47
- * @LastEditTime: 2019-10-16 15:21:30
+ * @LastEditTime: 2019-10-16 15:28:55
  * @LastEditors: Please set LastEditors
  -->
 <template>
@@ -53,9 +53,11 @@
         <a href="###">立即登录</a>
       </p>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 <script>
+import Footer from "./Footer";
 export default {
   data() {
     const validatePass = (rule, value, callback) => {
@@ -155,6 +157,9 @@ export default {
         path: "./login"
       });
     }
+  },
+  components: {
+    Footer
   }
 };
 </script>
