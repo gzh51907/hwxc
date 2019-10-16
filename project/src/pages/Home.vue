@@ -1,6 +1,7 @@
 <template>
   <div>
     <Header></Header>
+
     <div class="box">
       <div class="layout">
         <div class="banner">
@@ -86,7 +87,13 @@
           </ul>
         </div>
       </section>
-
+      <el-alert
+        title="成功加入购物车"
+        type="success"
+        show-icon
+        v-show="showAlert"
+        style="position:fixed;top:13.333vw;z-index:100"
+      ></el-alert>
       <section class="layout layout_list">
         <div class="loading" v-if="show">
           <img src="../images/loading.png" alt />
@@ -115,9 +122,9 @@
                   ￥
                   <em>{{item.guidePrice.toFixed(2)}}</em>
                 </div>
-              <p class="Price_p">
-                <i class="el-icon-shopping-cart-full" @click.stop="gotoCar(item)"></i>
-              </p>
+                <p class="Price_p">
+                  <i class="el-icon-shopping-cart-full" @click.stop="addCar(item)"></i>
+                </p>
               </div>
               <p class="ProItem__pro-num">销量{{item.sellCount}}笔</p>
             </div>
@@ -147,7 +154,8 @@ export default {
       active: 0,
       goodsList: [],
       pageNum: 1,
-      show: false
+      show: false,
+      showAlert: false
     };
   },
   methods: {
@@ -168,15 +176,17 @@ export default {
     goto(barcode) {
       this.$router.push({ name: "goods", params: { barcode } });
     },
-    add2cart(list){
- // 添加前，判断该商品是否已经存在,存在+1
-      let currentgoods = this.$store.state.cart.cartlist.filter(item=>item.id == list.barcode)[0];
-      if(currentgoods){
+    add2cart(list) {
+      // 添加前，判断该商品是否已经存在,存在+1
+      let currentgoods = this.$store.state.cart.cartlist.filter(
+        item => item.id == list.barcode
+      )[0];
+      if (currentgoods) {
         let num = currentgoods.num + 1;
-        this.$store.commit('changeNum',{id:list.barcode,num:1});
-      }else{
-          let goods = {
-          id:list.barcode,
+        this.$store.commit("changeNum", { id: list.barcode, num: 1 });
+      } else {
+        let goods = {
+          id: list.barcode,
           title: list.productName,
           efficacy: list.efficacy,
           pic: list.picUrl,
@@ -186,10 +196,14 @@ export default {
         this.$store.commit("add2cart", goods);
       }
     },
-    // 跳转购物车
-    gotoCar(list){
+
+    // 添加到购物车
+    addCar(list) {
       this.add2cart(list);
-      this.$router.push("/cart");
+      this.showAlert = true;
+      setTimeout(() => {
+        this.showAlert = false;
+      }, 1000);
     },
     async tabId(id, pageNum) {
       // 请求拿到第一选项卡的内容
@@ -612,8 +626,8 @@ export default {
             align-items: center;
             color: #fff;
             padding-right: 0.533vw;
-            box-sizing: border-box;   
-            i{
+            box-sizing: border-box;
+            i {
               font-size: 5vw;
             }
           }
