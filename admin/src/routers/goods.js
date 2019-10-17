@@ -21,6 +21,7 @@ Router.get('/', async (req, res) => {
     }
     res.send(result);
 })
+
 // 查询单个商品
 Router.get('/getgoods', async (req, res) => {
     let {

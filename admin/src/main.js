@@ -13,6 +13,8 @@ import axios from 'axios';
 Vue.prototype.$axios = axios;
 
 Vue.use(ElementUI);
+import axios from 'axios';
+Vue.prototype.$axios = axios;
 
 new Vue({
   router,
