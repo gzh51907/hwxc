@@ -17,8 +17,6 @@ import store from './store';
 import './css/base.css';
 import 'amfe-flexible';
 
-
-
 Vue.use(ElementUI);
 import axios from 'axios';
 Vue.prototype.$axios = axios;

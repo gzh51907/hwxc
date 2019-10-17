@@ -10,6 +10,8 @@ import  '../node_modules/layui-src/dist/layui.js';
 import router from './router';
 
 Vue.use(ElementUI);
+import axios from 'axios';
+Vue.prototype.$axios = axios;
 
 new Vue({
   router,
