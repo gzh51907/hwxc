@@ -1,10 +1,3 @@
-/*
- * @Description: In User Settings Edit
- * @Author: your name
- * @Date: 2019-10-16 11:13:53
- * @LastEditTime: 2019-10-16 15:12:42
- * @LastEditors: Please set LastEditors
- */
 import axios from 'axios';
 export default {
     state: {
@@ -34,6 +27,7 @@ export default {
     actions: {
         async checkLogin(context, payload) {
             let user = localStorage.getItem("user");
+            console.log('checklogin',user)
             if (!user) {
                 context.commit('logout');
             } else {

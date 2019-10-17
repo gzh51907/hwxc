@@ -22,7 +22,7 @@
         :rules="rules"
         ref="regForm"
         status-icon
-        label-width="92px"
+        label-width="105px"
       >
         <!-- 用户名 -->
         <el-form-item label="用户名" prop="username">
@@ -38,7 +38,7 @@
           ></el-input>
         </el-form-item>
         <!-- 确认密码 -->
-        <el-form-item label="确认密码" prop="checkPass">
+        <el-form-item label="确认密码" prop="checkPass" >
           <el-input
             type="password"
             prefix-icon="el-icon-lock"
@@ -50,7 +50,7 @@
       <!-- 注册 -->
       <el-button type="primary" class="likereg" @click="submitForm">立即注册</el-button>
       <p class="gologin fr" @click="goto3('/login')">
-        <a href="###">立即登录</a>
+        <span>立即登录</span>
       </p>
     </div>
     <Footer></Footer>
@@ -196,7 +196,7 @@ export default {
     width: 100%;
     padding-top: 30px;
     .regipt {
-      padding-right: 10px;
+      padding-right: 20px;
     }
     .likereg {
       background: rgb(235, 49, 49);

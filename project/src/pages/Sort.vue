@@ -135,11 +135,18 @@ export default {
     },
     // 添加到购物车
     addCar(list) {
-      this.add2cart(list);
-      this.showAlert = true;
-      setTimeout(() => {
-        this.showAlert = false;
-      }, 1000);
+      let user = localStorage.getItem("user");
+      if (user) {
+        this.add2cart(list);
+        this.showAlert = true;
+        setTimeout(() => {
+          this.showAlert = false;
+        }, 1000);
+      } else {
+        this.$router.replace({
+          path: "/login"
+        });
+      }
     },
     gotoGoods(barcode) {
       this.$router.push({ name: "goods", params: { barcode } });

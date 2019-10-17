@@ -14,8 +14,14 @@
             <i class="el-icon-user"></i>
           </p>
           <!--  判断是否登录中-->
-          <el-button type="text" class="reg rl" @click="goto1('/reg')">注册</el-button>
-          <el-button type="text" class="login rl" @click="goto2('/login')">登录</el-button>
+          <span class="span_name" v-show="showname">{{username}}</span>
+          <template v-if="!currentUser">
+            <el-button type="text" class="reg rl" @click="goto1('/reg')">注册</el-button>
+            <el-button type="text" class="login rl" @click="goto2('/login')">登录</el-button>
+          </template>
+          <el-button type="text" @click="logout" v-else>
+            <span>退出</span>
+          </el-button>
         </div>
         <div class="h-right">
           <i class="fr el-icon-present vip"></i>
@@ -100,12 +106,36 @@ import Footer from "./Footer.vue";
 
 export default {
   data() {
-    return {};
+    return {
+      currentUser: true,
+      username: "",
+      showname: true
+    };
   },
   components: {
     Footer
   },
+  created() {
+    //获取url地址参数
+    // console.log(this.$router);
+    // this.activeIndex = this.$route.path;
+    this.$store.dispatch("checkLogin");
+    let user = localStorage.getItem("user");
+    console.log("czxcxz", user);
+    this.username = JSON.parse(user).username;
+    console.log(this.username);
+    // this.username = JSON.parse(user.username);
+    // this.currentUser = false;
+  },
   methods: {
+    logout() {
+      this.currentUser = false;
+      this.$store.commit("logout");
+      this.showname = false;
+    },
+    // currentUser() {
+    //   return this.$store.state.common.user;
+    // },
     goto1(path) {
       this.$router.replace({
         path: "/reg"
@@ -143,6 +173,13 @@ export default {
         display: flex;
         padding-top: 0.296774rem;
         box-sizing: border-box;
+        .span_name {
+          width: 24vw;
+          line-height: 12vw;
+          text-align: center;
+          font-size: 0.49129rem;
+          color: white;
+        }
         .headPicture {
           width: 50px;
           height: 50px;

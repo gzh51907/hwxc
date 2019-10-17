@@ -171,38 +171,49 @@ export default {
     goto(barcode) {
       this.$router.push({ name: "goods", params: { barcode } });
     },
-    add2cart(list) {
-      // 添加前，判断该商品是否已经存在,存在+1
-      let currentgoods = this.$store.state.cart.cartlist.filter(
-        item => item.id == list.barcode
-      )[0];
-      if (currentgoods) {
-        let num = currentgoods.num + 1;
-        this.$store.commit("changeNum", { id: list.barcode, num: 1 });
+    // 添加到购物车
+    addCar(list) {
+      let user = localStorage.getItem("user");
+      if (user) {
+        this.add2cart(list);
+        this.showAlert = true;
+        setTimeout(() => {
+          this.showAlert = false;
+        }, 1000);
       } else {
-        let goods = {
-          id: list.barcode,
-          title: list.productName,
-          efficacy: list.efficacy,
-          pic: list.picUrl,
-          price: list.guidePrice,
-          num: 1
-        };
-        this.$store.commit("add2cart", goods);
+        this.$router.replace({
+          path: "/login"
+        });
       }
     },
-     gotoTab(id, index) {
+
+    add2cart(list) {
+      // 添加前，判断该商品是否已经存在,存在+1
+      let user = localStorage.getItem("user");
+      if (user) {
+        let currentgoods = this.$store.state.cart.cartlist.filter(
+          item => item.id == list.barcode
+        )[0];
+        if (currentgoods) {
+          let num = currentgoods.num + 1;
+          this.$store.commit("changeNum", { id: list.barcode, num: 1 });
+        } else {
+          let goods = {
+            id: list.barcode,
+            title: list.productName,
+            efficacy: list.efficacy,
+            pic: list.picUrl,
+            price: list.guidePrice,
+            num: 1
+          };
+          this.$store.commit("add2cart", goods);
+        }
+      }
+    },
+    gotoTab(id, index) {
       //切换tab颜色
       this.active = index;
       this.tabId(id, this.pageNum);
-    },
-    // 添加到购物车
-    addCar(list) {
-      this.add2cart(list);
-      this.showAlert = true;
-      setTimeout(() => {
-        this.showAlert = false;
-      }, 1000);
     },
     async tabId(id, pageNum) {
       // 请求拿到第一选项卡的内容.
@@ -217,13 +228,14 @@ export default {
             id: id,
             cityId: 903,
             pageNum: pageNum,
-            pageSize:20
+            pageSize: 20
           }
         }
       );
       this.goodsList = list;
     }
   },
+
   mounted() {
     document.querySelector(".scroll_Top").style.bottom = this.toBottom;
   },
