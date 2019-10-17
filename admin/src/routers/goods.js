@@ -81,7 +81,6 @@ Router.post('/reg', async (req, res) => {
 
 })
 // 删除单个商品
-<<<<<<< HEAD
 Router.patch("/dele", async (req, res) => {
     let {
         barcode
@@ -107,23 +106,6 @@ Router.patch("/dele", async (req, res) => {
 //         req.query,
 //         req.body
 //     );
-=======
-// Router.patch("/dele", async (req, res) => {
-//     let {
-//         barcode
-//     } = req.query;
-//     let result;
-//     try {
-//         result = await mongodb.remove(colName, {
-//             barcode: parseInt(barcode)
-//         })
-//         result = formatData()
-//     } catch {
-//         result = formatData({
-//             code: "0"
-//         })
-//     }
->>>>>>> bogui
 //     res.send(result);
 // })
 // 修改商品
