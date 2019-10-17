@@ -3,18 +3,34 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
-import Addgoods from '../pages/Addgoods.vue';
-
+import goodsInf from '../pages/goodsInf.vue';
+import userInf from '../pages/userInf.vue';
+import addUser from '../pages/addUser.vue';
+import userOrder from '../pages/userOrder.vue';
 
 let router = new VueRouter({
     routes: [
         //添加商品
         {
-            name: 'addgoods',
-            path: '/addgoods',
-            component: Addgoods
-        }
-
+            name: 'goodsInf',
+            path: '/goodsInf',
+            component: goodsInf
+        },
+        {
+            name: 'userInf',
+            path: '/userInf',
+            component: userInf
+        },
+        {
+            name: 'addUser',
+            path: '/addUser',
+            component: addUser
+        },
+        {
+            name: 'userOrder',
+            path: '/userOrder',
+            component: userOrder
+        },
     ]
 })
 export default router;

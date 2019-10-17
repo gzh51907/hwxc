@@ -3,10 +3,13 @@ import App from './App.vue'
 
 Vue.config.productionTip = false;
 
-
-import  '../node_modules/layui-src/src/css/layui.css';
-import  '../node_modules/layui-src/src/layui.js';
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+import  '../node_modules/layui-src/dist/css/layui.css';
+import  '../node_modules/layui-src/dist/layui.js';
 import router from './router';
+
+Vue.use(ElementUI);
 
 new Vue({
   router,

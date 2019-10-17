@@ -123,7 +123,5 @@ router.beforeEach(async function(to,from,next){
 
 })
 
-
 // 5.在组件中使用VueRouter
-
 export default router;
