@@ -19,7 +19,7 @@
                                         <span class="price">￥{{item.guidePrice.toFixed(2)}}</span>
                                         <i style="float:right;" class="car el-icon-shopping-cart-full" @click.stop="addCar(item)"></i>
                                     </p>
-                                </div> 
+                              </div> 
                   </li>
                 </ul>
                  
