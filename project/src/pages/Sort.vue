@@ -2,7 +2,7 @@
     <div>
         <Header></Header>
         <div class="middle" id="middle">
-          <el-alert title="成功加入购物车" type="success" show-icon v-show="showAlert"></el-alert>
+          <el-alert title="成功加入购物车" type="success" show-icon v-show="showAlert"  style="position:fixed;top:13.333vw;z-index:100"></el-alert>
             <ul class="tabbox">
               <li class="tab" v-for="(item,index) in sortList" :key="item.id" @click="goto(item.id,index)"
               :class="{tab_active:index===current}">{{item.categoryName}}</li>
