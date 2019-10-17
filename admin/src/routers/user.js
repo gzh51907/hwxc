@@ -101,7 +101,7 @@ Router.get('/', async (req, res) => {
     }
     res.send(result);
 })
-// 删除用户
+// 删除用户2
 Router.post("/dele", async (req, res) => {
     let {
         username
