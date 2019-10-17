@@ -9,6 +9,7 @@ const {
 } = require('../utils');
 const colName = 'goodslist';
 
+
 // 查询所有商品
 Router.get('/', async (req, res) => {
     let result
@@ -79,31 +80,34 @@ Router.post('/reg', async (req, res) => {
 
 })
 // 删除单个商品
-Router.patch("/dele", async (req, res) => {
-    let {
-        barcode
-    } = req.query;
-    let result;
-    try {
-        result = await mongodb.remove(colName, {
-            barcode: parseInt(barcode)
-        })
-        result = formatData()
-    } catch {
-        result = formatData({
-            code: "0"
-        })
-    }
-    res.send(result);
-})
-// 修改商品
-// Router.update('/update', async (req, res) => {
-//     // console.log(req.query, req.body)
-//     let result = await mongodb.update(colName,
-//         req.query,
-//         req.body
-//     );
+// Router.patch("/dele", async (req, res) => {
+//     let {
+//         barcode
+//     } = req.query;
+//     let result;
+//     try {
+//         result = await mongodb.remove(colName, {
+//             barcode: parseInt(barcode)
+//         })
+//         result = formatData()
+//     } catch {
+//         result = formatData({
+//             code: "0"
+//         })
+//     }
 //     res.send(result);
 // })
+// 修改商品
+Router.patch('/:id', async (req, res) => {
+    console.log(req,res)
+    let barcode = req.params.barcode;
+    console.log(req,res,barcode);
+    res.send({barcode,productName:'供医疗卫生清洁时使用。',guidePrice:6.5})
+    let result = await mongodb.update(colName,
+        req.query,
+        req.body
+    );
+    res.send(result);    
+})
 
 module.exports = Router;

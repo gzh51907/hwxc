@@ -98,7 +98,7 @@ router.beforeEach(async function(to,from,next){
         let user = localStorage.getItem('user');
         if(user){
             let res = await store.dispatch('checkLogin');
-            console.log('res:',res)
+            // console.log('res:',res)
             if(res === 400){
                 next({
                     path:'/login',

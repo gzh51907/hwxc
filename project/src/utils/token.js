@@ -16,7 +16,7 @@ let {
 } = require('../config.json');
 
 function create(data, expiresIn = 60*60*24*30) { 
-    console.log(expiresIn)
+    // console.log(expiresIn)
     let token = jwt.sign({
         data
     }, secret, {
@@ -30,7 +30,7 @@ function verify(token) {
     let res;
     try {
         let result = jwt.verify(token, secret);
-        console.log('token校验：', result)
+        // console.log('token校验：', result)
         res = true;
     } catch (err) {
         res = false;
