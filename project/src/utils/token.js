@@ -15,8 +15,8 @@ let {
     secret
 } = require('../config.json');
 
-function create(data, expiresIn = 60*60*24*30) { //7天
-    console.log('aa',data)
+function create(data, expiresIn = 60*60*24*30) { 
+    console.log(expiresIn)
     let token = jwt.sign({
         data
     }, secret, {
