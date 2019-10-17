@@ -19,5 +19,5 @@ app.use(allRouter);
 app.use(express.static('./'))
 // 监听
 app.listen(PORT, () => {
-    window.console.log("服务器启动成功");
+    console.log("服务器启动成功");
 });

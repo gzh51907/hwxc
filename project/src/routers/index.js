@@ -36,9 +36,12 @@ Router.use(express.urlencoded({
 
 Router.use('/user', userRouter);
 Router.get('/verify', (req, res) => {
+    console.log('aaaaaaaa',req)
     let Authorization = req.get('Authorization');
     // 校验token的有效性
+    console.log(Authorization)
     let result = token.verify(Authorization);
+    console.log('result',result)
     res.send(formatData({
         code: result ? 1 : 0
     }))
