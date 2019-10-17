@@ -16,23 +16,6 @@ const {
 } = require('../config.json');
 // 连接MongoDB
 async function connect() {
-    // return new Promise((resolve, reject) => {
-    //     MongoClient.connect(DBurl, function (err, client) {
-    //         // err: 错误信息
-    //         // client：数据库客户端
-    //         if (err) {
-    //             reject(err)
-    //         }
-    //         // 连接数据库，无则自动创建
-    //         let db = client.db(DBName);
-    //         resolve({
-    //             client,
-    //             db
-    //         })
-    //     });
-    // })
-
-
     let result;
     try {
         let client = await MongoClient.connect(DBurl, {
@@ -83,6 +66,7 @@ async function remove(colName, query) {
     let col = db.collection(colName);
     let result = await col.deleteMany(query);
     client.close();
+    
     return result;
 }
 

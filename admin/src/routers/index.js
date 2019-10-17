@@ -8,17 +8,26 @@
 const express = require('express');
 const Router = express.Router();
 
+//引入路由模块
+const userRouter = require('./user');
+const goodsRouter = require('./goods');
+
 const {
     formatData,
     token
 } = require('../utils');
+
+
+Router.use(express.urlencoded({
+    extended: true
+}), express.json());
 
 // 允许跨越
 Router.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Content-Type,Content-Length, Authorization, Accept,X-Requested-With");
     res.header("Access-Control-Allow-Methods", "PUT,PATCH,POST,GET,DELETE,OPTIONS");
-
+    
     // 跨域请求CORS中的预请求
     if (req.method == "OPTIONS") {
         res.sendStatus(200); /*让options请求快速返回*/
@@ -27,14 +36,9 @@ Router.use((req, res, next) => {
     }
 });
 
-//引入路由模块
-const userRouter = require('./user');
-const goodsRouter = require('./goods');
 
 
-Router.use(express.urlencoded({
-    extended: true
-}), express.json());
+
 
 Router.use('/user', userRouter);
 Router.use('/goods', goodsRouter);

@@ -182,6 +182,8 @@ export default {
       this.GoodsData = data;
       this.picList = data.picList;
       this.description = data.description;
+      // let str = this.description.rep('width');
+      // console.log('str',str)
       // console.log(data.description);
       // console.log("data", data);
     },
