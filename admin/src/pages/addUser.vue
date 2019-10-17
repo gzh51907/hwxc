@@ -34,7 +34,7 @@ export default {
     };
   },
   methods: {
-    // 失去焦点
+    // 失去焦点2
     async blur() {
       this.username = this.$refs.name.value;
       this.password = this.$refs.password.value;
