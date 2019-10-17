@@ -115,7 +115,7 @@ th {
   text-align: center;
 }
 th:nth-child(1) {
-  width: 6%;
+  width: 8%;
 }
 th:nth-child(2) {
   width: 6%;
