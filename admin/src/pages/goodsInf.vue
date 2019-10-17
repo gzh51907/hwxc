@@ -1,15 +1,27 @@
 <template>
   <div>
-    <h2> 商品信息表：</h2>
-    <table class="layui-table" lay-even="" lay-skin="row">
+    <h2>
+      商品信息表：
+      <el-pagination
+        background
+        layout="prev, pager, next"
+        :page-size="10"
+        :total="list.length"
+        style="float:right"
+      ></el-pagination>
+    </h2>
+
+    <table class="layui-table" lay-even lay-skin="row">
       <!-- <colgroup>
         <col width="150">
         <col width="150">
         <col width="200">
-      </colgroup> -->
+      </colgroup>-->
       <thead>
         <tr>
-          <th><input type="checkbox" />全选</th>
+          <th>
+            <input type="checkbox" />全选
+          </th>
           <th>序号</th>
           <th>商品id</th>
           <th>商品标题</th>
@@ -19,34 +31,38 @@
           <th>商品分类</th>
           <th>价格</th>
           <th>操作</th>
-        </tr> 
+        </tr>
       </thead>
       <tbody>
         <tr v-for="(item,index) in list" :key="index">
-          <td><input type="checkbox" /></td>
-          <td>{{item}}</td>
-          <td>汉族</td>
-          <td>1989-10-14</td>
-          <td>人生似修行</td>
-          <td>人生似修行</td>
-          <td>人生似修行</td>
-          <td>人生似修行</td>
-          <td>人生似修行</td>
           <td>
-            <button type="button" class="layui-btn layui-btn-sm layui-btn-normal" @click="removeItem">
-              <i class="layui-icon"></i> 
+            <input type="checkbox" />
+          </td>
+          <td>{{index+1}}</td>
+          <td>{{item.barcode}}</td>
+          <td>{{item.efficacy}}</td>
+          <td>
+            <img :src="item.picUrl" alt />
+          </td>
+          <td>{{item.barcode}}</td>
+          <td>{{item.id}}</td>
+          <td>{{item.categoryName}}</td>
+          <td>{{item.guidePrice}}</td>
+          <td>
+            <button type="button" class="layui-btn"><i class="layui-icon"></i> 编辑</button>  
+            <button
+              type="button"
+              class="layui-btn layui-btn-danger"
+              @click="removeItem"
+            >
+              <i class="layui-icon"></i>
               下架
             </button>
+            
           </td>
         </tr>
       </tbody>
     </table>
-      <el-pagination
-      background
-      layout="prev, pager, next"
-      :page-size="10"
-      :total="list.length">
-    </el-pagination>
   </div>
 </template>
 
@@ -54,22 +70,15 @@
 export default {
   data() {
     return {
-      list: [
-        "成都",
-        "武汉",
-        "青岛",
-        "天津",
-        "重庆",
-        "南京",
-        "九江",
-        "香港",
-        "澳门",
-        "台北"
-      ]
+      list: []
     };
   },
-  async created(){
-    
+  async created() {
+    let { data } = await this.$axios.get("http://localhost:20190/goods",{
+      size:50
+    });
+
+    this.list = data;
   },
   methods: {
     removeItem() {
@@ -91,15 +100,41 @@ export default {
           });
         });
     },
-    
+    Edit(){
+      
+    }
   }
 };
 </script>
 
 <style lang="scss" scoped>
 th {
+  width: 10%;
   font-weight: bold;
   text-align: center;
+}
+th:nth-child(1) {
+  width: 8%;
+}
+th:nth-child(2) {
+  width: 6%;
+}
+th:nth-child(4) {
+  width: 18%;
+}
+th:nth-child(5) {
+  width: 12%;
+}
+tr{
+  height: auto;
+}
+td {
+  text-align: center;
+  height: 120px;
+}
+td:last-child {
+  display: flex;
+  align-items: center;
 }
 .layui-btn {
   width: 100%;
