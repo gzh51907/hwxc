@@ -24,7 +24,7 @@
         label-width="100px"
         class="demo-ruleForm"
       >
-        <el-form-item label="用户名" class="loginipt" prop="username">
+        <el-form-item label="用户名" class="loginipt" prop="username" >
           <el-input v-model="ruleForm.username" prefix-icon="el-icon-user-solid"></el-input>
         </el-form-item>
         <el-form-item label="密码" class="loginipt" prop="password">
@@ -151,6 +151,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .login {
   width: 100%;
   .loginLogo {

@@ -171,6 +171,22 @@ export default {
     goto(barcode) {
       this.$router.push({ name: "goods", params: { barcode } });
     },
+    // 添加到购物车
+    addCar(list) {
+      let user = localStorage.getItem("user");
+      if (user) {
+        this.add2cart(list);
+        this.showAlert = true;
+        setTimeout(() => {
+          this.showAlert = false;
+        }, 1000);
+      } else {
+        this.$router.replace({
+          path: "/login"
+        });
+      }
+    },
+
     add2cart(list) {
       // 添加前，判断该商品是否已经存在,存在+1
       let currentgoods = this.$store.state.cart.cartlist.filter(
@@ -191,18 +207,10 @@ export default {
         this.$store.commit("add2cart", goods);
       }
     },
-     gotoTab(id, index) {
+    gotoTab(id, index) {
       //切换tab颜色
       this.active = index;
       this.tabId(id, this.pageNum);
-    },
-    // 添加到购物车
-    addCar(list) {
-      this.add2cart(list);
-      this.showAlert = true;
-      setTimeout(() => {
-        this.showAlert = false;
-      }, 1000);
     },
     async tabId(id, pageNum) {
       // 请求拿到第一选项卡的内容.
@@ -217,13 +225,14 @@ export default {
             id: id,
             cityId: 903,
             pageNum: pageNum,
-            pageSize:20
+            pageSize: 20
           }
         }
       );
       this.goodsList = list;
     }
   },
+
   mounted() {
     document.querySelector(".scroll_Top").style.bottom = this.toBottom;
   },
