@@ -97,7 +97,7 @@
               <li>11</li>
               <li>11</li>
             </ul>-->
-            <dl class="pinglun" v-for="item in userlist" :key="item.name">
+            <dl class="pinglun" v-for="item in userlist" :key="item.commentDate">
               <dd>
                 <div class="pinglun-top">
                   <div>
@@ -211,7 +211,7 @@ export default {
       });
       this.userlist = list;
 
-      // console.log("用户评论内容", this.userlist);
+      console.log("用户评论内容", this.userlist);
     },
     go() {
       this.$router.go(-1);
