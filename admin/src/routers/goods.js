@@ -109,7 +109,7 @@ Router.delete("/dele", async (req, res) => {
 //     res.send(result);
 // })
 // 修改商品.
-Router.patch('/barcode', async (req, res) => {
+Router.patch('/:barcode', async (req, res) => {
     console.log(req,res)
     let barcode = req.params.barcode;
     console.log(req,res,barcode);
