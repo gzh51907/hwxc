@@ -67,9 +67,9 @@ let router = new VueRouter({
             name: 'mine',
             path: '/mine',
             component: Mine,
-            meta: {
-                requiresAuth: true
-            }
+            // meta: {
+            //     requiresAuth: true
+            // }
         },
         {
             name: 'reg',
