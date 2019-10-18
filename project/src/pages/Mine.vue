@@ -121,9 +121,7 @@ export default {
     // this.activeIndex = this.$route.path;
     this.$store.dispatch("checkLogin");
     let user = localStorage.getItem("user");
-    console.log("czxcxz", user);
     this.username = JSON.parse(user).username;
-    console.log(this.username);
     // this.username = JSON.parse(user.username);
     // this.currentUser = false;
   },

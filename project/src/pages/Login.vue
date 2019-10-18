@@ -90,7 +90,7 @@ export default {
 
           if (data.code === 1) {
             let { targetUrl } = this.$route.query;
-            console.log("targetUrl", targetUrl);
+            // console.log("targetUrl", targetUrl);
             // 把token写入localstorage
             this.$store.commit("login", { username, Authorization: data.data });
             this.$router.replace({
