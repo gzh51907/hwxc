@@ -120,12 +120,12 @@ export default {
     // console.log(this.$router);
     // this.activeIndex = this.$route.path;
     this.$store.dispatch("checkLogin");
-     let user = localStorage.getItem("user");
+    let user = localStorage.getItem("user");
     if(user){
-      this.username = JSON.parse(user).username;
-      this.currentUser = true;
+    this.username = JSON.parse(user).username;
+     this.currentUser = true;
     }
-   
+
     // this.username = JSON.parse(user.username);
     // this.currentUser = false;
   },

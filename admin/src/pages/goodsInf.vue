@@ -79,7 +79,6 @@ export default {
     });
 
     this.list = data;
-    // console.log(data)
   },
   methods: {
     removeItem() {
