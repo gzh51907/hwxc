@@ -43,7 +43,7 @@
           <el-button type="primary" class="locolor likelogin" @click="submitForm">登录</el-button>
         </el-form-item>
         <div class="goreg fr" @click="goto4('/reg')">
-          <a href="###">立即注册</a>
+          <span>立即注册</span>
         </div>
       </el-form>
     </div>
@@ -73,6 +73,7 @@ export default {
     };
   },
   methods: {
+
     submitForm() {
       this.$refs.regForm.validate(async valid => {
         if (valid) {

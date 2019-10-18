@@ -40,11 +40,11 @@
           </td>
           <td>{{index+1}}</td>
           <td>{{item.barcode}}</td>
-          <td>{{item.efficacy}}</td>
+          <td>{{item.productName}}</td>
           <td>
             <img :src="item.picUrl" alt />
           </td>
-          <td>{{item.barcode}}</td>
+          <td>{{item.efficacy}}</td>
           <td>{{item.id}}</td>
           <td>{{item.categoryName}}</td>
           <td>{{item.guidePrice}}</td>
@@ -79,6 +79,7 @@ export default {
     });
 
     this.list = data;
+    console.log(data)
   },
   methods: {
     removeItem() {
@@ -124,6 +125,9 @@ th:nth-child(4) {
 }
 th:nth-child(5) {
   width: 12%;
+}
+th:nth-child(6) {
+  width: 14%;
 }
 tr{
   height: auto;
