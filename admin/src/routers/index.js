@@ -17,11 +17,6 @@ const {
     token
 } = require('../utils');
 
-
-Router.use(express.urlencoded({
-    extended: true
-}), express.json());
-
 // 允许跨越
 Router.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -36,9 +31,9 @@ Router.use((req, res, next) => {
     }
 });
 
-
-
-
+Router.use(express.urlencoded({
+    extended: true
+}), express.json());
 
 Router.use('/user', userRouter);
 Router.use('/goods', goodsRouter);

@@ -92,7 +92,7 @@ export default {
   },
   computed: {
     cartlist() {
-      console.log("cartlist", this.$store.state.cart.cartlist);
+      // console.log("cartlist", this.$store.state.cart.cartlist);
       return this.$store.state.cart.cartlist;
     },
     totalPrice() {

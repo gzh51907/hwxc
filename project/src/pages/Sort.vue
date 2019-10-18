@@ -111,7 +111,7 @@ export default {
         list: res.list,
         totalPage: res.totalPage
       };
-      console.log("goods", this.goodsList);
+      // console.log("goods", this.goodsList);
     },
     add2cart(list) {
       // 添加前，判断该商品是否已经存在,存在+1

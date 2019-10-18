@@ -83,7 +83,7 @@
         <li
           v-for="(item,index) in items"
           :class="{active:istrue==index}"
-          :key="item.id"
+          :key="item.name"
           @click="istrue=index"
         >
           {{ item.name }}
