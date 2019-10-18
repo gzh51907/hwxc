@@ -1,6 +1,6 @@
 <template>
   <div id="goods">
-    <div class="box1">
+    <div class="box1" ref="top">
       <el-carousel
         trigger="click"
         class="goodsimg"
@@ -157,6 +157,9 @@ export default {
     let { barcode } = this.$route.params;
     this.getData(barcode);
     this.getcomment(barcode);
+  },
+  mounted() {
+    this.$refs.top.scrollIntoView();
   },
   computed: {
     cartlength() {
