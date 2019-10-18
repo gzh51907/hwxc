@@ -26,7 +26,7 @@
       >
         <!-- 用户名 -->
         <el-form-item label="用户名" prop="username">
-          <el-input v-model="ruleForm.username" prefix-icon="el-icon-user-solid"></el-input>
+          <el-input v-model="ruleForm.username" prefix-icon="el-icon-user-solid"  ref="name"></el-input>
         </el-form-item>
         <!-- 密码 -->
         <el-form-item label="密码" prop="password">
@@ -44,6 +44,7 @@
             prefix-icon="el-icon-lock"
             v-model="ruleForm.checkPass"
             autocomplete="off"
+             @keyup.enter.native="submitForm"
           ></el-input>
         </el-form-item>
       </el-form>
@@ -69,7 +70,7 @@ export default {
         callback();
       }
     };
-    //发起ajax请求，验证用户名是否存在
+    //发起ajax请求，验证用户名是否存在1
     const checkUsername = async (rule, value, callback) => {
       let { data } = await this.$axios.get(
         "http://localhost:20190/user/check",
@@ -157,6 +158,9 @@ export default {
         path: "./login"
       });
     }
+  },
+  mounted(){
+    this.$refs.name.focus();
   },
   components: {
     Footer

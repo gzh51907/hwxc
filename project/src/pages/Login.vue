@@ -25,7 +25,7 @@
         class="demo-ruleForm"
       >
         <el-form-item label="用户名" class="loginipt" prop="username">
-          <el-input v-model="ruleForm.username" prefix-icon="el-icon-user-solid"></el-input>
+          <el-input v-model="ruleForm.username" prefix-icon="el-icon-user-solid" ref="name"></el-input>
         </el-form-item>
         <el-form-item label="密码" class="loginipt" prop="password">
           <el-input
@@ -33,13 +33,14 @@
             prefix-icon="el-icon-lock"
             v-model="ruleForm.password"
             autocomplete="off"
+            @keyup.enter.native="submitForm"
           ></el-input>
         </el-form-item>
         <el-form-item>
           <el-checkbox style="color:rgb(235, 49, 49)" label="下次免登陆" v-model="ruleForm.mdl"></el-checkbox>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" class="locolor likelogin" @click="submitForm ">登录</el-button>
+          <el-button type="primary" class="locolor likelogin" @click="submitForm">登录</el-button>
         </el-form-item>
         <div class="goreg fr" @click="goto4('/reg')">
           <a href="###">立即注册</a>
@@ -90,7 +91,7 @@ export default {
 
           if (data.code === 1) {
             let { targetUrl } = this.$route.query;
-            console.log("targetUrl", targetUrl);
+            // console.log("targetUrl", targetUrl);
             // 把token写入localstorage
             this.$store.commit("login", { username, Authorization: data.data });
             this.$router.replace({
@@ -142,6 +143,9 @@ export default {
         path: "/reg"
       });
     }
+  },
+  mounted(){
+    this.$refs.name.focus();
   },
   components: {
     Footer
