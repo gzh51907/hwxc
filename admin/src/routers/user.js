@@ -101,12 +101,12 @@ Router.get('/', async (req, res) => {
     }
     res.send(result);
 })
-// 删除用户2
+// 删除用户
 Router.post("/dele", async (req, res) => {
     let {
         username
     } = req.body;
-    console.log("后台接收",username)
+    // console.log("后台接收",username)
     let result;
     try {
         result = await mongodb.remove(colName, {

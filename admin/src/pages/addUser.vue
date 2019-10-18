@@ -34,10 +34,12 @@ export default {
     };
   },
   methods: {
-    // 失去焦点2
+    // 失去焦点
     async blur() {
+
       this.username = this.$refs.name.value;
       this.password = this.$refs.password.value;
+
 
       if (this.username) {
         let { data } = await this.$axios.get(

@@ -75,7 +75,7 @@
           </div>
         </div>
         <button class="but">提交需求</button>
-        <!-- <div class="yunfei">不含邮费</div> -->
+        <!-- <div class="yunfei">不含邮费1</div> -->
         <div class="yunfei" @click="clearCart">清空</div>
       </div>
     </div>
