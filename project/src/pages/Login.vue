@@ -39,10 +39,10 @@
           <el-checkbox style="color:rgb(235, 49, 49)" label="下次免登陆" v-model="ruleForm.mdl"></el-checkbox>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" class="locolor likelogin" @click="submitForm ">登录</el-button>
+          <el-button type="primary" class="locolor likelogin" @click="submitForm" >登录</el-button>
         </el-form-item>
         <div class="goreg fr" @click="goto4('/reg')">
-          <a href="###">立即注册</a>
+          <span>立即注册</span>
         </div>
       </el-form>
     </div>
@@ -72,6 +72,7 @@ export default {
     };
   },
   methods: {
+
     submitForm() {
       this.$refs.regForm.validate(async valid => {
         if (valid) {

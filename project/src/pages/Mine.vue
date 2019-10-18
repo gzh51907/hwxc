@@ -107,7 +107,7 @@ import Footer from "./Footer.vue";
 export default {
   data() {
     return {
-      currentUser: true,
+      currentUser: false,
       username: "",
       showname: true
     };
@@ -120,8 +120,12 @@ export default {
     // console.log(this.$router);
     // this.activeIndex = this.$route.path;
     this.$store.dispatch("checkLogin");
-    let user = localStorage.getItem("user");
-    this.username = JSON.parse(user).username;
+     let user = localStorage.getItem("user");
+    if(user){
+      this.username = JSON.parse(user).username;
+      this.currentUser = true;
+    }
+   
     // this.username = JSON.parse(user.username);
     // this.currentUser = false;
   },
