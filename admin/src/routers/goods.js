@@ -49,7 +49,7 @@ Router.get('/getgoods', async (req, res) => {
 })
 
 // 添加商品
-Router.post('/reg', async (req, res) => {
+Router.post('/add', async (req, res) => {
     let {
         id,
         categoryName,
@@ -82,6 +82,7 @@ Router.post('/reg', async (req, res) => {
 })
 // 删除单个商品
 Router.delete("/dele", async (req, res) => {
+    // console.log('barcode',req.query)
     let {
         barcode
     } = req.query;
@@ -99,24 +100,11 @@ Router.delete("/dele", async (req, res) => {
     res.send(result);
 })
 
-// 修改商品
-// Router.update('/update', async (req, res) => {
-//     // console.log(req.query, req.body)
-//     let result = await mongodb.update(colName,
-//         req.query,
-//         req.body
-//     );
-//     res.send(result);
-// })
 // 修改商品.
-Router.patch('/:barcode', async (req, res) => {
-    console.log(req,res)
-    let barcode = req.params.barcode;
-    console.log(req,res,barcode);
-    res.send({barcode,productName:'供医疗卫生清洁时使用。',guidePrice:6.5})
-    let result = await mongodb.update(colName,
-        req.query,
-        req.body
+Router.patch('/change', async (req, res) => {
+    let id = req.query.barcode * 1;
+    req.query.barcode = id;
+    let result = await mongodb.update(colName,req.query,req.body
     );
     res.send(result);    
 });

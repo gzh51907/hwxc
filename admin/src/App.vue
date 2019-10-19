@@ -78,6 +78,12 @@ export default {
           icon: "el-icon-s-home"
         },
         {
+          name: "addGoods",
+          path: "/addGoods",
+          text: "添加商品",
+          icon: "el-icon-menu"
+        },
+        {
           name: "userInf",
           path: "/userInf",
           text: "用户信息表",
@@ -95,6 +101,7 @@ export default {
           text: "用户订单表",
           icon: "el-icon-menu"
         },
+        
       ]
     };
   },
