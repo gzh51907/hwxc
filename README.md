@@ -2,7 +2,7 @@
 ---
 
 * 官网：https://xm.star365.com/
-* 上线网址：
+* 上线网址：http://119.23.107.32
 * git仓库地址：https://github.com/gzh51907/hwxc.git
 
 

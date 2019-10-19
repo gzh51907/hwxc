@@ -106,12 +106,11 @@ export default {
           }
         }
       );
-      // 拿到数据和总页数11
+      // 拿到数据和总页数
       this.goodsList = {
         list: res.list,
         totalPage: res.totalPage
       };
-      // console.log("goods", this.goodsList);
     },
     add2cart(list) {
       // 添加前，判断该商品是否已经存在,存在+1
