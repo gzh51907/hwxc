@@ -47,52 +47,106 @@
 ### 项目目录
 ---
 
-│  App.vue
-│  main.js
-│  tree.txt
-│  
-├─assets
-│      logo.png
-│      
-├─components
-│      HelloWorld.vue
-│      
-├─css
-│      base.css
-│      
-├─images
-│      active.png
-│      img1.png
-│      jiantou.png
-│      lightning.png
-│      loading.png
-│      logo.png
-│      logo_1.png
-│      logo_2.png
-│      logo_3.png
-│      logo_4.png
-│      no-goods.png
-│      qiye.png
-│      quanguo.png
-│      tl.png
-│      zhengpin.png
-│      
-├─pages
-│      Cart.vue
-│      Footer.vue
-│      Goods.vue
-│      Header.vue
-│      Home.vue
-│      Login.vue
-│      Mine.vue
-│      NotFound.vue
-│      Reg.vue
-│      Sort.vue
-│      
-├─router
-│      index.js
-│      
-└─store
-        cart.js
-        common.js
-        index.js
+|-- undefined
+
+    |-- .gitignore
+
+    |-- babel.config.js
+
+    |-- package-lock.json
+
+    |-- package.json
+
+    |-- README.md
+
+    |-- vue.config.js
+
+    |-- public
+
+    |   |-- favicon.ico
+
+    |   |-- index.html
+
+    |-- src(项目内容)
+
+        |-- App.vue
+
+        |-- main.js
+
+        |-- assets
+
+        |   |-- logo.png
+
+        |-- components
+
+        |   |-- HelloWorld.vue
+
+        |-- css(引入base样式))
+
+        |   |-- base.css
+
+        |-- images(图片)
+
+        |   |-- active.png
+
+        |   |-- img1.png
+
+        |   |-- jiantou.png
+
+        |   |-- lightning.png
+
+        |   |-- loading.png
+
+        |   |-- logo.png
+
+        |   |-- logo_1.png
+
+        |   |-- logo_2.png
+
+        |   |-- logo_3.png
+
+        |   |-- logo_4.png
+
+        |   |-- no-goods.png
+
+        |   |-- qiye.png
+
+        |   |-- quanguo.png
+
+        |   |-- tl.png
+
+        |   |-- zhengpin.png
+
+        |-- pages(各个单页面)
+
+        |   |-- Cart.vue
+
+        |   |-- Footer.vue
+
+        |   |-- Goods.vue
+
+        |   |-- Header.vue
+
+        |   |-- Home.vue
+
+        |   |-- Login.vue
+
+        |   |-- Mine.vue
+
+        |   |-- NotFound.vue
+
+        |   |-- Reg.vue
+
+        |   |-- Sort.vue
+
+        |-- router(路由)
+
+        |   |-- index.js
+
+        |-- store(vuex模块化)
+
+            |-- cart.js
+
+            |-- common.js
+
+            |-- index.js
