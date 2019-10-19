@@ -132,7 +132,7 @@ export default {
         this.$store.commit("add2cart", goods);
       }
     },
-    // 添加到购物车1
+    // 添加到购物车
     addCar(list) {
       let user = localStorage.getItem("user");
       if (user) {
