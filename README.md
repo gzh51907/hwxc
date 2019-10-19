@@ -44,6 +44,25 @@
 ![](./img/login.png) 
 
 
+## 技术栈
+
+### 前端
+* Vue
+* Vue-Router
+* Vuex
+* Vue-Cli
+* axios
+* elementUI
+* git
+
+### 后端
+* Nodejs
+* Express
+* MongoDB
+* elementUI
+* layui
+
+
 ### 项目目录
 ---
 
