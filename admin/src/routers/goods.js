@@ -77,9 +77,8 @@ Router.post('/add', async (req, res) => {
         })
     }
     res.send(result);
+});
 
-
-})
 // 删除单个商品
 Router.delete("/dele", async (req, res) => {
     // console.log('barcode',req.query)

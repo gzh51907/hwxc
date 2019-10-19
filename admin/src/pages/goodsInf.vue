@@ -114,6 +114,7 @@ export default {
       this.show = true;
     },
     async Save(barcode, index, e) {
+      this.show = false;
       let num = e.target.parentNode.parentNode.children[8].innerHTML;
       console.log(num);
       await this.$axios.patch(
