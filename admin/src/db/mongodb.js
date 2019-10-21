@@ -83,7 +83,7 @@ async function update(colName, query, data) {
     } = await connect();
     // 获取集合
     let col = db.collection(colName);
-    let result = await col.updateMany(query, data);
+    let result = await col.updateMany(query, {$set:data});
     client.close();
     return result;
 }
