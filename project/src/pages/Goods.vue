@@ -211,7 +211,7 @@ export default {
       });
       this.userlist = list;
 
-      console.log("用户评论内容", this.userlist);
+      // console.log("用户评论内容", this.userlist);
     },
     go() {
       this.$router.go(-1);

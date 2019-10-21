@@ -47,18 +47,21 @@
           <td>{{item.efficacy}}</td>
           <td>{{item.id}}</td>
           <td>{{item.categoryName}}</td>
-          <td>{{item.guidePrice}}</td>
+          <td class="price" :contenteditable="show" ref="price">{{item.guidePrice}}</td>
           <td>
-            <button type="button" class="layui-btn"><i class="layui-icon"></i> 编辑</button>  
+            <button type="button" class="layui-btn" @click="Edit($event)">
+              <i class="layui-icon"></i> 编辑
+            </button>
             <button
               type="button"
-              class="layui-btn layui-btn-danger"
-              @click="removeItem"
+              class="layui-btn layui-btn-normal"
+              @click="Save(item.barcode,index,$event)"
             >
-              <i class="layui-icon"></i>
-              下架
+              <i class="layui-icon"></i> 保存
             </button>
-            
+            <button type="button" class="layui-btn layui-btn-danger" @click="removeItem($event,index)">
+              <i class="layui-icon"></i> 下架
+            </button>
           </td>
         </tr>
       </tbody>
@@ -70,19 +73,24 @@
 export default {
   data() {
     return {
-      list: []
+      list: [],
+      show: false
     };
   },
   async created() {
-    let { data } = await this.$axios.get("http://119.23.107.32:20190/goods",{
-      size:50
-    });
+    let { data } = await this.$axios.get("http://localhost:20190/goods", {});
 
     this.list = data;
-    console.log(data)
+    // console.log(data)
   },
   methods: {
-    removeItem() {
+    changeText() {
+      this.$emit("input", this.$el.innerHTML);
+    },
+    async removeItem(e,index) {
+      let barcode = e.target.parentNode.parentNode.children[2].innerHTML * 1;
+       await this.$axios.delete(`http://localhost:20190/goods/dele?barcode=${barcode}`);
+      this.list.splice(index,1); 
       this.$confirm("此操作将永久删除该商品, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -101,8 +109,20 @@ export default {
           });
         });
     },
-    Edit(){
-      
+    Edit(e) {
+      e.target.parentNode.parentNode.children[8].focus();
+      this.show = true;
+    },
+    async Save(barcode, index, e) {
+      this.show = false;
+      let num = e.target.parentNode.parentNode.children[8].innerHTML;
+      console.log(num);
+      await this.$axios.patch(
+        `http://localhost:20190/goods/change?barcode=${barcode}`,
+        {
+          guidePrice: num
+        }
+      );
     }
   }
 };
@@ -129,7 +149,7 @@ th:nth-child(5) {
 th:nth-child(6) {
   width: 14%;
 }
-tr{
+tr {
   height: auto;
 }
 td {
@@ -139,8 +159,10 @@ td {
 td:last-child {
   display: flex;
   align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
 }
 .layui-btn {
-  width: 100%;
+  margin-left: 0;
 }
-</style>
+</style>  
