@@ -74,7 +74,7 @@ export default {
     };
   },
   async created() {
-    let { data } = await this.$axios.get("http://localhost:20190/goods",{
+    let { data } = await this.$axios.get("http://119.23.107.32:20190/goods",{
       size:50
     });
 

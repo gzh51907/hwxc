@@ -36,19 +36,19 @@ let cart = {
             })
         }
     },
-    actions:{
-        // 库存对比请求
-        async changeNumAsync(context,{id,num}){
-            let {data} = await axios.get('http://localhost:1907/goods/kucun')
-            let kucun = data.data;
-            if(num <= kucun){
-                context.commit('changeNum',{id,num})
-            }else{
-                Message.error('当前库存不足');
-                context.commit('changeNum',{id,num:kucun})
-            }
-        }
-    }
+    // actions:{
+    //     // 库存对比请求
+    //     async changeNumAsync(context,{id,num}){
+    //         let {data} = await axios.get('http://localhost:1907/goods/kucun')
+    //         let kucun = data.data;
+    //         if(num <= kucun){
+    //             context.commit('changeNum',{id,num})
+    //         }else{
+    //             Message.error('当前库存不足');
+    //             context.commit('changeNum',{id,num:kucun})
+    //         }
+    //     }
+    // }
 }
 
 export default cart;

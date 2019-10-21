@@ -35,7 +35,7 @@ export default {
                 // 发起ajax请求，校验token是否过期
                 let {
                     data
-                } = await axios.get('http://localhost:20190/verify', {
+                } = await axios.get('http://119.23.107.32:20190/verify', {
                     headers: {
                         Authorization: user.Authorization
                     }

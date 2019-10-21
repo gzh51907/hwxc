@@ -73,14 +73,13 @@ export default {
     };
   },
   methods: {
-
     submitForm() {
       this.$refs.regForm.validate(async valid => {
         if (valid) {
           let { username, password, mdl } = this.ruleForm;
 
           let { data } = await this.$axios.get(
-            "http://localhost:20190/user/login",
+            "http://172.18.172.181:20190/user/login",
             {
               params: {
                 username,
@@ -145,7 +144,7 @@ export default {
       });
     }
   },
-  mounted(){
+  mounted() {
     this.$refs.name.focus();
   },
   components: {

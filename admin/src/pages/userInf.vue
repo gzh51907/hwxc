@@ -48,7 +48,7 @@ export default {
     };
   },
   async created() {
-    let { data } = await this.$axios.get("http://localhost:20190/user");
+    let { data } = await this.$axios.get("http://119.23.107.32:20190/user");
     console.log(data);
     data.forEach(item => {
       this.userlist.push(item);
@@ -65,7 +65,7 @@ export default {
       })
         .then(() => {
           console.log("接收username", username);
-          let { data } = this.$axios.post("http://localhost:20190/user/dele", {
+          let { data } = this.$axios.post("http://119.23.107.32:20190/user/dele", {
             username
           });
           this.$message({

@@ -41,7 +41,7 @@ export default {
 
       if (this.username) {
         let { data } = await this.$axios.get(
-          "http://localhost:20190/user/check",
+          "http://119.23.107.32:20190/user/check",
           {
             params: {
               username: this.username
@@ -60,7 +60,7 @@ export default {
       let { username, password } = this.ruleForm;
       if (username && password) {
         let { data } = await this.$axios.post(
-          "http://localhost:20190/user/reg",
+          "http://119.23.107.32:20190/user/reg",
           {
             username,
             password
