@@ -1,6 +1,6 @@
 <template>
   <div id="goods">
-    <div class="box1">
+    <div class="box1" ref="top">
       <el-carousel
         trigger="click"
         class="goodsimg"
@@ -97,7 +97,7 @@
               <li>11</li>
               <li>11</li>
             </ul>-->
-            <dl class="pinglun" v-for="item in userlist" :key="item.name">
+            <dl class="pinglun" v-for="item in userlist" :key="item.commentDate">
               <dd>
                 <div class="pinglun-top">
                   <div>
@@ -158,6 +158,9 @@ export default {
     this.getData(barcode);
     this.getcomment(barcode);
   },
+  mounted() {
+    this.$refs.top.scrollIntoView();
+  },
   computed: {
     cartlength() {
       return this.$store.getters.cartlength;
@@ -208,7 +211,7 @@ export default {
       });
       this.userlist = list;
 
-      // console.log("用户评论内容", this.userlist);
+      console.log("用户评论内容", this.userlist);
     },
     go() {
       this.$router.go(-1);

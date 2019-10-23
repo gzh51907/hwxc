@@ -9,6 +9,7 @@ import addUser from '../pages/addUser.vue';
 import userOrder from '../pages/userOrder.vue';
 
 let router = new VueRouter({
+    mode:"history",
     routes: [
         //添加商品
         {

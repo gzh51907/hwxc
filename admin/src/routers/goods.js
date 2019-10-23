@@ -81,7 +81,7 @@ Router.post('/reg', async (req, res) => {
 
 })
 // 删除单个商品
-Router.patch("/dele", async (req, res) => {
+Router.delete("/dele", async (req, res) => {
     let {
         barcode
     } = req.query;

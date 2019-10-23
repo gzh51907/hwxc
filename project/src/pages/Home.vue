@@ -104,7 +104,7 @@
           <li
             class="layout_list_li"
             v-for="item in goodsList"
-            @click="goto(item.barcode)"
+            @click="gotoGoods(item.barcode)"
             :key="item.id"
           >
             <div class="ProItem__pro-imgs">
@@ -168,7 +168,7 @@ export default {
     toTop() {
       document.documentElement.scrollTop = document.body.scrollTop = 0;
     },
-    goto(barcode) {
+    gotoGoods(barcode) {
       this.$router.push({ name: "goods", params: { barcode } });
     },
     // 添加到购物车
