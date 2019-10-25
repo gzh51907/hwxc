@@ -1,7 +1,6 @@
 <template>
   <div>
     <Header></Header>
-
     <div class="box">
       <div class="layout">
         <div class="banner">
@@ -74,8 +73,9 @@
           </li>
         </ul>
       </section>
-      <section class="Home__product">
-        <div class="Tabtop">
+      <!-- 导航栏菜单 -->
+      <section id="header" :class="isFixed== true?'isFixed':''">
+        <div class="Home__product">
           <ul class="Home__product_ul">
             <li
               class="Home__product_li"
@@ -94,7 +94,7 @@
         v-show="showAlert"
         style="position:fixed;top:13.333vw;z-index:100"
       ></el-alert>
-      <section class="layout layout_list">
+      <section class="layout layout_list" id="layout_list">
         <div class="loading" v-if="show">
           <img src="../images/loading.png" alt />
           <img src="../images/loading.png" alt />
@@ -132,9 +132,14 @@
         </ul>
       </section>
     </div>
-    <div class="scroll_Top" @click="toTop">
-      <img src="../images/jiantou.png" alt />
-      回顶部
+    <!-- 回到顶部 -->
+    <div>
+        <back-to-top
+          :custom-style="myBackToTopStyle"
+          :visibility-height="300"
+          :back-position="0"
+          transition-name="fade"
+        />
     </div>
     <Footer></Footer>
   </div>
@@ -143,9 +148,19 @@
 <script>
 import Footer from "./Footer.vue";
 import Header from "./Header.vue";
+import BackToTop from "./BackToTop";
 export default {
   data() {
     return {
+      myBackToTopStyle: {
+        right: "7%",
+        bottom: "10%",
+        width: "10vw",
+        height: "10vw",
+        borderRadius: "4px",
+        lineHeight: "45px", // 请保持与高度一致以垂直居中
+        background: "#e7eaf1" // 按钮的背景颜色
+      },
       Noticelist: "",
       imglist: "",
       imgItem: "",
@@ -155,10 +170,24 @@ export default {
       goodsList: [],
       pageNum: 1,
       show: false,
-      showAlert: false
+      showAlert: false,
+      isFixed: false
     };
   },
   methods: {
+    handleScroll() {
+      this.$nextTick(() => {
+        let scrollTop =
+          document.documentElement.scrollTop || document.body.scrollTop;
+        let headerTop = document.getElementById("header");
+        let listTop = document.getElementById("layout_list");
+        if (scrollTop > listTop.offsetTop) {
+          this.isFixed = true;
+        } else {
+          this.isFixed = false;
+        }
+      });
+    },
     openFullScreen() {
       this.show = true;
       setTimeout(() => {
@@ -237,7 +266,11 @@ export default {
   },
 
   mounted() {
-    document.querySelector(".scroll_Top").style.bottom = this.toBottom;
+    // document.querySelector(".scroll_Top").style.bottom = this.toBottom;
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.handleScroll);
   },
   async created() {
     let {
@@ -289,7 +322,8 @@ export default {
   },
   components: {
     Footer,
-    Header
+    Header,
+    BackToTop
   }
 };
 </script>
@@ -477,6 +511,12 @@ export default {
   left: 50%;
   bottom: 2vw;
   transform: translateX(-50%);
+}
+.isFixed {
+  position: fixed;
+  top: 13.333vw;
+  z-index: 21;
+  width: 100%;
 }
 .Home__product {
   position: relative;
@@ -672,10 +712,4 @@ export default {
     margin-bottom: 1.333vw;
   }
 }
-// .Tabtop{
-//   position: fixed;
-//   top: 0;
-//   z-index: 4;
-//   width: 100%;
-// }
 </style>
