@@ -99,6 +99,8 @@
           <img src="../images/loading.png" alt />
           <img src="../images/loading.png" alt />
           <img src="../images/loading.png" alt />
+          <img src="../images/loading.png" alt />
+          <img src="../images/loading.png" alt />
         </div>
         <ul class="layout_list_ul">
           <li
