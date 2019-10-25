@@ -153,12 +153,12 @@ export default {
   data() {
     return {
       myBackToTopStyle: {
-        right: "7%",
-        bottom: "10%",
+        right: "6%",
+        bottom: "9%",
         width: "10vw",
         height: "10vw",
-        borderRadius: "4px",
-        lineHeight: "45px", // 请保持与高度一致以垂直居中
+        borderRadius: ".08rem",
+        lineHeight: "10vw", 
         background: "#e7eaf1" // 按钮的背景颜色
       },
       Noticelist: "",
@@ -181,7 +181,7 @@ export default {
           document.documentElement.scrollTop || document.body.scrollTop;
         let headerTop = document.getElementById("header");
         let listTop = document.getElementById("layout_list");
-        if (scrollTop > listTop.offsetTop) {
+        if (scrollTop > listTop.offsetTop - 100) {
           this.isFixed = true;
         } else {
           this.isFixed = false;

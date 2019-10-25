@@ -27,13 +27,13 @@ export default {
       type: Object,
       default: function() {
         return {
-          right: '50px',
-          bottom: '50px',
-          width: '40px',
-          height: '40px',
-          'border-radius': '4px',
-          'line-height': '45px',
-          background: '#e7eaf1'
+        //   right: '50px',
+        //   bottom: '50px',
+        //   width: '40px',
+        //   height: '40px',
+        //   'border-radius': '.053333rem',
+        //   'line-height': '.6rem',
+        //   background: '#e7eaf1'
         }
       }
     },
@@ -99,7 +99,7 @@ export default {
   }
   .fade-enter-active,
   .fade-leave-active {
-    transition: opacity .5s;
+    transition: opacity .5s; 
   }
   .fade-enter,
   .fade-leave-to {
