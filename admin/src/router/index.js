@@ -7,6 +7,7 @@ import goodsInf from '../pages/goodsInf.vue';
 import userInf from '../pages/userInf.vue';
 import addUser from '../pages/addUser.vue';
 import userOrder from '../pages/userOrder.vue';
+import addGoods from '../pages/addGoods.vue'
 
 let router = new VueRouter({
     mode:"history",
@@ -32,6 +33,11 @@ let router = new VueRouter({
             path: '/userOrder',
             component: userOrder
         },
+        {
+            name : 'addGoods',
+            path : '/addGoods',
+            component:addGoods
+        }
     ]
 })
 export default router;
