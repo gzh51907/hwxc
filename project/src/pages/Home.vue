@@ -693,25 +693,25 @@ export default {
     }
   }
 }
-.scroll_Top {
-  position: fixed;
-  bottom: 18.667vw;
-  right: 1.333vw;
-  width: 16vw;
-  height: 16vw;
-  background: rgba(0, 0, 0, 0.43922);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  font-size: 3.2vw;
-  color: #fff;
-  transform: scale(0.8);
-  z-index: 99;
-  img {
-    width: 5.333vw;
-    margin-bottom: 1.333vw;
-  }
-}
+// .scroll_Top {
+//   position: fixed;
+//   bottom: 18.667vw;
+//   right: 1.333vw;
+//   width: 16vw;
+//   height: 16vw;
+//   background: rgba(0, 0, 0, 0.43922);
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   border-radius: 50%;
+//   font-size: 3.2vw;
+//   color: #fff;
+//   transform: scale(0.8);
+//   z-index: 99;
+//   img {
+//     width: 5.333vw;
+//     margin-bottom: 1.333vw;
+//   }
+// }
 </style>
