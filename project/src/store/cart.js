@@ -39,7 +39,7 @@ let cart = {
     // actions:{
     //     // 库存对比请求
     //     async changeNumAsync(context,{id,num}){
-    //         let {data} = await axios.get('http://localhost:1907/goods/kucun')
+    //         let {data} = await axios.get('http://119.23.107.32:1907/goods/kucun')
     //         let kucun = data.data;
     //         if(num <= kucun){
     //             context.commit('changeNum',{id,num})

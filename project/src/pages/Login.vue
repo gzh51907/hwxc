@@ -79,7 +79,7 @@ export default {
           let { username, password, mdl } = this.ruleForm;
 
           let { data } = await this.$axios.get(
-            "http://localhost:20190/user/login",
+            "http://119.23.107.32:20190/user/login",
             {
               params: {
                 username,
