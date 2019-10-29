@@ -89,11 +89,26 @@ Router.get('/login', async (req, res) => {
     }
 })
 
+// 用户分页,一次渲染十个
+Router.post('/userpage', async (req, res) => {
+    console.log('body', req.body)
+    let result;
+    try {
+        result = await mongodb.find(colName, req.query, req.body)
+
+    } catch {
+        result = formatData({
+            code: "0"
+        })
+    }
+    res.send(result);
+})
+
 // 查询所有用户
 Router.get('/', async (req, res) => {
     let result
     try {
-        result = await mongodb.find(colName, req.query);
+        result = await mongodb.find(colName, req.query, null);
     } catch (err) {
         result = formatData({
             code: "0"
@@ -101,16 +116,17 @@ Router.get('/', async (req, res) => {
     }
     res.send(result);
 })
+
 // 删除用户
 Router.post("/dele", async (req, res) => {
     let {
         username
     } = req.body;
-    console.log("后台接收",username)
+    console.log("后台接收", username)
     let result;
     try {
         result = await mongodb.remove(colName, {
-            username:username
+            username: username
         })
         result = formatData()
     } catch {

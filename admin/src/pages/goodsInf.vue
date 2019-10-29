@@ -6,8 +6,9 @@
         background
         layout="prev, pager, next"
         :page-size="10"
-        :total="list.length"
+        :total="total_goods"
         style="float:right"
+        @current-change="current_change"
       ></el-pagination>
     </h2>
 
@@ -59,7 +60,11 @@
             >
               <i class="layui-icon"></i> 保存
             </button>
-            <button type="button" class="layui-btn layui-btn-danger" @click="removeItem($event,index)">
+            <button
+              type="button"
+              class="layui-btn layui-btn-danger"
+              @click="removeItem($event,index)"
+            >
               <i class="layui-icon"></i> 下架
             </button>
           </td>
@@ -74,23 +79,39 @@ export default {
   data() {
     return {
       list: [],
-      show: false
+      show: false,
+      current_page: 1,
+      total_goods: null
     };
   },
   async created() {
-    let { data } = await this.$axios.get("http://localhost:20190/goods", {});
+    let { data: total } = await this.$axios.get(
+      "http://localhost:20190/goods",
+      {}
+    );
 
+    this.total_goods = total.length;
+
+    let { data } = await this.$axios.post(
+      `http://localhost:20190/goods/goodspage`,
+      {
+        limit: 10,
+        page: 1
+      }
+    );
     this.list = data;
-    // console.log(data)
   },
+
   methods: {
     changeText() {
       this.$emit("input", this.$el.innerHTML);
     },
-    async removeItem(e,index) {
+    async removeItem(e, index) {
       let barcode = e.target.parentNode.parentNode.children[2].innerHTML * 1;
-       await this.$axios.delete(`http://localhost:20190/goods/dele?barcode=${barcode}`);
-      this.list.splice(index,1); 
+      await this.$axios.delete(
+        `http://localhost:20190/goods/dele?barcode=${barcode}`
+      );
+      this.list.splice(index, 1);
       this.$confirm("此操作将永久删除该商品, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
@@ -123,6 +144,18 @@ export default {
           guidePrice: num
         }
       );
+    },
+
+    async current_change(page) {
+      this.current_page = page;
+      let { data: datas } = await this.$axios.post(
+        `http://localhost:20190/goods/goodspage`,
+        {
+          limit: 10,
+          page: this.current_page
+        }
+      );
+      this.list = datas;
     }
   }
 };

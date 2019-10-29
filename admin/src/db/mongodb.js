@@ -66,7 +66,7 @@ async function remove(colName, query) {
     let col = db.collection(colName);
     let result = await col.deleteMany(query);
     client.close();
-    
+
     return result;
 }
 
@@ -83,7 +83,7 @@ async function update(colName, query, data) {
     } = await connect();
     // 获取集合
     let col = db.collection(colName);
-    let result = await col.updateMany(query, {$set:data});
+    let result = await col.updateMany(query, { $set: data });
     client.close();
     return result;
 }
@@ -93,7 +93,7 @@ async function update(colName, query, data) {
  * @param {String} colName  集合名称
  * @param {Object} query    查询条件
  */
-async function find(colName, query = {}) {
+async function find(colName, query = {}, body = { limit, page }) {
 
     let {
         db,
@@ -101,13 +101,23 @@ async function find(colName, query = {}) {
     } = await connect();
     let col = db.collection(colName);
 
-    // 查询数据库
-    let result = await col.find(query).toArray();
-
-    // 关闭数据库连接
-    client.close();
-    //返回结果
-    return result;
+    if (body) {
+        let { limit, page } = body;
+        limit = limit - 0
+        // 查询数据库
+        let result = await col.find().limit(limit).skip((page - 1) * limit).toArray();
+        // 关闭数据库连接
+        client.close();
+        //返回结果
+        return result;
+    } else {
+        // 查询数据库
+        let result = await col.find(query).toArray();
+        // 关闭数据库连接
+        client.close();
+        //返回结果
+        return result;
+    }
 }
 
 module.exports = {

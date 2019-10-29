@@ -51,7 +51,7 @@ let router = new VueRouter({
                 requiresAuth: true
             }
         },
-        
+
         // 动态路由
         {
             name: 'sort',
@@ -90,34 +90,34 @@ let router = new VueRouter({
         }
     ]
 });
-router.beforeEach(async function(to,from,next){
+router.beforeEach(async function (to, from, next) {
 
     // 在全局路由守卫beforeEach中进行页面权限访问控制
     // 先判断目标路由是否需要鉴权
-    if(to.meta.requiresAuth){
+    if (to.meta.requiresAuth) {
         let user = localStorage.getItem('user');
-        if(user){
+        if (user) {
             let res = await store.dispatch('checkLogin');
             // console.log('res:',res)
-            if(res === 400){
+            if (res === 400) {
                 next({
-                    path:'/login',
-                    query:{
-                        targetUrl:to.fullPath
+                    path: '/login',
+                    query: {
+                        targetUrl: to.fullPath
                     }
                 });
-            }else{
+            } else {
                 next();
             }
-        }else{
+        } else {
             router.push({
-                path:'/login',
-                query:{
-                    targetUrl:to.fullPath
+                path: '/login',
+                query: {
+                    targetUrl: to.fullPath
                 }
             });
         }
-    }else{
+    } else {
         next();
     }
 
