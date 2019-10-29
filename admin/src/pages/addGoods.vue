@@ -53,7 +53,7 @@ export default {
   },
   methods: {
     async addGoods() {
-      await this.$axios.post("http://localhost:20190/goods/add", {
+      await this.$axios.post("http://119.23.107.32:20190/goods/add", {
         id: parseInt(this.id),
         categoryName: this.categoryName,
         productName: this.productName,

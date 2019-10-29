@@ -86,14 +86,14 @@ export default {
   },
   async created() {
     let { data: total } = await this.$axios.get(
-      "http://localhost:20190/goods",
+      "http://119.23.107.32:20190/goods",
       {}
     );
 
     this.total_goods = total.length;
 
     let { data } = await this.$axios.post(
-      `http://localhost:20190/goods/goodspage`,
+      `http://119.23.107.32:20190/goods/goodspage`,
       {
         limit: 10,
         page: 1
@@ -109,7 +109,7 @@ export default {
     async removeItem(e, index) {
       let barcode = e.target.parentNode.parentNode.children[2].innerHTML * 1;
       await this.$axios.delete(
-        `http://localhost:20190/goods/dele?barcode=${barcode}`
+        `http://119.23.107.32:20190/goods/dele?barcode=${barcode}`
       );
       this.list.splice(index, 1);
       this.$confirm("此操作将永久删除该商品, 是否继续?", "提示", {
@@ -139,7 +139,7 @@ export default {
       let num = e.target.parentNode.parentNode.children[8].innerHTML;
       console.log(num);
       await this.$axios.patch(
-        `http://localhost:20190/goods/change?barcode=${barcode}`,
+        `http://119.23.107.32:20190/goods/change?barcode=${barcode}`,
         {
           guidePrice: num
         }
@@ -149,7 +149,7 @@ export default {
     async current_change(page) {
       this.current_page = page;
       let { data: datas } = await this.$axios.post(
-        `http://localhost:20190/goods/goodspage`,
+        `http://119.23.107.32:20190/goods/goodspage`,
         {
           limit: 10,
           page: this.current_page

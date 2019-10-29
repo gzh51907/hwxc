@@ -58,13 +58,13 @@ export default {
   },
   async created() {
     let { data: totalUser } = await this.$axios.get(
-      "http://localhost:20190/user",
+      "http://119.23.107.32:20190/user",
       {}
     );
 
     this.total_users = totalUser.length;
     let { data:userlist } = await this.$axios.post(
-      "http://localhost:20190/user/userpage",
+      "http://119.23.107.32:20190/user/userpage",
       {
         limit: 5,
         page: 1
@@ -102,7 +102,7 @@ export default {
     async current_change(page) {
       this.current_page = page;
       let { data: res } = await this.$axios.post(
-        "http://localhost:20190/user/userpage",
+        "http://119.23.107.32:20190/user/userpage",
         {
           limit: 5,
           page: this.current_page
