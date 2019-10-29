@@ -73,7 +73,7 @@ export default {
     //发起ajax请求，验证用户名是否存在
     const checkUsername = async (rule, value, callback) => {
       let { data } = await this.$axios.get(
-        "http://119.23.107.32:20190/user/check",
+        "http://localhost:20190/user/check",
         {
           params: {
             username: this.ruleForm.username
@@ -131,11 +131,11 @@ export default {
           let { username, password } = this.ruleForm;
           // 接收后端返回结果
           let { data } = await this.$axios.post(
-            "http://172.18.172.181:20190/user/reg",
+            "http://localhost:20190/user/reg",
             {
               username,
               password
-            }
+            },null
           );
           if (data.code === 1) {
             // //为1，表示该用户名不存在，可以注册并跳到登录

@@ -52,7 +52,7 @@ Router.get('/check', async (req, res) => {
 
     let result = await mongodb.find(colName, {
         username
-    });
+    },null);
     if (result.length) {
         res.send(formatData({
             code: 0
@@ -72,7 +72,7 @@ Router.get('/login', async (req, res) => {
     let result = await mongodb.find(colName, {
         username,
         password
-    });
+    },null);
     if (result.length > 0) {
         let Authorization
         if (mdl) {
@@ -89,7 +89,7 @@ Router.get('/login', async (req, res) => {
     }
 })
 
-// 用户分页,一次渲染十个
+// 用户分页,一次渲染十个.
 Router.post('/userpage', async (req, res) => {
     console.log('body', req.body)
     let result;
